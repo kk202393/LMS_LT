@@ -1,0 +1,79 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% elif role.name == "Branch Manager" %}
+{% include "headerBranchManager.html" %}
+{% endif %}
+<style>
+  table, th, td {
+  border: 1px solid black;
+}
+</style>
+    <div class="container1">
+      <h1>Branch Summary Report</h1>
+      <form  method="POST">
+        {% csrf_token %}
+        <fieldset>
+            
+            {% if not user.is_superuser %}
+            <div>
+              <label for="branch">Branch</label><br />
+              <select id="branch" name="branchName">
+                <option value="">--Select--</option>
+                <option value="{{managerBranch.branchName.id}}">{{managerBranch.branchName.branch_Name}}</option>
+              </select>
+            </div>
+            {% else %}
+            <div>
+      
+              <label for="branch">Branch</label><br />
+              <select id="branch" name="branchName">
+                <option value="">--Select--</option>
+                {% for branch in branchName %}
+                <option value="{{branch.id}}">{{branch}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            {% endif %}           
+          <div>
+            <label for="branchSummaryDateID">Branch Summary Date</label><br />
+            <input type="date" name="branchSummaryDate" id="branchSummaryDateID">
+          </div>
+          <div>
+            <br>
+            <button type="submit" class="button">Fetch</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="container-table">
+        <!-- table -->
+
+        <div >
+          <table>
+            <tr>
+              <th>CSO Name {{LoanDisbursementData}}</th>
+              <th>Center Meeting</th>
+              <th>Due Client</th>
+              <th>Amount Due</th>
+              <th>Amount Collected</th>
+              <th>Disbursement Amount</th>
+              <th>LPF</th>
+              <th>LPC</th>
+            </tr>
+            {% for  key, value   in agentEmiData.items %}
+            <tr>
+              <td>{{value.0}}</td>
+              <td>{{value.1}}</td>
+              <td>{{value.2}}</td>
+              <td>{% if not value.3.0.agentSubmitInstallmentSum %} 0 {% else %} {{value.3.0.agentSubmitInstallmentSum|floatformat:0}}{% endif %}</td>
+              <td>{% if not value.4.0.agentSubmitInstallmentAmountSum %} 0 {% else %}{{value.4.0.agentSubmitInstallmentAmountSum|floatformat:0}}{% endif %}</td>
+              <td>{% if not value.5.0.disburseAmountSum %} 0 {% else %}{{value.5.0.disburseAmountSum|floatformat:0}}{% endif %}</td>
+              <td>{% if not value.5.0.disburseAmountSum %} 0 {% else %}{{value.6.0.LPFAmountSum|floatformat:0}}{% endif %}</td>
+              <td>{% if not value.5.0.disburseAmountSum %} 0 {% else %}{{value.7.0.LPCAmountSum|floatformat:0}}{% endif %}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+    {% include "footer.html" %}

@@ -1,0 +1,40 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% else %}
+{% include "headerBranchManager.html" %}
+{% endif %}
+<div>
+    {{openingBalanceAmount}}
+</div>
+<div>
+    <h2 style="justify-content: center; align-items: center; display: flex; margin: 10px 0px 10px 0px;">
+        {% if messages %} {% for message in messages %}
+        <span style="color:rgb(8, 8, 8); font-size: 30px; font-weight: 600;" {% if message.tags %}
+            class="{{message.tags}}" {% endif %}>{{message}}</span>{% endfor %}{% endif%}
+    </h2>
+    {% if customerKYCData %}
+    <h4>Your Aadhar Card Number is : {{customerKYCData.Aadhaar}}</h4>
+    <hr>
+    <h4>Your Loan Id is {{customerKYCData.loanId}}</h4>
+    <hr>
+    <h4>Your customer Id Number is {{customerKYCData.customerId}}</h4>
+    {% endif%}
+</div>
+{% if lastDayCloseDate %}
+{% for date in lastDayCloseDate %}
+<div>
+    <h4 style="justify-content: center; align-items: center; display: flex; margin: 10px 0px 10px 0px;">
+        {{date.date|date:"d/m/Y" }}
+    </h4>
+    <hr>
+</div>
+{% endfor %}
+<br>
+<br>
+<div style="display: flex; justify-content: center;">
+    <button class="button"><a href="{% url 'branchDayClose' %}">Back</a></button>
+</div>
+<br>
+<br>
+{% endif%}
+{% include "footer.html" %}

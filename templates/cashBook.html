@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./styletable.css"> -->
+    <title>Cash Book</title>
+    <Style>
+        /* body {
+            margin: 0;
+            padding: 0;
+        } */
+
+        @page {
+            size: letter landscape;
+            margin: 1cm;
+        }
+
+        .cantainer {
+            text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .cantainer h1 {
+            margin: 0px;
+        }
+
+        .cantainer h3 {
+            margin: 0px;
+        }
+
+        .cantainer h2 {
+            margin: 0px;
+        }
+
+        .table1 table,
+        td,
+        tr,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 4px;
+            text-align: center;
+            font-family: sans-serif;
+            margin-bottom: 15px;
+
+        }
+
+        .table2 table,
+        td,
+        tr,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            padding: 4px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-evenly;
+            /* margin-top: 65px; */
+
+        }
+
+        .footer h4 {
+            font-size: 1.3rem;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .footer h4 span {
+            font-size: 15px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </Style>
+</head>
+
+<body>
+    <div class="cantainer">
+        <h1>Parishkar Microcare Foundation</h1>
+        <h3>Regd.Office-Prop No P-57 Block No-P , Pandav Nagar Delhi-110091</h3>
+        <h2>Cash Book ({{BranchName.branch_Name}})</h2>
+        <h4>Date From <span class="from"> {{From_Date}} </span> To
+            <span class="to"> {{To_Date}} </span>
+        </h4>
+
+    </div>
+    <div class="table1">
+        <table>
+            <tr>
+                <th>Account Name</th>
+                <th>Description</th>
+                <th>Joural Number</th>
+                <th>Debit</th>
+                <th>Credit</th>
+
+            </tr>
+            <tr>
+                <td>Cash Account</td>
+                <td>Opening Balance</td>
+                <td>&nbsp;</td>
+                <td>{{openingBalance}}</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Loan Principal</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{{PriAmount|floatformat:"0"}}</td>
+                <td>{{LoanAmount|floatformat:"0"}}</td>
+            </tr>
+            <tr>
+                <td>Loan Interested Received</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{{IntAmount|floatformat:"0"}}</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Loan Insurance Fee</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{{AmountLPC|floatformat:"0"}}</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Loan Proc. Fees</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{{AmountLPF|floatformat:"0"}}</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Cash Withdrawal</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{{bankWithdrawalAmount}}</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Cash Deposit</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>0.00</td>
+                <td>{{bankDeposite}}</td>
+            </tr>
+            <tr>
+                <td>Cash Account</td>
+                <td>Day Total</td>
+                <td>&nbsp;</td>
+                <td>{{dayTotal|floatformat:"0" }}</td>
+                <td>0.00</td>
+            </tr>
+            <tr>
+                <td>Cash Account</td>
+                <td>Closing Balance</td>
+                <td>&nbsp;</td>
+                <td>{{ClosingBalance |floatformat:"0"}}</td>
+                <td>0.00</td>
+            </tr>
+        </table>
+    </div>
+    <div class="table2">
+        <table>
+            <tr>
+                <th>Cash Denom.</th>
+                <td>2000</td>
+                <td>500</td>
+                <td>200</td>
+                <td>100</td>
+                <td>50</td>
+                <td>20</td>
+                <td>10</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+                <td>Coins</td>
+                <td>20</td>
+                <td>10</td>
+                <td>5</td>
+                <td>2</td>
+                <td>1</td>
+                <th>Total</th>
+
+            </tr>
+            <tr>
+                <th>No.</th>
+                <td>{{noteCount.0}}</td>
+                <td>{{noteCount.1}}</td>
+                <td>{{noteCount.2}}</td>
+                <td>{{noteCount.3}}</td>
+                <td>{{noteCount.4}}</td>
+                <td>{{noteCount.5}}</td>
+                <td>{{noteCount.6}}</td>
+                <td>{{noteCount.7}}</td>
+                <td>{{noteCount.8}}</td>
+                <td>{{noteCount.9}}</td>
+                <td>&nbsp;</td>
+                <td>{{noteCount.10}}</td>
+                <td>{{noteCount.11}}</td>
+                <td>{{noteCount.12}}</td>
+                <td>{{noteCount.13}}</td>
+                <td>{{noteCount.14}}</td>
+                <td>{{totalNoteCount}}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{% widthratio noteCount.0 1 2000 %}</td>
+                <td>{% widthratio noteCount.1 1 500 %}</td>
+                <td>{% widthratio noteCount.2 1 200 %}</td>
+                <td>{% widthratio noteCount.3 1 100 %}</td>
+                <td>{% widthratio noteCount.4 1 50 %}</td>
+                <td>{% widthratio noteCount.5 1 20 %}</td>
+                <td>{% widthratio noteCount.6 1 10 %}</td>
+                <td>{% widthratio noteCount.7 1 5 %}</td>
+                <td>{% widthratio noteCount.8 1 2 %}</td>
+                <td>{% widthratio noteCount.9 1 1 %}</td>
+                <td>&nbsp;</td>
+                <td>{% widthratio noteCount.10 1 20 %}</td>
+                <td>{% widthratio noteCount.11 1 10 %}</td>
+                <td>{% widthratio noteCount.12 1 5 %}</td>
+                <td>{% widthratio noteCount.13 1 2 %}</td>
+                <td>{% widthratio noteCount.14 1 1 %}</td>
+                <td>{{totalAmount}}</td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="footer">
+        <h4>Requested By: <span>{{userName}}</span></h4>
+        <h4>Requested On: <span>{{createdDate |date:'d-m-Y'}}</span></h4>
+    </div>
+    <div class="cantainer">
+        <h3>This is system generated document and requires no signature</h3>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+{% include "header.html" %}
+
+<div class="container">
+    <div class="container1">
+        <h1>Add Center Meeting</h1>
+        <form action="">
+            <fieldset>
+                <div>
+
+                    <label for="branch">Branch<span class="danger">*</span></label><br>
+                    <select id="branch" name="branch" required>
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="center">Center<span class="danger">*</span></label><br>
+                    <select id="center" name="center" required>
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="cenName">Center Name<span class="danger">*</span></label><br>
+                    <input type="text" id="cenName" name="cenName">
+
+                </div>
+
+                <div>
+
+                    <label for="centerStatus">Center Status<span class="danger">*</span></label><br>
+                    <input type="text" id="centerStatus" name="centerStatus">
+
+                </div>
+
+                <div>
+
+                    <label for="centerDay">Center Day<span class="danger">*</span></label><br>
+                    <input type="text" id="centerDay" name="centerDay">
+
+                </div>
+
+                <div>
+
+                    <label for="centerTime">Center Time<span class="danger">*</span></label><br>
+                    <input type="text" id="centerTime" name="centerTime">
+
+                </div>
+                <div>
+
+                    <label for="meetingDate">Meeting Date<span class="danger">*</span></label><br>
+                    <input type="date" id="meetingDate" name="meetingDate">
+
+                </div>
+                <div>
+
+                    <label for="meetingTime">Meeting Time<span class="danger">*</span></label><br>
+                    <input type="text" id="meetingTime" name="meetingTime">
+
+                </div>
+                <div>
+
+                    <label for="meetingPlace">Meeting Place<span class="danger">*</span></label><br>
+                    <input type="text" id="meetingPlace" name="meetingPlace">
+
+                </div>
+
+                <div>
+
+                    <label for="meetingPurpose">Meeting Purpose<span class="danger">*</span></label><br>
+                    <select id="meetingPurpose" name="meetingPurpose">
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                    </select>
+
+                </div>
+                <div>
+
+                    <label for="SeqNum">SeqNum<span class="danger">*</span></label><br>
+                    <input type="text" id="SeqNum" name="SeqNum">
+
+                </div>
+                <div>
+
+                    <label for="meetingAssignedTo">Meeting Assigned To<span class="danger">*</span></label><br>
+                    <select id="meetingAssignedTo" name="meetingAssignedTo">
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                    </select>
+
+                </div>
+                <div>
+
+                    <label for="comments">Comments</label><br>
+                    <input type="text" id="comments" name="comments">
+
+                </div>
+
+
+            </fieldset>
+            <div class="buttons">
+                <button type="button">Save</button>
+                <a href="{% url 'center_meeting' %}"> <button type="button">Back</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% include "footer.html" %}

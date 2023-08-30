@@ -1,0 +1,611 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{% static '/css/accountStatement.css' %}" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Account Statement</title>
+    <style>
+        /* font-file */
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+        /* global css */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 12px;
+        }
+
+        /* print pdf */
+        @media print {
+
+            @page :first {
+                margin-block: -1cm;
+                margin-inline: 0;
+
+            }
+
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+
+
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            font-size: 1rem;
+        }
+
+        .account-statement-container {
+            min-width: 100dvh;
+            width: 100%;
+            padding: 2rem;
+
+        }
+
+        .company-info {
+            text-align: left;
+            font-size: 0.9rem;
+            margin-bottom: 0.5em;
+            line-height: 2;
+        }
+
+        .company-info span {
+            display: block;
+            text-align: right;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        .column-header {
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+            margin-top: 0.5em;
+        }
+
+        .column-header div {
+            width: 33%;
+        }
+
+        .column-header.first {
+            text-align: center;
+        }
+        .column-header.first div {
+            font-size: 22px;
+        }
+
+        .column-header.second {
+            text-align: left;
+        }
+
+        /* upper-section */
+        .section-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .section-container .column {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: no-wrap;
+            border-top: 1px solid black;
+            padding-right: 2em;
+        }
+
+        .section-container .column .table-row {
+            width: 100%;
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            margin-bottom: 0.4em;
+        }
+
+        .section-container .table-header {
+            min-width: 200px;
+        }
+
+        .upper-section .table-header {
+            font-weight: 900;
+        }
+
+        .table-header p {
+            display: flex;
+            padding-inline: 0.1em;
+        }
+
+        .section-container .table-header span {
+            margin-left: auto;
+        }
+
+        .section-container .table-data {
+            flex: 1;
+            text-align: right;
+        }
+
+        /* lower section */
+
+        /* tables-section */
+        .tables-section {
+            width: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: start;
+            justify-content: start;
+        }
+
+        .tables-section table {
+            width: 50%;
+            margin-right: 1rem;
+
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            text-transform: capitalize;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        caption {
+            text-align: left;
+            font-weight: 900;
+            text-decoration: underline;
+            font-size: 1.2rem;
+        }
+
+        th,
+        td,
+        caption {
+            padding: 0.5rem 1rem;
+        }
+
+        th,
+        td {
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="account-statement-container">
+        <div class="company-info">
+            <h2>Parishkar Microcare Foundation</h2>
+            <p>Plort No.492, Phase3, Udyog Vihar,</p>
+            <p>Sector-20, Gurugram Haryrana </p>
+
+        </div>
+
+        <div class="column-header first">
+            <div></div>
+            <div>Account Statement</div>
+        </div>
+
+        <div class="upper-section section-container">
+            <div class="column">
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Region <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.CenterId.region.region}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Branch <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.CenterId.branch_Name.branch_Name}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Center <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.CenterId.center_Id}}-{{customer_data.CenterId.center_name}}</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="column">
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Product Id <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Product.Product}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Interest Rate(%)<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Product.InterestRate}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Tenure <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Product.Number_of_months}} months</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Processing Fees(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.LPF}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Morat Interest <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>0</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Restructured Interest<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>0</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="column">
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Disbursement Date <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Disbursement_Date}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Loan Id<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.loandata.loanId}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Customer Id <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.loandata.customerId}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Name <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.FirstName}} {{customer_data.LastName}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Co-Insurer Name<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.CoInsurerName}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Address <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.customerAddress}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="column-header second">
+            <div>Loan Details</div>
+            <div>ZccRestructuredIntAmount</div>
+            <div>Insurance Details</div>
+        </div>
+        <div class="lower-section section-container">
+            <div class="column">
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Principal Total(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.LoanAmount }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Principal O/S(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{% if lastPaidEmai is None %}{{customer_data.LoanAmount }}{% else%}{{lastPaidEmai.outstandingPrincipal | floatformat:0 }}{% endif %}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Interst Total(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.totalEMIIntrest | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Interst O/S(Rs.)<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.OSInterest | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Installment Total <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.totalEmiData|length}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Installment O/S <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.OSInstallments}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Next Installment Principal(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.pendingEmiData.principleAmount | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Loan Status <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>Bad Debt</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="column">
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Loan Util Date <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.lastEmiData.installmentDate.date |date:"d-m-Y"}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Loan Util Status<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>25.88</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Overdue Interest(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.intrestArrear | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Preclosure Amount(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.installmentArrear | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Principal Arrear(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.principleArrear | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Interest Arrear(Rs.)<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.Pre_Closure_Amount.intrestArrear | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Next Installment Interest(Rs.)<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.pendingEmiData.interestAmoun | floatformat:0 }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Next Installment(Rs.)<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.pendingEmiData.installmentAmount | floatformat:0 }}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="column">
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Insurance Id <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Co-Insurer Name<span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.CoInsurerName}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Loan Protection Charge(Rs.) <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.LPC |floatformat:0}}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Loan Insurance Maturity Date <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{{customer_data.lastEmiData.installmentDate.date |date:"d-m-Y" }}</p>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-header">
+                        <p>Requested Date & Time <span>:</span> </p>
+                    </div>
+
+                    <div class="table-data">
+                        <p>{% now "SHORT_DATETIME_FORMAT" %}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr>
+        <div class="tables-section">
+            <!-- firs table -->
+
+            <table>
+                <caption>Collection Summary</caption>
+                <tr>
+                    <th>Seq. Num.</th>
+                    <th>Collection Date Time</th>
+                    <th>amount collected</th>
+                    <th>Principal collected</th>
+                    <th>interest collected</th>
+                    <th>principal outstanding</th>
+                    <th>collected by</th>
+                </tr>
+                {% for paidEmi in allPaidEmi %}
+                <tr>
+                    <td> {{ forloop.counter }}</td>
+                    <td>{{paidEmi.PaymentDate.date |date:"d-m-Y"}}</td>
+                    <td>{{paidEmi.installmentAmount |floatformat:0}}</td>
+                    <td>{{paidEmi.principleAmount |floatformat:0}}</td>
+                    <td>{{paidEmi.interestAmoun |floatformat:0}}</td>
+                    <td>{{paidEmi.outstandingPrincipal |floatformat:0}}</td>
+                    <td>{{paidEmi.emiSubmittedBy}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <!-- second table  --> 
+            <table>
+                <caption>Demand Summary</caption>
+                <tr>
+                    <th>Due Date</th>
+                    <th>Inst No</th>
+                    <th>Principal due</th>
+                    <th>interest due</th>
+                    <th>Total due</th>
+                </tr>
+                {% for Emi in allEmi %}
+                <tr>
+                    <td>{{Emi.installmentDate.date |date:"d-m-Y"}}</td>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{Emi.principleAmount |floatformat:0}}</td>
+                    <td>{{Emi.interestAmoun |floatformat:0}}</td>
+                    <td>{{Emi.installmentAmount |floatformat:0}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script>
+        window.print()
+    </script>
+</body>
+
+</html>

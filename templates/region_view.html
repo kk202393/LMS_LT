@@ -1,0 +1,18 @@
+{% include "header.html" %}
+<div class="container1">
+    <h2>List of Regions</h2>
+    <fieldset>
+        {% for region in regions %}
+        <div>
+            <p>Resion: <span>{{region.region}}</span></p>
+            <p>Created By: <span>{{region.created_by}}</span></p>
+            <p>Created Date: <span>{{region.created_date}}</span></p>
+        </div>
+        {% endfor %}
+        <div>
+            <a href="{% url 'region' %} "><button class="button1">Add Another Region</button></a>
+            <a href="{% url 'desbord' %} "><button class="button1">Go to Homepage</button></a>
+        </div>
+    </fieldset>
+</div>
+{% include "footer.html" %}

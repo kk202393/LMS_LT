@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=Lato:ital,wght@1,100&display=swap');
+*{
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'EB Garamond', serif; 
+}
+
+
+
+.container1{
+    background: #fff;
+    border: 2px solid black;
+    text-align: center;
+    margin:auto;
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    overflow:auto;
+    
+    
+}
+
+.container1 h1{
+    color: #3b5998;
+    line-height: 60px;
+    font-weight: 900;
+}
+
+fieldset 
+{
+    display:flex;
+    width: 100%;
+    flex-wrap:wrap;
+    flex-direction:row;
+    text-align: left;
+    /* justify-content: flex-start; */
+    justify-content: flex-start;
+    margin-top:20px;
+    margin-bottom:20px;
+    background-color: rgba(91, 137, 180, 0.311);
+    border-style: solid;
+    border-width: 2px 0;
+    border-color:#3b5998;
+    border-radius: 5px;
+}
+
+fieldset div{
+    margin: 8px 8px ;
+}
+
+input
+{
+    height: 20px;
+    width: 150px
+}
+
+select {
+    height: 20px;
+    width: 150px
+} 
+
+.button{
+    /* margin: 10px 10px 0px 10px; */
+    background: rgb(40, 86, 129);
+    border-radius: 5px;
+    border: 0px;
+    height: 25px;
+    color: white;
+    box-shadow: 4px 5px 10px #214c58;
+    font-weight: 900;
+    font-size: 15px;
+    text-align: center;
+    width: auto;
+    line-height: 2px;
+    margin-left: 5px;
+    padding: 0 10px;
+
+}
+
+.button:hover{
+    background: rgba(74, 159, 238, 0.664);
+
+}        
+  /* second fieldset buttons */
+.button1{
+    font-size: 16px;
+    
+    margin: 10px 5px 0;
+    border-radius: 12px;
+    border: 0;
+    height: 35px;
+    cursor: pointer;
+    font-weight: 600;
+    background:#202d49;
+    color: white;
+
+}
+
+.button1:hover{
+    background-color: #202d4983;
+}
+
+/* second div */
+  
+.second{
+    position:relative;
+    /* width: 100vw; */
+    /* height: auto; */
+    /* background: grey; */
+
+}
+#firstElement{
+    margin-top: 30px;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.sidenav{
+    height: 75%;
+    width: 0;
+    position: absolute;
+    z-index:1;
+    top:101;
+    left: 0;
+    background: #3b5998;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.sidenav a{
+    
+    text-align: left;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f4f4f4;
+    display:block;
+    transition: 0.3s
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+
+/* /*start checkbox ******************* */
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  color:white;
+  user-select: none;
+  
+  
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 20;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  } */
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #18ac64;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+      top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+  }
+
+/*end checkbox******************   */
+
+/* table desgin */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    transition: 0.5s;
+    
+  }
+  
+  th {
+    text-align: center;
+    padding:5 10px;
+    font-size: 15px;
+    font-weight: 550;
+    background: #3b5998;
+    color: white;
+    
+  
+  }
+  
+  td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+  
+  tr:nth-child(even){background-color: rgba(135, 206, 250, 0.466)}
+
+

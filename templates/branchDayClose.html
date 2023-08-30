@@ -1,0 +1,304 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% elif role.name == "Branch Manager" %}
+{% include "headerBranchManager.html" %}
+{% else %}
+{% include "headerAgent.html" %}
+{% endif %}
+<div class="container1">
+    <h1>Branch Day Close</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend>BRANCH DAY CLOSE</legend>
+
+            <div>
+
+                <label for="cash_Book_Branch">Branch</label><br>
+                <select id="cash_Book_Branch" name="branch">
+                    <option value="">--Select--</option>
+                    {% if role.name == "Branch Manager" %}
+                    <option value="{{managerBranch.branchName.id}}">{{managerBranch.branchName.branch_Name}}</option>
+                    {% else %}
+                    {% for Branch in Branches %}
+                    <option value="{{Branch.id}}">{{Branch.branch_Name}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div>
+
+                <label for="dateRange">Date</label><br>
+                <input type="date" id="dateRange" name="dateRange">
+
+                <button type="submit" class="button">Fetch</button>
+            </div>
+
+            <div>
+                <label for="closingAmount">Closing Amount</label><br>
+                <input type="number" readonly id="closingAmount" name="closingAmount"
+                    value="{{ClosingBalance | floatformat:0}}">
+                <input type="hidden" readonly name="Branch_Name" id="Branch_Name" value="{{Branch}}">
+            </div>
+            <div>
+                <label for="branchDayCloseDate">Closing Date </label><br>
+                <input type="date" readonly name="branchDayCloseDate" id="branchDayCloseDateId"
+                    value="{{branchDayCloseDate}}">
+            </div>
+            <div>
+
+                <label for="CalculatedBalance">Calculated Balance</label><br>
+                <input type="number" id="CalculatedBalance" name="CalculatedBalance" readonly>
+                <input id="show-modal-dayClose" type="button" onclick="Calculated_Amount()" value="ADD AMOUNT"
+                    class="button" />
+                <button type="submit" class="button">Submit</button>
+
+            </div>
+
+        </fieldset>
+    </form>
+
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend>CLOSING BALANCE DETAILS</legend>
+            <div>
+
+                <label for="closing_branch">Branch</label><br>
+                <select id="closing_branch" name="closing_branch">
+                    <option value="">--Select--</option>
+                    {% if role.name == "Branch Manager" %}
+                    <option value="{{managerBranch.branchName.id}}">{{managerBranch.branchName.branch_Name}}</option>
+                    {% else %}
+                    {% for Branch in Branches %}
+                    <option value="{{Branch.id}}">{{Branch.branch_Name}}</option>
+                    {% endfor %}
+                    {% endif %}
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label for="closing_date">Date</label><br>
+                <input type="date" id="closing_date" name="closing_date">
+
+                <button type="submit" class="button">GET DETAILS</button>
+
+                {% if error != Null %}
+                {{error}}
+                {% endif %}
+            </div>
+
+        </fieldset>
+    </form>
+
+    <form id="pdf-form" action="{% url 'generate_pdf' %}" method="POST" target="_blank">
+        {% csrf_token %}
+        <fieldset>
+            <legend>DOWNLOAD CASHBOOK REPORT </legend>
+            <div>
+                <label for="CashBookBranchName">Branch</label><br>
+                <select id="CashBookBranchName" name="branch">
+                    <option value="">--Select--</option>
+                    {% if role.name == "Branch Manager" %}
+                    <option value="{{managerBranch.branchName.id}}">{{managerBranch.branchName.branch_Name}}</option>
+                    {% else %}
+                    {% for Branch in Branches %}
+                    <option value="{{Branch.id}}">{{Branch.branch_Name}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+
+            </div>
+            <div>
+
+                <label for="dateRange"> From</label><br>
+                <input type="date" id="fromDateRange" name="fromDateRange">
+
+
+            </div>
+            <div>
+
+                <label for="dateRange"> To</label><br>
+                <input type="date" id="toDateRange" name="toDateRange">
+
+                <button type="submit" onclick="CashBookReport()" class="button">Download Cash Book</button>
+            </div>
+
+        </fieldset>
+    </form>
+
+    <!-- table -->
+    <div style="overflow-x:auto;" id="table">
+        <table>
+            <tr>
+                <th>Action</th>
+                <th>Region</th>
+                <th>Branch</th>
+                <th>Branch Manager</th>
+                <th>Branch Day Close Date</th>
+                <th>Cash Date</th>
+                <th>Cash Balance</th>
+                <th>2000 (note)</th>
+                <th>500 (note)</th>
+                <th>200 (note)</th>
+                <th>100 (note)</th>
+                <th>50 (note)</th>
+                <th>20 (note)</th>
+                <th>10 (note)</th>
+                <th>5 (note)</th>
+                <th>2 (note)</th>
+                <th>1 (note)</th>
+                <th>20 (coin)</th>
+                <th>10 (coin)</th>
+                <th>5 (coin)</th>
+                <th>2 (coin)</th>
+                <th>1 (coin)</th>
+            </tr>
+            {% for branchCashBook in branch_CashBook %}
+            <tr>
+                <td><button id="delete-button" class="button" cl
+                        data-record-id="{{branchCashBook.TransID}}">Delete</button></td>
+                <td>{{branchCashBook.Branch_Name.region.region}}</td>
+                <td>{{branchCashBook.Branch_Name.branch_Name}}</td>
+                <td>{{branchCashBook.BranchManager}}</td>
+                <td>{{branchCashBook.BranchDayCloseDate}}</td>
+                <td>{{branchCashBook.CashDate}}</td>
+                <td>{{branchCashBook.CashBalance}}</td>
+                <td>{{branchCashBook.Note2000}}</td>
+                <td>{{branchCashBook.Note500}}</td>
+                <td>{{branchCashBook.Note200}}</td>
+                <td>{{branchCashBook.Note100}}</td>
+                <td>{{branchCashBook.Note50}}</td>
+                <td>{{branchCashBook.Note20}}</td>
+                <td>{{branchCashBook.Note10}}</td>
+                <td>{{branchCashBook.Note5}}</td>
+                <td>{{branchCashBook.Note2}}</td>
+                <td>{{branchCashBook.Note1}}</td>
+                <td>{{branchCashBook.Coin20}}</td>
+                <td>{{branchCashBook.Coin10}}</td>
+                <td>{{branchCashBook.Coin5}}</td>
+                <td>{{branchCashBook.Coin2}}</td>
+                <td>{{branchCashBook.Coin1}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+</div>
+<div id="modals" class="modals hidden">
+    <button class="close-modal">X</button>
+    <h2>Curreny Denomination</h2>
+    <hr />
+    <form action="" method="POST" id="myform" onsubmit="event.preventDefault()">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Branch</th>
+                <th>Closing Amount</th>
+                <th>Calculated Amount</th>
+            </tr>
+            <tr>
+                <!-- <td>&nbsp;</td> -->
+                <td><input readonly type="text" name="" id="BranchName" /></td>
+                <td><input readonly type="text" name="" id="ClosingAmount" /></td>
+                <td><input readonly type="text" name="" id="CalculatedAmount" /></td>
+            </tr>
+            <tr>
+                <td>2000 (Note)</td>
+                <td><input id="2000" type="text" /></td>
+                <td><input id="2000value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>500 (Note)</td>
+                <td><input id="500" type="text" /></td>
+                <td><input id="500value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>200 (Note)</td>
+                <td><input id="200" type="text" /></td>
+                <td><input id="200value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>100 (Note)</td>
+                <td><input id="100" type="text" /></td>
+                <td><input id="100value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>50 (Note)</td>
+                <td><input id="50" type="text" /></td>
+                <td><input id="50value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>20 (Note)</td>
+                <td><input id="20" type="text" /></td>
+                <td><input id="20value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>10 (Note)</td>
+                <td><input id="10" type="text" /></td>
+                <td><input id="10value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>5 (Note)</td>
+                <td><input id="5" type="text" /></td>
+                <td><input id="5value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>2 (Note)</td>
+                <td><input id="2" type="text" /></td>
+                <td><input id="2value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>1 (Note)</td>
+                <td><input id="1" type="text" /></td>
+                <td><input id="1value" type="text" /></td>
+            </tr>
+            <tr>
+                <td>20 (coin)</td>
+                <td><input id="20c" type="text" /></td>
+                <td><input id="20cv" type="text" /></td>
+            </tr>
+            <tr>
+                <td>10 (Coin)</td>
+                <td><input id="10c" type="text" /></td>
+                <td><input id="10cv" type="text" /></td>
+            </tr>
+            <tr>
+                <td>5 (Coin)</td>
+                <td><input id="5c" type="text" /></td>
+                <td><input id="5cv" type="text" /></td>
+            </tr>
+            <tr>
+                <td>2 (Coin)</td>
+                <td><input id="2c" type="text" /></td>
+                <td><input id="2cv" type="text" /></td>
+            </tr>
+            <tr>
+                <td>1 (Coin)</td>
+                <td><input id="1c" type="text" /></td>
+                <td><input id="1cv" type="text" /></td>
+            </tr>
+
+        </table>
+        <input type="hidden" name="data" id="data">
+        <br>
+        <button class="button" id="btn1" onclick="dataCalculations()" type="submit">Submit</button>
+    </form>
+
+</div>
+<div id="overlay" class="overlay hidden"></div>
+
+{% include "footer.html" %}
+{% if closingBalancePendingMessage != None %}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{closingBalancePendingMessage}}',
+    })
+</script>
+{% endif %}

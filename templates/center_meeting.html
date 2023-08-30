@@ -1,0 +1,333 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% elif role.name == "Branch Manager" %}
+{% include "headerBranchManager.html" %}
+{% else %}
+{% include "headerAgent.html" %}
+{% endif %}
+<div class="container">
+    <div class="container1">
+        <h1>Center Meeting</h1>
+        <form action="">
+            <fieldset>
+                <div>
+
+                    <label for="appId">Region</label><br>
+                    <input type="text" id="region" name="region" placeholder="">
+
+                </div>
+
+                <div>
+
+                    <label for="branch">Branch</label><br>
+                    <input type="text" id="branch" name="branch">
+
+                </div>
+
+                <div>
+
+                    <label for="cenId">Center</label><br>
+                    <input type="text" id="cenid" name="CenterId">
+
+                </div>
+
+                <div>
+
+                    <label for="cusId">Meeting Purpose</label><br>
+                    <input type="text" id="meetingPurpose" name="meetingPurpose">
+
+                </div>
+
+                <div>
+
+                    <label for="group">Date Range</label><br>
+                    <select id="dateRange" name="dateRange">
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                      </select>
+
+                </div>
+
+                <div>
+
+                    <label for="cusId">Meeting Assigned To</label><br>
+                    <input type="text" id="meetingAssignedTo" name="meetingAssignedTo">
+                    <button type="button" class="button">Fetch</button>
+                </div>
+            </fieldset>
+
+        </form>
+
+        <div class="container-table">
+            <fieldset>
+                <div>
+                    <button type="button" class="button1">COPY</button>
+                    <button type="button" class="button1">PDF</button>
+                    <button type="button" class="button1">EXCEL</button>
+                    <button type="button" class="button1">CSV</button>
+                    <a href="{% url 'addCenterMeeting' %}"><button type="button" class="button1">CENTER MEETING</button></a>
+
+                </div>
+            </fieldset>
+
+            <!-- table -->
+
+            <div style="overflow-x:auto;">
+                <table>
+                    <tr>
+                        <th>Action</th>
+                        <th>Region</th>
+                        <th>Branch</th>
+                        <th>Center Id</th>
+                        <th>Center Name</th>
+                        <th>Center Status</th>
+                        <th>Meeting Status</th>
+                        <th>Purpose</th>
+                        <th>SeqNum</th>
+                        <th>Center Day</th>
+                        <th>Meeting Date</th>
+                        <th>Meeting Time</th>
+                        <th>Meeting Day</th>
+                        <th>Meeting Place</th>
+                        <th>M Assigned To</th>
+                        <th>M Attend ON</th>
+                        <th>C Meeting Place</th>
+                        <th>C Assigned To</th>
+                        <th>Pospone Limit</th>
+                        <th>Prepone Limit</th>
+                        <th>Comments</th>
+                        <th>GRT Status</th>
+                        <th>GRT Response</th>
+                        <th>Exp Dish Date</th>
+                        <th>Created By</th>
+                        <th>Created On</th>
+                        <th>Modified By</th>
+                        <th>Modified On</th>
+                        <th>Holiday Type</th>
+
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td>29</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}

@@ -1,0 +1,67 @@
+{% include "header.html" %}
+
+<div class="container1">
+    <h3>BANK TRANSACTION DEPOSIT</h3>
+    <fieldset>
+        <legend>Transactions Search</legend>
+        <div>
+            <label for="fromDate">From Date</label><br />
+            <input type="date" id="fromDate" name="fromDate" />
+        </div>
+        <div>
+            <label for="toDate">To Date</label><br />
+            <input type="date" id="toDate" name="toDate" />
+        </div>
+        <button type="button" class="button1">Search Transaction</button>
+    </fieldset>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Physical Assets<span class="danger">*</span></legend>
+            <div>
+                <label for="branchName">Branch Name</label><br />
+                <select name="branchName" id="branchName">
+                    <option value="" selected>--Select--</option>
+                    {% for data in Branch %}
+                    <option value="{{data.id}}">{{data.branch_Name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="AccountNo">Account No:</label><br />
+                <input type="number" name="AccountNo" readonly id="AccountNo" value="50200075519643">
+            </div>
+            <div>
+                <label for="Date">Date:</label><br />
+                <input type="date" id="Date" name="transactionsDate" />
+            </div>
+
+            <div>
+                <label for="amount">Amount:<span class="danger">*</span></label><br />
+                <input type="number" id="amount" name="depositAmount" />
+            </div>
+            <div>
+                <label for="slipNo">Slip No/Cheque No:</label><br />
+                <input type="text" id="slipNo" name="transactionsSlipNumber" />
+            </div>
+
+            <div>
+                <label for="BankName">Bank Name:</label><br />
+                <select name="BankName" id="BankName">
+                    <option value="">--Select--</option>
+                    <option value="{{Bank.id}}">{{Bank.BankName_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="remarks">Remarks</label><br />
+                <input name="remarks" id="remarks"></input>
+            </div>
+            <div class="container">
+                <button type="submit" class="button1">INSERT TRANSACTION</button>
+                <button type="reset" class="button1">CLEAR</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+{% include "footer.html" %}

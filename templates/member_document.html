@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-left: 100px;
+        }
+
+        img {
+            width: 400px;
+            display: block;
+            margin-left: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    {% if num == "100" %}
+    <div id="main">
+        <img src="{{customer_data.Custimage.url}}" alt="">
+        <h2>Originally Seen and Verified by: {{customer_data.user.id}} ({{customer_data.user.first_name}})</h2>
+    </div>
+    {% elif num == "101" %}
+    <div>
+        <img src="{{customer_data.Member_Aadhar_Card_front.url}}" alt="">
+        <img src="{{customer_data.Member_Aadhar_Card_back.url}}" alt="">
+        <h2>Originally Seen and Verified by: {{customer_data.user.id}} ({{customer_data.user.first_name}})</h2>
+    </div>
+    {% elif num == "102" %}
+    <div>
+        <img src="{{customer_data.Member_Voter_Card_front.url}}" alt="">
+        <img src="{{customer_data.Member_Voter_Card_back.url}}" alt="">
+        <h2>Originally Seen and Verified by: {{customer_data.user.id}} ({{customer_data.user.first_name}})</h2>
+    </div>
+    {% elif num == "103" %}
+    <div>
+        <img src="{{customer_data.Co_Insurer_Aadhaar_front.url}}" alt="">
+        <img src="{{customer_data.Co_Insurer_Aadhaar_back.url}}" alt="">
+        <h2>Originally Seen and Verified by: {{customer_data.user.id}} ({{customer_data.user.first_name}})</h2>
+    </div>
+    {% elif num == "104" %}
+    <div>
+        <img src="{{customer_data.Member_Bank_Details.url}}" alt="">
+        <h2>Originally Seen and Verified by: {{customer_data.user.id}} ({{customer_data.user.first_name}})</h2>
+    </div>
+    {% elif num == "105" %}
+    <div>
+        {% if customer_data.Member_Relationship_Proof.path is not None %}
+        <img src="{{customer_data.Member_Relationship_Proof.url}}" alt="">
+        <h2>Originally Seen and Verified by: {{customer_data.user.id}} ({{customer_data.user.first_name}})</h2>
+        {% else %}
+        <h2>No. Record Found</h2>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+
+</html>

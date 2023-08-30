@@ -1,0 +1,471 @@
+{% include "header.html" %}
+<div class="container">
+    <div class="container1">
+        <h1>Loan Application Form</h1>
+        <form action="3">
+            <!-- fieldset#1 -->
+            <fieldset>
+                <div>
+                    <label for="appId">Application Id</label><br>
+                    <input type="number" id="appId" name="ApplicationId">
+                </div>
+                <div>
+                    <label for="branch">Branch</label><br>
+                    <input type="text" id="branch" name="branch">
+                </div>
+                <div>
+                    <label for="cenId">Center Id</label><br>
+                    <input type="text" id="cenid" name="CenterId">
+                </div>
+
+                <div>
+
+                    <label for="cusId">Customer Id</label><br>
+                    <input type="text" id="cusid" name="customerId">
+
+                </div>
+
+                <div>
+
+                    <label for="status">Status</label><br>
+                    <input type="text" id="status" name="status">
+
+                </div>
+
+                <div>
+
+                    <label for="cycle">Cycle</label><br>
+                    <input type="number" id="cycle" name="cycle">
+
+                </div>
+
+                <div>
+
+                    <label for="group">Group<span class="danger">*</span></label><br>
+                    <select id="group" name="group" required>
+                            <option value="option1">option1</option>
+                            <option value="option2">option2</option>
+                            <option value="option3">option3</option>
+                            <option value="option4">option4</option>
+                          </select>
+
+                </div>
+
+            </fieldset>
+
+
+
+
+            <!-- second fieldset (Customer details) -->
+
+            <fieldset>
+                <legend>Customer Details</legend>
+                <div class="image-upload">
+                    <div>
+                        image
+                    </div>
+                    <div>
+                        Location
+                    </div>
+                </div>
+
+
+                <div>
+
+                    <label for="fName">First Name</label><br>
+                    <input type="text" id="fName" name="fName">
+
+                </div>
+
+                <div>
+
+                    <label for="lName">Last Name</label><br>
+                    <input type="text" id="lName" name="lName">
+
+                </div>
+
+                <div>
+
+                    <label for="gender">Gender</label><br>
+                    <input type="text" id="gender" name="gender">
+
+                </div>
+
+                <div>
+
+                    <label for="dob">Date of Birth</label><br>
+                    <input type="date" id="dob" name="dob">
+
+                </div>
+
+                <div>
+
+                    <label for="maritalStatus">Marital Status</label><br>
+                    <input type="text" id="maritalStatus" name="maritalStatus">
+
+                </div>
+
+                <div>
+
+                    <label for="voterCard">Voter Card</label><br>
+                    <input type="text" id="voterCard" name="voterCard">
+
+                </div>
+
+                <div>
+
+                    <label for="fsType">F/S Type</label><br>
+                    <input type="text" id="fsType" name="fsType">
+
+                </div>
+
+                <div>
+
+                    <label for="fsName">F/S Name</label><br>
+                    <input type="text" id="fsName" name="fsName">
+
+                </div>
+
+                <div>
+
+                    <label for="fsDOB">F/S Date of Birth</label><br>
+                    <input type="date" id="fsDOB" name="fsDOB">
+
+                </div>
+
+                <div>
+
+                    <label for="MoName">Mother's Name</label><br>
+                    <input type="text" id="MoName" name="MoName">
+
+                </div>
+
+                <div>
+
+                    <label for="FaName">Father's Name</label><br>
+                    <input type="text" id="FaName" name="FaName">
+
+                </div>
+
+                <div>
+
+                    <label for="fsAdhaar">F/S Adhaar</label><br>
+                    <input type="number" id="fsAdhaar" name="fsAdhaar">
+
+                </div>
+
+                <div>
+
+                    <label for="AddLine1">Address Line1</label><br>
+                    <input type="text" id="AddLine1" name="AddLine1">
+
+                </div>
+
+                <div>
+
+                    <label for="AddLine2">Address Line2</label><br>
+                    <input type="text" id="AddLine2" name="AddLine2">
+
+                </div>
+
+                <div>
+
+                    <label for="AddLine3">Address Line3</label><br>
+                    <input type="text" id="AddLine3" name="AddLine3">
+
+                </div>
+                <div>
+
+                    <label for="pcode">Pincode</label><br>
+                    <input type="number" id="pcode" name="pcode">
+
+                </div>
+
+                <div>
+
+                    <label for="village">Village</label><br>
+                    <input type="number" id="village" name="village">
+
+                </div>
+
+                <div>
+
+                    <label for="district">District</label><br>
+                    <input type="text" id="district" name="district">
+
+                </div>
+
+                <div>
+
+                    <label for="group">State</label><br>
+                    <select name="state" id="state" style="width: 150px">
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                            <option value="Daman and Diu">Daman and Diu</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Puducherry">Puducherry</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            </select>
+
+                </div>
+
+                <div>
+
+                    <label for="caste">Caste</label><br>
+                    <input type="text" id="caste" name="caste">
+
+                </div>
+
+                <div>
+
+                    <label for="religion">Religion</label><br>
+                    <input type="text" id="religion" name="religion">
+
+                </div>
+
+                <div>
+
+                    <label for="lang">Preferred Language</label><br>
+                    <input type="text" id="lang" name="lang">
+
+                </div>
+
+                <div>
+
+                    <label for="qualification">Qualification</label><br>
+                    <input type="text" id="qualification" name="qualification">
+
+                </div>
+
+                <div>
+
+                    <label for="vid">VID</label><br>
+                    <input type="text" id="vid" name="vid">
+
+                </div>
+
+                <div>
+
+                    <label for="aadhaar">Aadhaar</label><br>
+                    <input type="number" id="aadhaar" name="aadhaar">
+
+                </div>
+
+                <div>
+
+                    <label for="kycIdType">Other KYC Id type</label><br>
+                    <input type="text" id="kycIdType" name="kycIdType">
+
+                </div>
+
+                <div>
+
+                    <label for="kycId">Other KYC Id </label><br>
+                    <input type="number" id="kycId" name="kycId">
+
+                </div>
+
+                <div>
+
+                    <label for="extAppId">Ext Appl. Id</label><br>
+                    <input type="text" id="extAppId" name="extAppId">
+
+                </div>
+
+                <div>
+                    <label for="pNumber">Phone number</label><br>
+                    <input type="text" id="pNumber" name="pNumber">
+                    <button type="button" class="button">Validate Number</button>
+                </div>
+
+
+
+
+                <div>
+                    <label for="AltpNumber">Alt. Phone number</label><br>
+                    <input type="text" id="AltpNumber" name="AltpNumber">
+                    <button type="button" class="button">Validate Number</button>
+                </div>
+
+
+
+
+
+            </fieldset>
+
+
+            <!-- third fieldset Product details -->
+
+            <fieldset>
+                <legend>Product Details</legend>
+                <div>
+
+                    <label for="catType">Category Type</label><br>
+                    <select id="catType" name="catType">
+                            <option value="option1">option1</option>
+                            <option value="option2">option2</option>
+                            <option value="option3">option3</option>
+                            <option value="option4">option4</option>
+                          </select>
+
+
+                </div>
+
+                <div>
+
+                    <label for="proType">Product Category<span class="danger">*</span></label><br>
+                    <select id="proType" name="proType">
+                            <option value="option1">option1</option>
+                            <option value="option2">option2</option>
+                            <option value="option3">option3</option>
+                            <option value="option4">option4</option>
+                          </select>
+
+
+                </div>
+
+                <div>
+
+                    <label for="product">Product<span class="danger">*</span></label><br>
+                    <select id="product" name="product">
+                            <option value="option1">option1</option>
+                            <option value="option2">option2</option>
+                            <option value="option3">option3</option>
+                            <option value="option4">option4</option>
+                          </select>
+
+
+                </div>
+
+                <div>
+
+                    <label for="loanAmount">Loan Amount</label><br>
+                    <input type="number" id="loanAmount" name="loanAmount">
+
+                </div>
+
+                <div>
+
+                    <label for="appliedAmount">Applied Amount</label><br>
+                    <input type="number" id="appliedAmount" name="appliedAmount">
+
+                </div>
+
+                <div>
+
+                    <label for="intRate">Interest Rate</label><br>
+                    <input type="number" id="intRate" name="intRate">
+
+                </div>
+
+                <div>
+
+                    <label for="repayFreq">Repay Frequency</label><br>
+                    <input type="number" id="repayFreq" name="repayFreq">
+                    <button class="button">Check Product</button>
+
+                </div>
+
+                <div>
+
+                    <label for="proInvNum">Product Invoice Number</label><br>
+                    <input type="number" id="proInvNum" name="proInvNum">
+
+                </div>
+
+                <div>
+
+                    <label for="sanctionStatus">Sanction Status</label><br>
+                    <input type="text" id="sanctionStatus" name="sanctionStatus">
+
+                </div>
+
+
+            </fieldset>
+
+
+            <!-- sideways container and fieldset -->
+
+
+            <div class="container-sideways">
+                <fieldset class="sideways">
+                    <legend>Purpose Details</legend>
+
+                    <div>
+
+                        <label for="purpose">Purpose<span class="danger">*</span></label><br>
+                        <select id="purpose" name="purpose">
+                            <option value="option1">option1</option>
+                            <option value="option2">option2</option>
+                            <option value="option3">option3</option>
+                            <option value="option4">option4</option>
+                          </select>
+
+
+                    </div>
+
+                    <div>
+
+                        <label for="subpurpose">Sub Purpose<span class="danger">*</span></label><br>
+                        <select id="subpurpose" name="subpurpose">
+                            <option value="option1">option1</option>
+                            <option value="option2">option2</option>
+                            <option value="option3">option3</option>
+                            <option value="option4">option4</option>
+                          </select>
+
+
+                    </div>
+
+                </fieldset>
+                <fieldset class="sideways">
+                    <legend>Insurance Details</legend>
+
+                    <div>
+
+                        <label for="InsuranceId">Insurance Id</label><br>
+                        <input type="text" id="InsuranceId" name="InsuranceId">
+
+                    </div>
+                </fieldset>
+            </div>
+
+
+
+        </form>
+    </div>
+
+
+</div>
+
+{% include "footer.html" %}

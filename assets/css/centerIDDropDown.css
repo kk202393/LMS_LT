@@ -1,0 +1,29 @@
+/* center id drop downlist start*/
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .select-input {
+    width: 200px;
+  }
+
+  .select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+  }
+
+  .select-option {
+    cursor: pointer;
+  }
+
+  .select-option:hover {
+    background-color: #f2f2f2;
+  }

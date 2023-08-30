@@ -1,0 +1,840 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="{% static '/favicon.ico' %}" />
+  <link
+      rel="stylesheet"
+      href="{% static '/css/group_Loan_Application.css' %}"
+    />
+  <title>Parishkar Microcare Foundation</title>
+</head>
+
+<body>
+  <button style="float:right" id="print-button">Print</button>
+  <!-- first-english-page -->
+  <div id="first-page" class="page first">
+    <div class="container-top">
+      <h2>Parishkar Microcare Foundation (PMCF)</h2>
+      <h4>Regd.Office--Prop No P-57 Block No-P , Pandav Nagar Delhi-110091</h4>
+      <h4>CIN: U65100DL2022NPL402347</h4>
+      <p>GROUP LOAN APPLICATION FORM <span>(Office Copy)</span></p>
+      <div>
+        <h3>LOAN SANCTION LETTER CUM DEMAND PROMISSORY NOTE</h3>
+        <p>
+          Center Meeting Day: <span>{{center_meeting_day}}</span>
+        </p>
+      </div>
+      <div>
+        <p>Date of disbursement <span></span></p>
+        <p>Repayment Frequency: <span> {{repay}} </span> (in Days)</p>
+      </div>
+      <div>
+        <p>
+          I/We, the member of Center no. <span id="center">{{centerid}}-{{center}}</span> Group
+          <span id="group"> {{group}} </span> at <span>{{branch}}</span> Branch
+          (branch name and code) of <span id="branch"> {{Region}}</span> Region
+          apply to Parishkar Microcare Foundation. for the loans and the
+          contents are filled at my/our instructions and are read over and
+          explained in the language to me/us group memebers by the Center
+          Leader/ Community Service Officer and made me/ us understand. I / We
+          authorized PMCF to amount in cash/ NEFT to me/ us /product vendor/
+          authorized dealer on my/our behalf. I/ We understand that I/We will
+          receive the remaining loan amount as showed in below table after
+          auto-deduction of Loan Processing Fee including applicable Credit
+          Shield Insurance Premium (CSIP). I/We hereby make this loadn
+          application with my/us free will and consent to the declaration
+          mentioned overleaf and make the following factual declarations which
+          are true and corrent . If I/ We cancel the loan, I/We undertake to
+          refund the transereed loan amount to Parishkar Microcare Foundation
+          along with applicable interest if any.
+        </p>
+      </div>
+      <label for="asset">
+        Is the asset classified as a qualifying asset?
+        <input type="checkbox" name="asset" id="asset-yes" value="yes" />
+        <span>Yes</span>
+        <input type="checkbox" name="asset" id="asset-no" value="no" />
+        <span>No</span>
+        <p>
+          <b>FORM 60:-</b>
+        </p>
+        <p>
+          I/We do not have a permanent Account Number(PAN) hence submitting
+          form 60 details as per second to rule 114B of Income Tax Rules, 1962
+        </p>
+      </label>
+
+      <div class="container-table">
+        <table id="myTable">
+          <!-- empty -->
+        </table>
+      </div>
+
+    </div>
+
+    <div class="container-bottom">
+      <hr />
+      <h4>FOR OFFICIAL PURPOSE ONLY</h4>
+      <p>
+        As per request of your loan application . we Parishkar Microcare Foundation (PMCF), hereby approve above-mentioned loan amount. The final
+        agreement is subject to agreement of auto-debit of loan processing fee
+        (including Applicable Tax-Non-refundable) and applicable Premium for
+        credit shield insurance at the time of disbursement of the loan amount
+        for above -mentioned purpose. The loan amount is repayable in
+        <span> {{Total_loan_amount}}</span> weekly /Bi-weekly/monthly installment along with an
+        effective rate of interest on diminishing balance method for Income
+        Generation Loans and the installment payable by you is stated in loan
+        card
+      </p>
+      <br>
+      <div>
+        <h5>BM/ABM Name-</h5>
+        <h5>BM/ABM Employee ID-</h5>
+        <h5>BM/ABM Signature -</h5>
+      </div>
+
+      <!-- <button id="generatePDFbutton">Generate Pdf and print</button> -->
+    </div>
+  </div>
+
+
+  <div id="second-page" class="page second">
+    <div class="container-top">
+      <h3>TERMS AND CONDITIONS FOR LOAN APPLICATION</h3>
+      <ol type="1">
+        <li>
+          The borrower will utilize the loan only for the purpose declared in
+          loan application form. LUC must be conducted within 60 days of loan
+          disbursement of loan.
+        </li>
+        <li>
+          All financial transactions will be held only in the center meeting at
+          a central designated place.
+        </li>
+        <li>
+          A Member has the option to repay the loan in Weekly/Bi-weekly /Monthly
+          mode. There will be a moratorium for the loan repayment equivalent to
+          the period of one instalment span selected by the borrower in the Loan
+          application.
+        </li>
+        <li>
+          The tenure of loans will be as chosen by the member in the loan
+          application
+        </li>
+        <li>
+          There is no penalty for prepayment of loans but penal charges can be
+          taken in case of delayed payments. No security deposit or margin will
+          be collected from the borrower by the lender. Pre-closure of loan will
+          be done by updating both the promissory note and loan card.
+        </li>
+        <li>
+          PMCF will acknowledge every financial transaction in the presence of
+          members by making entry into their loan cards.
+        </li>
+        <li>
+          Loan application forms will not be returned to the member as it is the
+          property of the organization.
+        </li>
+        <li>
+          . The borrower will be charged an amount equivalent to 1% (exclusive
+          of applicable tax) of the loan amount as a non-refundable Loan
+          Processing Fee and applicable insurance premium towards Credit Shield
+          Insurance at the time of disbursement of each loan
+        </li>
+        <li>
+          The pricing of loan involves only three components, viz. Interest
+          Amount, Loan Processing Fees and applicable Insurance Premium.
+        </li>
+        <li>
+          The borrower agrees to pay a Life Insurance Premium of Rs.
+          <span>{{Total_LPC_amount|floatformat:"0"}}</span> for a sum assured equal to disbursed loan amount.
+          The life insurance cover term shall be equal to the loan term & any
+          pre-closure of the loan will get the insurance cover terminated
+        </li>
+        <li>
+          . Member/s have an option to change their nomination for the life
+          insurance cover any time during the cover term.
+        </li>
+        <li>
+          . PMCF is authorized to share the client details to Credit Bureau
+          agencies approved by Regulator/Government Authorities. PMCF gives an
+          assurance that the privacy of borrower data shall be respected.
+        </li>
+        <li>
+          All changes in the terms & conditions of Loan, Interest rates and
+          other charges of loan will be only prospective.
+        </li>
+        <li>
+          PMCF does not use outsource recovery agents for recovery. However,
+          recovery can be done at door step if borrower fail to appear at the
+          central designated place on two or more successive occasion. PMCF will
+          not engage in any harsh method towards recovery.
+        </li>
+        <li>
+          PMCF staff verifies all the details of monthly/yearly household
+          income/household expenses of customer/s and ascertained her/their
+          household income from the other members of group/s & neighbors.
+        </li>
+        <li>
+          The borrower needs to submit approved Know Your Customer (KYC)
+          documents like Address and Identity Proof. ID Proof (self and
+          Spouse/Son/Daughter)/Address Proof/Member Photograph 3 no./Letter of
+          Undertaking (If Applicable)
+        </li>
+        <li>
+          Warranty and after sales services are provided by the manufacturer and
+          PMCF will not be responsible for any lapse on the part of manufacturer
+        </li>
+        <li>
+          PMCF staff is adequately trained and reasonable care is being taken
+          for any inappropriate staff behavior wherein PMCF will be accountable
+          for the same. In case of any complaint/grievance call 8905654731. The details of
+          the operational timings of the number are mentioned in the Loan Card
+          given to you.
+        </li>
+        <li>
+          PMCF does not discriminate against customers on the basis of
+          ethnicity, age (Subject to IRDA norms), sexual orientation, political
+          affiliation, caste, creed or religion
+        </li>
+        <li>
+          PMCF provides Loan Acknowledgment Form, Group Loan Application Form
+          and Loan Card to its member in which loan repayment schedule and all
+          the terms and condition related to the loan are enlisted
+        </li>
+        <li>
+          Customers should apply for loans/product loans on their own wish, PMCF
+          does not force anyone to borrow/take a loan or buy a product
+        </li>
+        <li>
+          In addition to the amount specified in the loan card, members are not
+          required to pay any kind of cash or any other form to the employees or
+          any other person
+        </li>
+        <li>
+          PMCF maintains transparency of all the norms and conditions with the
+          borrower and communicates to the members in the local language or in
+          the language they understand.
+        </li>
+        <li>
+          Grant of loan is not linked to any other product/services offered by
+          the company or third party
+        </li>
+        <li>
+          Loan account classified as NPA (Non - Performing Asset), may be
+          upgraded as 'standard' asset only if entire arrears of interest and
+          principal are paid by the borrower
+        </li>
+        <li>
+          Loan facility shall be classified as SMA 0 when it is in overdue up to
+          30 days; SMA-1 when it is more than 30 days and up to 60 days; SMA-2
+          when it is more than 60 days and up to 90 days and classifies as NPA
+          when it is more than 90 days
+        </li>
+        <li>
+          PMCF can be approached on toll free number for any inappropriate
+          behavior of its employee/employee of outsourcing agencies & we shall
+          address the grievance with in the timeframe as mentioned in client
+          grievance redressal.
+        </li>
+      </ol>
+      <h3>Group Undertaking</h3>
+      <p>
+        We, the below mentioned members, each agrees to stand as responsible and
+        witness for such members of our group to whom loans have been sanctioned
+        as per this Application Form. In our capacity as joint liability group,
+        we agree that, in the event of non-repayment of the loan with principal
+        and interest by anyone or more members of the group, we are jointly and
+        severally liable for repaying of dues to Parishkar Microcare Foundation
+        We will be receiving our respective loans as members of the group after
+        representing to PMCF by way of this undertaking to be jointly liable for
+        the repayment of loan of any member in the group if each member defaults
+        in the repayment of her loan. We wish to state that all the members of
+        the group shall remain jointly liable for all the loans/debts contracted
+        from PMCF, by the individual members of the group till the tenure of all
+        the debts so contracted by each of the individual members of the group
+        is fully repaid. In the event of a default or mis-utilization of the
+        loan amount, PMCF is authorized to recall the entire amount that is
+        outstanding at the time of default (Including arrears of interest, if
+        any) at any time upon notice. The contents of this undertaking have been
+        read by us or explained to us in a language that is known to us and we
+        understand, accept and acknowledge the contents and accept the terms and
+        conditions herein. This whole transaction is with our permission and is
+        fully within our knowledge. We recommend this loan for sanction. PMCF
+        shall have the right to make disclosure of information relating to the
+        Member to the Credit information Bureau of India (CIBIL) and /or any
+        other governmental/regulatory/statutory or private agencies which are
+        allowed by RBI, as required by law from time to time. PMCF reserves the
+        right to disclose the information relating to Member to any prospective
+        investor / existing investor, creditor, vendor or any third party on a
+        need-to-know basis. PMCF has the right to assign or transfer the rights
+        under the agreement and all other documents executed by the Member in
+        favor of PMCF to any other party.
+      </p>
+      <p>
+        I/ We understand that :- -<strong>
+          (A) No penal charges on pre-payment but penal charges can be taken for
+          delayed payment (B) No security deposit/margin is being
+          collected.</strong>
+      </p>
+      <h3>Self-Declaration by the Borrower</h3>
+      <p>
+        We, the below mentioned members, each hereby declares that each of our
+        total outstanding borrowing inclusive of all sources and the applied
+        loan (Assuming that the same would be approved without further charges)
+        does not exceed monthly loan repayment obligation limit of 50% of our
+        household monthly income. I/We understand that the other Life cover
+        applicant as indicated in this Group Loan Application form shall be my
+        default nominee. I/We am/are aware that Parishkar Microcare Foundation (PMCF)
+         is the holder of the life insurance Master Policy issued by
+        <span><strong>HDFC  LIFE INSURANCE</strong></span> for
+        <span><strong>HDFC_24M_4.00</strong></span> and I/We am/are a member of
+        this group. I/We understand the features of this product and agree with
+        the terms and conditions and hereby consent to avail the benefits under
+        the <span><strong>HDFC  LIFE INSURANCE</strong></span> group
+        policy
+      </p>
+      <h3>Authorization to the Insurer</h3>
+      <p>
+        In the event of any eventuality of self and/or Co-Insurer 's death
+        giving rise to a claim under the Group Insurance Scheme, the claim
+        proceeds should be utilized to liquidate the outstanding loan amount of
+        Parishkar Microcare Foundation . I/We, the below mentioned member(s), who
+        are enrolled in the insurance policy, hereby jointly and severally
+        authorize Parishkar Microcare Foundation (PMCF) to receive the
+        outstanding loan amount of the claim proceeds payable on the happening
+        of the contingent event covered under the insurance policy from the
+        Insurance partner. Any residual amount shall be paid by the Insurer to
+        me or my nominee/beneficiary as the case may be.
+      </p>
+      <table id="myTable2">
+        <!-- empty -->
+      </table>
+    </div>
+
+    <div  style="font-size: 15px;  display: flex; justify-content: space-around; width: 100%;">
+      <h5>CENTER LEADER NAME: <br> <br> CENTER LEADER SIGNATURE:</h5>
+      <h5>CSO NAME: <br> <br>EMPLOYEE CODE: <br> <br> CSO SINGATURE:</h5>
+      <h5>BM/ ABM NAME: <br><br>EMPLOYEE CODE: <br><br>BM/AM SIGNATURE:</h5>
+    </div>
+  </div>
+
+  <!-- first-english-page-customer-copy -->
+  <!-- first-english-page -->
+  <div id="first-page" class="page first">
+    <div class="container-top">
+      <h2>Parishkar Microcare Foundation (PMCF)</h2>
+      <h4>Regd.Office--Prop No P-57 Block No-P , Pandav Nagar Delhi-110091</h4>
+      <h4>CIN: U65100DL2022NPL402347</h4>
+      <p>GROUP LOAN APPLICATION FORM <span>(Customer Copy)</span></p>
+      <div>
+        <h3>LOAN SANCTION LETTER CUM DEMAND PROMISSORY NOTE</h3>
+        <p>
+          Center Meeting Day: <span>{{center_meeting_day}}</span>
+        </p>
+      </div>
+      <div>
+        <p>Date of disbursement <span></span></p>
+        <p>Repayment Frequency: <span> {{repay}} </span> (in Days)</p>
+      </div>
+      <div>
+        <p>
+          I/We, the member of Center no. <span id="center">{{centerid}}-{{center}}</span> Group
+          <span id="group"> {{group}} </span> at <span>{{branch}}</span> Branch
+          (branch name and code) of <span id="branch"> {{Region}}</span> Region
+          apply to Parishkar Microcare Foundation. for the loans and the
+          contents are filled at my/our instructions and are read over and
+          explained in the language to me/us group memebers by the Center
+          Leader/ Community Service Officer and made me/ us understand. I / We
+          authorized PMCF to amount in cash/ NEFT to me/ us /product vendor/
+          authorized dealer on my/our behalf. I/ We understand that I/We will
+          receive the remaining loan amount as showed in below table after
+          auto-deduction of Loan Processing Fee including applicable Credit
+          Shield Insurance Premium (CSIP). I/We hereby make this loadn
+          application with my/us free will and consent to the declaration
+          mentioned overleaf and make the following factual declarations which
+          are true and corrent . If I/ We cancel the loan, I/We undertake to
+          refund the transereed loan amount to Parishkar Microcare Foundation.
+          along with applicable interest if any.
+        </p>
+      </div>
+      <label for="asset">
+        Is the asset classified as a qualifying asset?
+        <input type="checkbox" name="asset" id="asset-yes" value="yes" />
+        <span>Yes</span>
+        <input type="checkbox" name="asset" id="asset-no" value="no" />
+        <span>No</span>
+        <p>
+          <b>FORM 60:-</b>
+        </p>
+        <p>
+          I/We do not have a permanent Account Number(PAN) hence submitting
+          form 60 details as per second to rule 114B of Income Tax Rules, 1962
+        </p>
+      </label>
+
+      <div class="container-table">
+        <table id="custTable">
+          <!-- empty -->
+        </table>
+      </div>
+
+    </div>
+
+    <div class="container-bottom">
+      <hr />
+      <h4>FOR OFFICIAL PURPOSE ONLY</h4>
+      <p>
+        As per request of your loan application . we Parishkar Microcare Foundation (PMCF)
+        , hereby approve above-mentioned loan amount. The final
+        agreement is subject to agreement of auto-debit of loan processing fee
+        (including Applicable Tax-Non-refundable) and applicable Premium for
+        credit shield insurance at the time of disbursement of the loan amount
+        for above -mentioned purpose. The loan amount is repayable in
+        <span> {{Total_loan_amount}}</span> weekly /Bi-weekly/monthly installment along with an
+        effective rate of interest on diminishing balance method for Income
+        Generation Loans and the installment payable by you is stated in loan
+        card
+      </p>
+      <div>
+        <h5>BM/ABM Name-</h5>
+        <h5>BM/ABM Employee ID-</h5>
+        <h5>BM/ABM Signature -</h5>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="second-page" class="page second">
+    <div class="container-top">
+      <h3>TERMS AND CONDITIONS FOR LOAN APPLICATION</h3>
+      <ol type="1">
+        <li>
+          The borrower will utilize the loan only for the purpose declared in
+          loan application form. LUC must be conducted within 60 days of loan
+          disbursement of loan.
+        </li>
+        <li>
+          All financial transactions will be held only in the center meeting at
+          a central designated place.
+        </li>
+        <li>
+          A Member has the option to repay the loan in Weekly/Bi-weekly /Monthly
+          mode. There will be a moratorium for the loan repayment equivalent to
+          the period of one instalment span selected by the borrower in the Loan
+          application.
+        </li>
+        <li>
+          The tenure of loans will be as chosen by the member in the loan
+          application
+        </li>
+        <li>
+          There is no penalty for prepayment of loans but penal charges can be
+          taken in case of delayed payments. No security deposit or margin will
+          be collected from the borrower by the lender. Pre-closure of loan will
+          be done by updating both the promissory note and loan card.
+        </li>
+        <li>
+          PMCF will acknowledge every financial transaction in the presence of
+          members by making entry into their loan cards.
+        </li>
+        <li>
+          Loan application forms will not be returned to the member as it is the
+          property of the organization.
+        </li>
+        <li>
+          . The borrower will be charged an amount equivalent to 1% (exclusive
+          of applicable tax) of the loan amount as a non-refundable Loan
+          Processing Fee and applicable insurance premium towards Credit Shield
+          Insurance at the time of disbursement of each loan
+        </li>
+        <li>
+          The pricing of loan involves only three components, viz. Interest
+          Amount, Loan Processing Fees and applicable Insurance Premium.
+        </li>
+        <li>
+          The borrower agrees to pay a Life Insurance Premium of Rs.
+          <span>{{Total_LPC_amount|floatformat:"0"}}</span> for a sum assured equal to disbursed loan amount.
+          The life insurance cover term shall be equal to the loan term & any
+          pre-closure of the loan will get the insurance cover terminated
+        </li>
+        <li>
+          . Member/s have an option to change their nomination for the life
+          insurance cover any time during the cover term.
+        </li>
+        <li>
+          . PMCF is authorized to share the client details to Credit Bureau
+          agencies approved by Regulator/Government Authorities. PMCF gives an
+          assurance that the privacy of borrower data shall be respected.
+        </li>
+        <li>
+          All changes in the terms & conditions of Loan, Interest rates and
+          other charges of loan will be only prospective.
+        </li>
+        <li>
+          PMCF does not use outsource recovery agents for recovery. However,
+          recovery can be done at door step if borrower fail to appear at the
+          central designated place on two or more successive occasion. PMCF will
+          not engage in any harsh method towards recovery.
+        </li>
+        <li>
+          PMCF staff verifies all the details of monthly/yearly household
+          income/household expenses of customer/s and ascertained her/their
+          household income from the other members of group/s & neighbors.
+        </li>
+        <li>
+          The borrower needs to submit approved Know Your Customer (KYC)
+          documents like Address and Identity Proof. ID Proof (self and
+          Spouse/Son/Daughter)/Address Proof/Member Photograph 3 no./Letter of
+          Undertaking (If Applicable)
+        </li>
+        <li>
+          Warranty and after sales services are provided by the manufacturer and
+          PMCF will not be responsible for any lapse on the part of manufacturer
+        </li>
+        <li>
+          PMCF staff is adequately trained and reasonable care is being taken
+          for any inappropriate staff behavior wherein PMCF will be accountable
+          for the same. In case of any complaint/grievance call 8905654731. The details of
+          the operational timings of the number are mentioned in the Loan Card
+          given to you.
+        </li>
+        <li>
+          PMCF does not discriminate against customers on the basis of
+          ethnicity, age (Subject to IRDA norms), sexual orientation, political
+          affiliation, caste, creed or religion
+        </li>
+        <li>
+          PMCF provides Loan Acknowledgment Form, Group Loan Application Form
+          and Loan Card to its member in which loan repayment schedule and all
+          the terms and condition related to the loan are enlisted
+        </li>
+        <li>
+          Customers should apply for loans/product loans on their own wish, PMCF
+          does not force anyone to borrow/take a loan or buy a product
+        </li>
+        <li>
+          In addition to the amount specified in the loan card, members are not
+          required to pay any kind of cash or any other form to the employees or
+          any other person
+        </li>
+        <li>
+          PMCF maintains transparency of all the norms and conditions with the
+          borrower and communicates to the members in the local language or in
+          the language they understand.
+        </li>
+        <li>
+          Grant of loan is not linked to any other product/services offered by
+          the company or third party
+        </li>
+        <li>
+          Loan account classified as NPA (Non - Performing Asset), may be
+          upgraded as 'standard' asset only if entire arrears of interest and
+          principal are paid by the borrower
+        </li>
+        <li>
+          Loan facility shall be classified as SMA 0 when it is in overdue up to
+          30 days; SMA-1 when it is more than 30 days and up to 60 days; SMA-2
+          when it is more than 60 days and up to 90 days and classifies as NPA
+          when it is more than 90 days
+        </li>
+        <li>
+          PMCF can be approached on toll free number for any inappropriate
+          behavior of its employee/employee of outsourcing agencies & we shall
+          address the grievance with in the timeframe as mentioned in client
+          grievance redressal.
+        </li>
+      </ol>
+      <h3>Group Undertaking</h2>
+        <p>
+          We, the below mentioned members, each agrees to stand as responsible and
+          witness for such members of our group to whom loans have been sanctioned
+          as per this Application Form. In our capacity as joint liability group,
+          we agree that, in the event of non-repayment of the loan with principal
+          and interest by anyone or more members of the group, we are jointly and
+          severally liable for repaying of dues to Parishkar Microcare Foundation .
+          We will be receiving our respective loans as members of the group after
+          representing to PMCF by way of this undertaking to be jointly liable for
+          the repayment of loan of any member in the group if each member defaults
+          in the repayment of her loan. We wish to state that all the members of
+          the group shall remain jointly liable for all the loans/debts contracted
+          from PMCF, by the individual members of the group till the tenure of all
+          the debts so contracted by each of the individual members of the group
+          is fully repaid. In the event of a default or mis-utilization of the
+          loan amount, PMCF is authorized to recall the entire amount that is
+          outstanding at the time of default (Including arrears of interest, if
+          any) at any time upon notice. The contents of this undertaking have been
+          read by us or explained to us in a language that is known to us and we
+          understand, accept and acknowledge the contents and accept the terms and
+          conditions herein. This whole transaction is with our permission and is
+          fully within our knowledge. We recommend this loan for sanction. PMCF
+          shall have the right to make disclosure of information relating to the
+          Member to the Credit information Bureau of India (CIBIL) and /or any
+          other governmental/regulatory/statutory or private agencies which are
+          allowed by RBI, as required by law from time to time. PMCF reserves the
+          right to disclose the information relating to Member to any prospective
+          investor / existing investor, creditor, vendor or any third party on a
+          need-to-know basis. PMCF has the right to assign or transfer the rights
+          under the agreement and all other documents executed by the Member in
+          favor of PMCF to any other party.
+        </p>
+        <p>
+          I/ We understand that :- -<strong>
+            (A) No penal charges on pre-payment but penal charges can be taken for
+            delayed payment (B) No security deposit/margin is being
+            collected.</strong>
+        </p>
+        <h3>Self-Declaration by the Borrower</h3>
+        <p>
+          We, the below mentioned members, each hereby declares that each of our
+          total outstanding borrowing inclusive of all sources and the applied
+          loan (Assuming that the same would be approved without further charges)
+          does not exceed monthly loan repayment obligation limit of 50% of our
+          household monthly income. I/We understand that the other Life cover
+          applicant as indicated in this Group Loan Application form shall be my
+          default nominee. I/We am/are aware that Parishkar Microcare Foundation (PMCF)
+         is the holder of the life insurance Master Policy issued by
+          <span><strong>HDFC  LIFE INSURANCE</strong></span> for
+          <span><strong>HDFC_24M_4.00</strong></span> and I/We am/are a member of
+          this group. I/We understand the features of this product and agree with
+          the terms and conditions and hereby consent to avail the benefits under
+          the <span><strong>HDFC  LIFE INSURANCE</strong></span> group
+          policy
+        </p>
+        <h3>Authorization to the Insurer</h3>
+        <p>
+          In the event of any eventuality of self and/or Co-Insurer 's death
+          giving rise to a claim under the Group Insurance Scheme, the claim
+          proceeds should be utilized to liquidate the outstanding loan amount of
+          Parishkar Microcare Foundation. I/We, the below mentioned member(s), who
+          are enrolled in the insurance policy, hereby jointly and severally
+          authorize Parishkar Microcare Foundation (PMCF) to receive the
+          outstanding loan amount of the claim proceeds payable on the happening
+          of the contingent event covered under the insurance policy from the
+          Insurance partner. Any residual amount shall be paid by the Insurer to
+          me or my nominee/beneficiary as the case may be.
+        </p>
+        <table id="custmyTable2">
+          <!-- empty -->
+        </table>
+    </div>
+    <div  style="font-size: 15px;  display: flex; justify-content:  space-around; width: 100%;">
+      <h5>CENTER LEADER NAME: <br> <br> CENTER LEADER SIGNATURE:</h5>
+      <h5>CSO NAME: <br> <br>EMPLOYEE CODE: <br> <br> CSO SINGATURE:</h5>
+      <h5 style="margin-right: 10px;">BM/ ABM NAME: <br><br>EMPLOYEE CODE: <br><br>BM/AM SIGNATURE:</h5>
+    </div>
+      {{data|json_script:"group-name"}}
+    <script>
+      const groupname = JSON.parse(
+        document.getElementById("group-name").textContent
+      );
+      const loanData = [];
+      groupname.map((data) => {
+        loanData.push({
+          "Member photo": data.Custimage,
+          "Member Id": data.loandata.customerId,
+          "Loan Id": data.loandata.loanId,
+          "Date of application": data.Timestamp.split("T")[0],
+          "Member Name": `${data.FirstName} ${data.LastName == "None" ? " " : data.LastName}`,
+          "Loan Type": data.Product.Product,
+          "Loan Amount": data.LoanAmount,
+          "Purpose": data.PurposeId.PurposeId_value,
+          "Loan cycle": data.Loan_Cycle,
+          "Tenure": data.RepayFrequency,
+          "Bank Name/ Bank Account No.": `${data.BankAccountNo} ${data.BankName.BankName_value}`,
+          "IFSC code": data.BankIFSCCode,
+          "ROI (%)": data.InterestRate,
+          "LPF*(Including Tax) (Rs.)": data.LoanAmount * data.Product.loanProcessingFee,
+          "LPC*(Including Tax) (Rs.)": data.LoanAmount * data.Product.loanProcessingCharge,
+          "Loan Amount after deduction of Charges of LPF & Insurance(Q=G-(O+P))": data.LoanAmount - (data.LoanAmount * data.Product.loanProcessingFee + data.LoanAmount * data.Product.loanProcessingCharge),
+          "disbursment mode": data.Disbursement_Payment_Mode.DisbursementModeName,
+          "Revenue Stamp/Signature": " ",
+        })
+      })
+      // first table
+      const table = document.getElementById("myTable");
+      const custTable = document.getElementById("custTable");
+      const thead = table.createTHead();
+      const tbody = table.createTBody();
+      const custTablethead = custTable.createTHead();
+      const custTabletbody = custTable.createTBody();
+
+      const headers = [
+        "Member photo",
+        "Member Id",
+        "Loan Id",
+        "Date of application",
+        "Member Name",
+        "Loan Type",
+        "Loan Amount",
+        "Purpose",
+        "Loan cycle",
+        "Tenure",
+        "Bank Name/ Bank Account No.",
+        "IFSC code",
+        "ROI (%)",
+        "LPF*(Including Tax) (Rs.)",
+        "LPC*(Including Tax) (Rs.)",
+        "Loan Amount after deduction of Charges of LPF & Insurance(Q=G-(O+P))",
+        "disbursment mode",
+        "Revenue Stamp/Signature",
+      ];
+
+      // create table header
+      const headerRow = thead.insertRow(0);
+      for (let i = 0; i < headers.length; i++) {
+        const header = document.createElement("th");
+        header.innerHTML = headers[i];
+        headerRow.appendChild(header);
+      }
+      // customer copy table
+      const custheaderRow = custTablethead.insertRow(0);
+      for (let i = 0; i < headers.length; i++) {
+        const header = document.createElement("th");
+        header.innerHTML = headers[i];
+        custheaderRow.appendChild(header);
+      }
+
+      //customer  table body
+      loanData.forEach((loan, index) => {
+        const row = custTabletbody.insertRow(index);
+
+        for (const key in loan) {
+          const cell = row.insertCell();
+          const value = loan[key];
+          if (key === "Member photo") {
+            const image = document.createElement("img");
+            image.src = value;
+            image.style.height = "40px";
+            image.style.width = "50px";
+            cell.appendChild(image);
+          } else {
+            cell.textContent = value;
+          }
+        }
+      });
+
+
+
+
+      // Create table body for office
+      loanData.forEach((loan, index) => {
+        const row = tbody.insertRow(index);
+
+        for (const key in loan) {
+          const cell = row.insertCell();
+          const value = loan[key];
+          if (key === "Member photo") {
+            const image = document.createElement("img");
+            image.src = value;
+            image.style.height = "40px";
+            image.style.width = "50px";
+            cell.appendChild(image);
+          } else {
+            cell.textContent = value;
+          }
+        }
+      });
+
+      // create an array of 5 dummy objects with name as s.no , group code , loan id , member's name, co-insured name, nominee name, contact no. member's signature, co-insured sign
+
+      // SECOND TABLE
+      const loanData2 = [];
+      groupname.map((data , index) => {
+        loanData2.push({
+          "s.no": index,
+          "group code": data.GroupName.GroupName_value,
+          "loan id": data.loandata.loanId,
+          "member's name": `${data.FirstName} ${data.LastName == "None" ? " " : data.LastName}`,
+          "co-insured name": data.CoInsurerName,
+          "relationship": data.CoInsurerRelation,
+          "contact no.": data.PhoneNumber,
+          "member's signature": " ",
+          "co-insured signature": " ",
+        })
+      })
+
+      const table2 = document.getElementById("myTable2");
+      const custmyTable2 = document.getElementById("custmyTable2");
+      const headers2 = [
+        "S.No",
+        "GROUP CODE",
+        "LOAN ID",
+        "MEMBER'S NAME",
+        "CO-INSURED NAME",
+        "RELATIONSHIP",
+        "CONTACT NO.",
+        "MEMBER'S SIGNATURE",
+        "CO-INSURED SIGN",
+      ];
+
+      const thead2 = table2.createTHead();
+      const tbody2 = table2.createTBody();
+      const custthead2 = custmyTable2.createTHead();
+      const custtbody2 = custmyTable2.createTBody();
+
+      // create table 2 header
+      const headerRow2 = thead2.insertRow(0);
+      for (let i = 0; i < headers2.length; i++) {
+        const header2 = document.createElement("th");
+        header2.innerHTML = headers2[i];
+        headerRow2.appendChild(header2);
+      }
+
+      loanData2.forEach((loan, index) => {
+        const row = tbody2.insertRow(index);
+
+        for (const key in loan) {
+          const cell = row.insertCell();
+          const value = loan[key];
+          if (key === "Member photo") {
+            const image = document.createElement("img");
+            image.src = value;
+            cell.appendChild(image);
+          } else {
+            cell.textContent = value;
+          }
+        }
+      });
+
+
+      // table 2 for customer
+
+      // create table 2 header
+      const custheaderRow2 = custthead2.insertRow(0);
+      for (let i = 0; i < headers2.length; i++) {
+        const header2 = document.createElement("th");
+        header2.innerHTML = headers2[i];
+        custheaderRow2.appendChild(header2);
+      }
+
+      loanData2.forEach((loan, index) => {
+        const row = custtbody2.insertRow(index);
+
+        for (const key in loan) {
+          const cell = row.insertCell();
+          const value = loan[key];
+          if (key === "Member photo") {
+            const image = document.createElement("img");
+            image.src = value;
+            cell.appendChild(image);
+          } else {
+            cell.textContent = value;
+          }
+        }
+      });
+
+      // print button
+      const printBtn = document.getElementById("print-button");
+
+      printBtn.addEventListener("click", () => {
+        window.print();
+      });
+    </script>
+</body>
+
+</html>

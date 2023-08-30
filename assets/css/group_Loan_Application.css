@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: -2em;
+  }
+  /* .container-bottom p {
+    font-size: 11px;
+    font-weight: 900;
+  } */
+
+  .container-bottom h5 {
+    font-size: 15px;
+    font-weight: 900;
+  }
+  /* .sigTab h5 br {
+    padding: 20px;
+    outline: 1px solid red;
+  } */
+  /* code upated 7 june */
+  #myTable2 td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  #custmyTable2 td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  .page {
+    page-break-after: always;
+  }
+
+  body {
+    transform: scale(0.94);
+    transform-origin: 50% 50%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .container-top {
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .second {
+    font-size: 8px;
+    line-height: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #print-button {
+    display: none;
+  }
+}
+
+/* utlity styles */
+
+table,
+td,
+th {
+  border: 1px solid;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+h2,
+h4 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+ol {
+  margin-left: 0px;
+  margin: 1px;
+}
+
+/* classess */
+.page {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container-top div,
+.container-bottom div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* padding: 0px 2px; */
+}
+
+.container-top span,
+.container-bottom span {
+  border-bottom: 1px solid black;
+  display: inline-block;
+  min-width: 30px;
+  padding: 2px 10px;
+  text-align: center;
+  font-weight: 800;
+}
+
+.container-bottom .input-container {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  width: 30%;
+}
+
+.input-container .text-space {
+  display: inline-block;
+}
+
+.input-container .input-space {
+  width: 50%;
+}
+
+.add {
+  text-align: center;
+  text-decoration: underline;
+}

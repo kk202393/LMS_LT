@@ -1,0 +1,14 @@
+{% include "header.html" %}
+<legend>{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} style="font-size: 25px; color: red; margin: 10px 0px 10px 0px;" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h2 style="justify-content: center; align-items: center; display: flex; margin: 10px 0px 10px 0px;">
+        Loan is disbursed successfully
+    </h2>
+    {% endif %}</legend>
+
+{% include "footer.html" %}

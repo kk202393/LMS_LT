@@ -1,0 +1,15 @@
+{% include "header.html" %}
+<div class="container1">
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        <div class="">{{form.as_p}}</div>
+        <label>Installment Amount</label>
+        <input type="number" value="{{finalAmount}}">
+        <br>
+        <br>
+        <span><button class="button1" type="submit">submit</button>
+            <!-- <button class="button1" type="reset">Reset</button></span> -->
+            <br>
+    </form>
+</div>
+<br> {% include "footer.html" %}

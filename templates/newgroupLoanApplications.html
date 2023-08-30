@@ -1,0 +1,400 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin-top: 0px;
+        padding: 0%;
+      }
+
+      @page {
+        size: A3;
+        size: landscape;
+        margin: 10px;
+      }
+
+      .container-form {
+        outline: 1px solid black;
+        padding: 1px;
+      }
+
+      .title p {
+        text-align: center;
+        font-size: 10px;
+        margin-top: 0px;
+      }
+
+      h2 {
+        text-align: center;
+        text-decoration: none;
+        margin-top: 4px;
+      }
+
+      h3,
+      h4 {
+        text-align: center;
+        text-decoration: none;
+        margin: 0%;
+      }
+
+      p {
+        margin: 0px 1px 0px 1px;
+        font-size: 8.5px;
+      }
+
+      span {
+        text-decoration: underline;
+      }
+
+      table {
+        margin-top: 5px;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8px;
+        min-height: 100px;
+      }
+
+      td,
+      th {
+        border: 1px solid black;
+        text-align: center;
+        font-size: 6.6px;
+        font-weight: 500;
+        padding: 1px;
+        margin: 1px;
+        height: 30px;
+      }
+
+      .firstTable td {
+        height: 50px;
+      }
+
+      .firstTable th {
+        height: 50px;
+      }
+
+      footer {
+        display: inline-block;
+        align-self: flex-end;
+        bottom: 0%;
+      }
+
+      .signature {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* second page */
+      ol {
+        font-size: 7px;
+      }
+
+      hr {
+        margin-top: 250px;
+      }
+
+      .signature table {
+        font-size: 8px;
+        margin-bottom: 50px;
+      }
+
+      footer.second {
+        position: absolute;
+        width: 100%;
+        margin-top: 60px;
+      }
+
+      .signature table {
+        position: absolute;
+        width: 100%;
+        margin-top: 10px;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container-top">
+      <h2>Parishkar Microcare Foundation (PMCF)</h2>
+      <div class="title">
+        <p>Regd.Office--Prop No P-57 Block No-P , Pandav Nagar Delhi-110091</p>
+        <p>CIN: U65100DL2022NPL402347</p>
+        <p>GROUP LOAN APPLICATION FORM <span>(Office Copy)</span></p>
+      </div>
+      <p>
+        Center Meeting day:
+        <span id="day">{{center_meeting_day}}</span>
+      </p>
+      <p>Time :<span id="time">{{datetime}}</span></p>
+      <p>Repayment Frequency : <span> {{repay}} </span>(In Days)</p>
+      <h4>LOAN SANCTION LETTER CUM DEMAND PROMISSORY NOTE</h4>
+      <p>Date of Disbursement <span>--------</span></p>
+      <p>
+        I/We, the member of Center no.
+        <span id="center">{{centerid}}-{{center}} </span> Group
+        <span id="group">{{group}}</span> at <span>{{branch}}</span> Branch
+        (branch name and code)<span id="branch"> {{Region}}</span> Region apply
+        to Parishkar Microcare Foundation. for the loans and the contents are
+        filled at my/our instructions and are read over and explained in the
+        language to me/us group memebers by the Center Leader/ Community Service
+        Officer and made me/ us understand. I / We authorized PMCF to amount in
+        cash/ NEFT to me/ us /product vendor/ authorized dealer on my/our
+        behalf. I/ We understand that I/We will receive the remaining loan
+        amount as showed in below table after auto-deduction of Loan Processing
+        Fee(including applicable Credit Shield Insurance Premium (CSIP)). I/We
+        hereby make this loadn application with my/us free will and consent to
+        the declaration mentioned overleaf and make the following factual
+        declarations which are true and corrent . If I/ We cancel the loan, I/We
+        undertake to refund the transereed loan amount to Parishkar Microcare
+        Foundation along with applicable interest if any.
+      </p>
+      <label for="asset">is Classified as "Qualifying Asset :" YES / NO </label>
+      <p>
+        <b>FORM 60:-</b>
+      </p>
+      <p>
+        I/We do not have a permanent Account Number(PAN) hence submitting form
+        60 details as per second to rule 114B of Income Tax Rules, 1962
+      </p>
+      <div class="container-table">
+        <table id="myTable">
+          <!-- empty -->
+        </table>
+      </div>
+    </div>
+
+    <div class="container-bottom">
+      <footer class="first">
+        <h3>FOR OFFICIAL PURPOSE ONLY</h3>
+        <p>
+          As per request of your loan application . we Parishkar Microcare
+          Foundation (PMCF), hereby approve above-mentioned loan amount. The
+          final agreement is subject to agreement of auto-debit of loan
+          processing fee (including Applicable Tax-Non-refundable) and
+          applicable Premium for credit shield insurance at the time of
+          disbursement of the loan amount for above -mentioned purpose. The loan
+          amount is Payable in
+          <span>{{Total_loan_amount}}</span> weekly /Bi-weekly/monthly
+          installment along with an effective rate of interest on diminishing
+          balance method for Income Generation Loans and the installment payable
+          by you is stated in loan card application Form is an integral part of
+          loan card
+        </p>
+        <div class="signature">
+          <table>
+            <tr>
+              <th>BM/ABM Name</th>
+              <th>BM/ABM Employee ID-</th>
+              <th>BM/ABM Signature-</th>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+      </footer>
+      <button id="generatePDFbutton">Generate Pdf and print</button>
+    </div>
+
+    <script src="app.js"></script>
+    <script type="text/javascript">
+      const loanData = [
+        {
+          "Member photo": "https://via.placeholder.com/40",
+          "Member Id": "M001",
+          "Loan Id": "L001",
+          "Date of application": "2022-03-20",
+          "Member Name": "John Doe",
+          "Loan Type": "Personal Loan",
+          "Loan Amount": 50000,
+          Purpose: "Home Renovation",
+          "sub-purpose": "Kitchen Renovation",
+          "Loan cycle": 1,
+          Tenure: 36,
+          "Bank Name": "ABC Bank",
+          "IFSC code": "ABCD1234567",
+          ROI: 12,
+          LPF: 1.5,
+          "Insurance Premium": 1000,
+          "Net Loan Amount after deduction": 48350,
+          "disbursment mode": "Cheque",
+          "Revenue Stamp": 500,
+        },
+        {
+          "Member photo": "https://via.placeholder.com/40",
+          "Member Id": "M002",
+          "Loan Id": "L002",
+          "Date of application": "2022-03-15",
+          "Member Name": "Jane Doe",
+          "Loan Type": "Home Loan",
+          "Loan Amount": 1000000,
+          Purpose: "Purchase of new house",
+          "sub-purpose": "NA",
+          "Loan cycle": 2,
+          Tenure: 240,
+          "Bank Name": "XYZ Bank",
+          "IFSC code": "XYZW9876543",
+          ROI: 8.5,
+          LPF: 2,
+          "Insurance Premium": 5000,
+          "Net Loan Amount after deduction": 975000,
+          "disbursment mode": "NEFT",
+          "Revenue Stamp": 2000,
+        },
+        {
+          "Member photo": "https://via.placeholder.com/40",
+          "Member Id": "M003",
+          "Loan Id": "L003",
+          "Date of application": "2022-03-10",
+          "Member Name": "Bob Smith",
+          "Loan Type": "Car Loan",
+          "Loan Amount": 750000,
+          Purpose: "Purchase of new car",
+          "sub-purpose": "NA",
+          "Loan cycle": 3,
+          Tenure: 60,
+          "Bank Name": "PQR Bank",
+          "IFSC code": "PQRS5678901",
+          ROI: 9.5,
+          LPF: 1,
+          "Insurance Premium": 2500,
+          "Net Loan Amount after deduction": 740000,
+          "disbursment mode": "RTGS",
+          "Revenue Stamp": 1000,
+        },
+        {
+          "Member photo": "https://via.placeholder.com/40",
+          "Member Id": "M004",
+          "Loan Id": "L004",
+          "Date of application": "2022-03-05",
+          "Member Name": "Alice Lee",
+          "Loan Type": "Education Loan",
+          "Loan Amount": 200000,
+          Purpose: "MBA Program",
+          "sub-purpose": "NA",
+          "Loan cycle": 2,
+          Tenure: 120,
+          "Bank Name": "LMN Bank",
+          "IFSC code": "LMNO2345678",
+          ROI: 11,
+          LPF: 1.8,
+          "Insurance Premium": 1500,
+          "Net Loan Amount after deduction": 740000,
+          "disbursment mode": "RTGS",
+          "Revenue Stamp": 1000,
+        },
+        {
+          "Member photo": "https://via.placeholder.com/40",
+          "Member Id": "M005",
+          "Loan Id": "L005",
+          "Date of application": "2022-03-05",
+          "Member Name": "Alice Lee",
+          "Loan Type": "Education Loan",
+          "Loan Amount": 200000,
+          Purpose: "MBA Program",
+          "sub-purpose": "NA",
+          "Loan cycle": 2,
+          Tenure: 120,
+          "Bank Name": "LMN Bank",
+          "IFSC code": "LMNO2345678",
+          ROI: 11,
+          LPF: 1.8,
+          "Insurance Premium": 1500,
+          "Net Loan Amount after deduction": 740000,
+          "disbursment mode": "RTGS",
+          "Revenue Stamp": 1000,
+        },
+      ];
+
+      const table = document.getElementById("myTable");
+      const thead = table.createTHead();
+      const tbody = table.createTBody();
+
+      const headers = [
+        "Member photo",
+        "Member Id",
+        "Loan Id",
+        "Date of application",
+        "Member Name",
+        "Loan Type",
+        "Loan Amount",
+        "Purpose",
+        "sub-purpose",
+        "Loan cycle",
+        "Tenure",
+        "Bank Name",
+        "IFSC code",
+        "ROI",
+        "LPF",
+        "Insurance Premium",
+        "Net Loan Amount after deduction",
+        "disbursment mode",
+        "Revenue Stamp",
+      ];
+
+      // create table header
+
+      const headerRow = thead.insertRow(0);
+      for (let i = 0; i < headers.length; i++) {
+        const header = document.createElement("th");
+        header.innerHTML = headers[i];
+        headerRow.appendChild(header);
+      }
+
+      // Create table body
+      loanData.forEach((loan, index) => {
+        const row = tbody.insertRow(index);
+
+        for (const key in loan) {
+          const cell = row.insertCell();
+          const value = loan[key];
+          if (key === "Member photo") {
+            const image = document.createElement("img");
+            image.src = value;
+            cell.appendChild(image);
+          } else {
+            cell.textContent = value;
+          }
+        }
+      });
+
+      window.jsPDF = window.jspdf.jsPDF;
+      document
+        .getElementById("generatePDFbutton")
+        .addEventListener("click", generatePDF);
+
+      function generatePDF() {
+        console.log("clicked");
+        // Create a new jsPDF instance with landscape orientation and A4 size sheet
+        const doc = new jsPDF({
+          orientation: "landscape",
+          unit: "mm",
+          format: "a4",
+        });
+
+        // Get the HTML element you want to print
+        const elementToPrint = document.getElementsByTagName("body")[0];
+
+        // Convert the element to canvas
+        html2canvas(elementToPrint).then((canvas) => {
+          // Get the canvas data as an image
+          const imgData = canvas.toDataURL("image/png");
+
+          // Add the image to the PDF document
+          doc.addImage(imgData, "PNG", 0, 0, 297, 210);
+
+          // Save and print the PDF document
+          doc.save("file.pdf");
+          doc.autoPrint();
+        });
+      }
+    </script>
+  </body>
+</html>

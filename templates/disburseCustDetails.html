@@ -1,0 +1,570 @@
+{% include "header.html" %}
+<style>
+    fieldset.second {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    li {
+        color: rgb(219, 18, 18);
+    }
+
+    .second input {
+        margin-top: 4px;
+        width: auto;
+        height: 25px;
+    }
+
+    .second p {
+        width: 90vw;
+        margin-top: 25px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .second p a {
+        text-decoration: none;
+        color: blue;
+        font-size: 20px;
+    }
+
+    .second button {
+        font-size: 16px;
+        margin: 10px 30px 0;
+        padding: 10px 20px 10px;
+        border-radius: 15px;
+        border: 0;
+        height: 45px;
+        cursor: pointer;
+        font-weight: 600;
+        background: #42598a;
+        color: white;
+    }
+
+    #inputFile10 {
+        display: block;
+    }
+
+    .second button:hover {
+        background-color: #202d4983;
+    }
+</style>
+
+<div class="container1">
+    <h1>Customer Details</h1>
+    <form method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% for customer in custoner_data %}
+        <!-- fieldset#1 -->
+        <fieldset>
+            <legend>KYC IDS
+                <!-- {*Fields are mandatory}-->
+            </legend>
+
+            <div>
+                <label for="Application_No">Loan ID<span class="danger">*</span></label> <br>
+                <input readonly required type="number" id="Approved_Application_No" name="Application_No"
+                    value="{{customer.loandata.loanId}}" />
+            </div>
+            <div>
+                <label for="Customer_ID">Customer ID<span class="danger">*</span></label><br>
+                <input readonly required type="number" id="Customer_ID" name="Customer_ID"
+                    value="{{customer.loandata.customerId}}" />
+            </div>
+            <div>
+                <label for="id_Aadhaar">Aadhaar<span class="danger">*</span></label><br>
+                <input readonly required type="number" id="id_Aadhaar" name="Aadhaar"
+                    value="{{customer.loandata.Aadhaar}}" />
+            </div>
+
+            <div>
+                <label for="id_VoterCard">Voter Card Id</label><br />
+                <input readonly required type="text" id="id_VoterCard" name="VoterCard"
+                    value="{{customer.VoterCard}}" />
+            </div>
+
+            <div>
+                <label for="id_OtherKYCIdtype">Other KYC Id type</label><br />
+                <select readonly id="id_OtherKYCIdtype" name="OtherKYCIdtype">
+                    <option value="{{customer.OtherKYCIdtype.id}}">{{customer.OtherKYCIdtype.OTHERKYCTYPE_value}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="id_OtherKYCId">Other KYC Id </label><br />
+                <input readonly required type="text" id="Approved_id_OtherKYCId" name="OtherKYCId"
+                    value="{{customer.OtherKYCId}}" />
+            </div>
+
+
+        </fieldset>
+
+        <!-- second fieldset (Customer details) -->
+
+        <fieldset>
+            <legend>Customer Details</legend>
+            <div class="grid">
+                <div class="container-0">
+                    <h3>Client Image</h3>
+                    <!----------- PREVIEW Client Image --------->
+                    <div class="preview">
+                        <div class="image-preview">
+                            <img src="{{customer.Custimage.url}}" style="display: block;" alt="Image Preview9"
+                                class="image-preview__image9" />
+                            <a class="remove-img9" id='remove-image9' href="#">&#215;</a>
+                            <input readonly type="hidden" class="image-preview__default-text9" name="Custimage"
+                                value="{{customer.Custimage}}">
+                            <!-- <span class="image-preview__default-text9">UPLOAD</span> -->
+                        </div>
+                        <p id="image-details9"></p>
+                    </div>
+                    <!--------- Client Image BUTTONS -------->
+                    <div class="container-button">
+                        <input readonly type="file" name="inputFile9" id="inputFile9" class="custom-file-input" />
+                        <!-- <label for="inputFile9">UPLOAD</label> -->
+                        <!-- <span class="remove-img8">&#215;</span> -->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="id_FirstName">First Name<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_FirstName" name="FirstName"
+                    value="{{customer.FirstName}}" />
+            </div>
+
+            <div>
+                <label for="id_LastName">Last Name<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_LastName" name="LastName" value="{{customer.LastName}}" />
+            </div>
+
+            <div>
+                <label for="id_Gender">Gender<span class="danger">*</span></label><br />
+                <select readonly id="id_Gender" name="Gender">
+                    <option value="{{customer.Gender.GENDER_value}}">{{customer.Gender.GENDER_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="txtDOB">Date of Birth<span class="danger">*</span></label><br />
+                <input readonly required type="date" id="txtDOB" name="DateOfBirth" onchange="fnCalculateAge();"
+                    value="{{customer.DateOfBirth|date:'Y-m-d'}}" />
+            </div>
+            <div>
+                <label for="age">Age</label><br />
+                <input readonly required type="number" id="age" readonly name="Age" value="{{customer.Age}}" />
+            </div>
+
+            <div>
+                <label for="id_MaritalStatus">Marital Status<span class="danger">*</span></label><br />
+                <select readonly id="id_MaritalStatus" name="MaritalStatus">
+                    <option value="{{customer.MaritalStatus.id}}">{{customer.MaritalStatus.MaritalStatus_value}}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_FSName">F/S Name<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_FSName" name="FSName" value="{{customer.FSName}}" />
+            </div>
+
+            <div>
+                <label for="fsDOB">F/S Type<span class="danger">*</span></label><br />
+                <select readonly id="fsDOB" name="FSDateOfBirth">
+                    <option value="{{customer.FSType.id}}">{{customer.FSType.FSType_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="fsDOB">F/S Date of Birth<span class="danger">*</span></label><br />
+                <input readonly required type="date" id="fsDOB" name="FSDateOfBirth"
+                    value="{{customer.FSDateOfBirth|date:'Y-m-d'}}" />
+            </div>
+            <div>
+                <label for="id_FSAdhaar">F/S Adhaar</label><br />
+                <input required type="number" readonly id="id_FSAdhaar" name="FSAdhaar" value="{{customer.FSAdhaar}}" />
+            </div>
+
+            <div>
+                <label for="id_MothersName">Mother's Name<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_MothersName" name="MothersName"
+                    value="{{customer.MothersName}}" />
+            </div>
+
+            <div>
+                <label for="id_Caste">Caste<span class="danger">*</span></label><br />
+                <select id="id_Caste" readonly name="Caste">
+                    <option value="{{customer.Caste.id}}">{{customer.Caste.CAST_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_Religion">Religion<span class="danger">*</span></label><br />
+                <select id="id_Religion" readonly name="Religion">
+                    <option value="{{customer.Religion.id}}">{{customer.Religion.Religion_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_Qualification">Qualification<span class="danger">*</span></label><br />
+                <select id="id_Qualification" readonly name="Qualification">
+                    <option value="{{customer.Qualification.id}}">{{customer.Qualification.Qualification_value}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="id_Occupation">Occupation<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_Occupation" name="Occupation"
+                    value="{{customer.MothersName}}" />
+            </div>
+            <div>
+                <label for="id_PhoneNumber">Phone number<span class="danger">*</span></label><br />
+                <input required type="number" readonly id="id_PhoneNumber" name="PhoneNumber"
+                    value="{{customer.PhoneNumber}}" />
+            </div>
+
+            <div>
+                <label for="id_PreferredLanguage">Preferred Language<span class="danger">*</span></label><br />
+                <select readonly id="id_PreferredLanguage" name="PreferredLanguage">
+                    <option value="{{customer.PreferredLanguage.id}}">
+                        {{customer.PreferredLanguage.PreferredLanguage_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_AddressLine1">Address Line1<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_AddressLine1" name="AddressLine1"
+                    value="{{customer.AddressLine1}}" />
+            </div>
+
+            <div>
+                <label for="id_AddressLine2">Address Line2</label><br />
+                <input readonly required type="text" id="id_AddressLine2" name="AddressLine2"
+                    value="{{customer.AddressLine2}}" />
+            </div>
+
+            <div>
+                <label for="id_AddressLine3">Address Line3</label><br />
+                <input readonly required type="text" id="id_AddressLine3" name="AddressLine3"
+                    value="{{customer.AddressLine3}}" />
+            </div>
+
+            <div>
+                <label for="id_Village">Village<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_Village" name="Village" value="{{customer.Village}}" />
+            </div>
+
+            <div>
+                <label for="id_District">District Name<span class="danger">*</span></label><br />
+                <select readonly class="form-control" id="id_District" name="District">
+                    <option value="{{dist.Dist_Name}}">{{dist.Dist_Name}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_State">State<span class="danger">*</span></label><br />
+                <select readonly name="State" id="id_State" style="width: 150px">
+                    <option value="{{customer.State}}">{{customer.State}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_Pincode">Pincode<span class="danger">*</span></label><br />
+                <input required type="number" readonly id="id_Pincode" name="Pincode" value="{{customer.Pincode}}" />
+            </div>
+        </fieldset>
+
+        <!-- third fieldset Product details -->
+
+        <fieldset>
+            <legend>
+                Correspondence Address
+            </legend>
+            <div>
+                <label for="id_confirmAddressLine1">Address Line1<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_confirmAddressLine1" name="confirmAddressLine1"
+                    value="{{customer.confirmAddressLine1}}" />
+            </div>
+
+            <div>
+                <label for="id_confirmAddressLine2">Address Line2</label><br />
+                <input required type="text" readonly id="id_confirmAddressLine2" name="confirmAddressLine2"
+                    value="{{customer.confirmAddressLine2}}" />
+            </div>
+
+            <div>
+                <label for="id_confirmAddressLine3">Address Line3</label><br />
+                <input required type="text" readonly id="id_confirmAddressLine3" name="confirmAddressLine3"
+                    value="{{customer.confirmAddressLine3}}" />
+            </div>
+            <div>
+                <label for="id_confirmVillage">Confirm Village</label><br />
+                <input required type="text" readonly id="id_confirmVillage" name="confirmVillage"
+                    value="{{customer.confirmVillage}}" />
+            </div>
+            <div>
+                <label for="id_confirmDistrict">Confirm District Name<span class="danger">*</span></label><br />
+                <select class="form-control" readonly name="confirmDistrict" id="id_confirmDistrict">
+                    <option value="{{confirmdist.Dist_Name}}">{{confirmdist.Dist_Name}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_confirmState">State<span class="danger">*</span></label><br />
+                <select name="confirmState" readonly id="id_confirmState" style="width: 150px">
+                    <option value="{{customer.confirmState}}">{{customer.confirmState}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_confirmPincode">Pincode<span class="danger">*</span></label><br />
+                <input required type="number" readonly id="id_confirmPincode" name="confirmPincode"
+                    value="{{customer.confirmPincode}}" />
+            </div>
+
+        </fieldset>
+
+        <!-- third <fieldset> -->
+
+        <fieldset>
+            <legend>Disbursement Details</legend>
+            <div>
+                <label for="BankName">Bank Name<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_BankName" name="BankName"
+                    value="{{customer.BankName.BankName_value}}" />
+            </div>
+            <div>
+                <label for="id_BankAccountNo">Bank Account No.<span class="danger">*</span></label><br />
+                <input required type="number" readonly id="id_BankAccountNo" name="BankAccountNo"
+                    value="{{customer.BankAccountNo}}" />
+            </div>
+            <div>
+                <label for="bankIFSCcode">Bank IFSC Code<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_BankIFSCCode" name="BankIFSCCode"
+                    value="{{customer.BankIFSCCode}}" />
+            </div>
+            <div>
+                <label for="Customer_Name_Bank"> Customer Name(Bank)<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="Customer_Name_Bank" name="Customer_Name_Bank"
+                    value="{{customer.FirstName}}" />
+            </div>
+            <div>
+                <label for="Disbursement_Mode">Disbursement Mode</label><br />
+                <input required type="text" readonly id="Disbursement_Mode" name="Disbursement_Mode"
+                    value="{{customer.Disbursement_Payment_Mode.DisbursementModeName}}" />
+            </div>
+            <div>
+                <label for="Loan_Processing_Fee">LPF</label><br />
+                <input required type="number" readonly id="Loan_Processing_Fee" name="Loan_Processing_Fee"
+                    value="{{customer.LPF|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="Loan_Processing_Charge">LPC<span class="danger">*</span></label><br />
+                <input required type="number" readonly id="Loan_Processing_Charge" name="Loan_Processing_Charge"
+                    value="{{customer.LPC|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="Pre_Closure_Amount">Pre Closure Amount<span class="danger">*</span></label><br />
+                <input required type="number" readonly id="Pre_Closure_Amount" name="Pre_Closure_Amount"
+                    value="{{customer.Pre_Closure_Amount.totalPreClosureAmount|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="Disbursement_Amount">Disbursement Amount<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="Disbursement_Amount" name="Disbursement_Amount"
+                    value="{{customer.disbursementAmount|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="Disbursement_Date">Disbursement Date<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="Disbursement_Date" name="Disbursement_Date"
+                    value="{{customer.Disbursement_Date|date:'d-m-Y'}}" />
+            </div>
+        </fieldset>
+
+        <!-- fourth fieldset -->
+        <fieldset>
+            <legend>Loan Details</legend>
+            <div>
+                <label for="id_BranchName">Branch<span class="danger">*</span></label><br />
+                <select id="id_BranchName" readonly name="BranchName">
+                    <option value="{{customer.CenterId.id}}">{{customer.BranchName.branch_Name.branch_Name}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_CenterId">Center Id<span class="danger">*</span></label><br />
+                <select id="id_CenterId" readonly name="CenterId">
+                    <option value="{{customer.CenterId.id}}">{{customer.CenterId.center_Id}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_CategoryType">Category Type<span class="danger">*</span></label><br />
+                <select id="id_CategoryType" readonly name="CategoryType">
+                    <option value="{{customer.CategoryType.id}}">{{customer.CategoryType.categoryType_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_ProductCategory">Product Category<span class="danger">*</span></label><br />
+                <select id="id_ProductCategory" readonly name="ProductCategory">
+                    <option value="{{customer.ProductCategory}}">{{customer.ProductCategory}}</option>
+                </select>
+
+            </div>
+            <div>
+                <label for="id_Product">Product<span class="danger">*</span></label><br />
+                <select id="id_Product" readonly name="Product">
+                    <option value="{{customer.Product}}">{{customer.Product}}</option>
+                </select>
+                <!-- <button class="button">Check Product Eligibility</button> -->
+            </div>
+            <div>
+                <label for="id_PurposeId">Purpose Id<span class="danger">*</span></label><br />
+                <select id="id_PurposeId" readonly name="PurposeId">
+                    <option value="{{customer.PurposeId.id}}">{{customer.PurposeId.PurposeId_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="totalPrinciple">Total Principle</label><br />
+                <input required type="number" readonly id="totalPrinciple" name="totalPrinciple"
+                    value="{{customer.LoanAmount}}" />
+            </div>
+            <div>
+                <label for="OS_Principle">O/S Principle</label><br />
+                <input required type="number" readonly id="OS_Principle" name="OS_Principle"
+                    value="{{customer.Pre_Closure_Amount.OSPrinciple|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="totalIntrest">Total Intrest</label><br />
+                <input required type="number" readonly id="totalIntrest" name="totalIntrest"
+                    value="{{customer.Pre_Closure_Amount.totalEMIIntrest|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="OS_Intrest">O/S Intrest</label><br />
+                <input required type="number" readonly id="OS_Intrest" name="OS_Intrest"
+                    value="{{customer.Pre_Closure_Amount.OSInterest|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="totalInstallments">Total Installments</label><br />
+                <input required type="number" readonly id="totalInstallments" name="totalInstallments"
+                    value="{{customer.RepayFrequency|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="OS_Installments">O/S Installments</label><br />
+                <input required type="number" readonly id="OS_Installments" name="OS_Installments"
+                    value="{{customer.Pre_Closure_Amount.OSInstallments|floatformat:0}}" />
+            </div>
+            
+            <div>
+                <label for="Principle_Arrear">Principle Arrear</label><br />
+                <input required type="number" readonly id="Principle_Arrear" name="Principle_Arrear"
+                    value="{{customer.Pre_Closure_Amount.principleArrear|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="Interest_Arrear">Interest Arrear</label><br />
+                <input required type="number" readonly id="Interest_Arrear" name="Interest_Arrear"
+                    value="{{customer.Pre_Closure_Amount.intrestArrear|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="Total_Arrear">Total Arrear</label><br />
+                <input required type="number" readonly id="Total_Arrear" name="Total_Arrear"
+                    value="{{customer.Pre_Closure_Amount.installmentArrear|floatformat:0}}" />
+            </div>
+            <div>
+                <label for="intRate">Interest Rate</label><br />
+                <input required type="float" readonly id="id_InterestRate" name="InterestRate"
+                    value="{{customer.InterestRate}}" />
+            </div>
+            <div>
+                <label for="id_GroupName">Group Name</label><br />
+                <select id="id_GroupName" readonly name="GroupName">
+                    <option value="{{customer.GroupName.id}}">{{customer.GroupName.GroupName_value}}</option>
+                </select>
+            </div>
+        </fieldset>
+
+
+
+        <!-- #fieldset-Co-InsurerDetails -->
+        <fieldset>
+            <legend>Co-Insurer Details</legend>
+
+            <div>
+                <label for="id_CoInsurerRelation">Co-Insurer Relation<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_CoInsurerRelation" name="CoInsurerRelation"
+                    value="{{customer.CoInsurerRelation}}" />
+            </div>
+            <div>
+                <label for="id_CoInsurerName">Co-Insurer Name<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_CoInsurerName" name="CoInsurerName"
+                    value="{{customer.CoInsurerName}}" />
+            </div>
+            <div>
+                <label for="coInsurerdob">Co-Insurer DOB<span class="danger">*</span></label><br />
+                <input required type="date" readonly id="coInsurerdob" name="CoInsurerDOB"
+                    value="{{customer.CoInsurerDOB|date:'Y-m-d'}}" onchange="fnCalculateAge2();" />
+            </div>
+            <div>
+                <label for="co-Insurerage">Co-Insurer Age</label><br />
+                <input required type="number" readonly id="co-Insurerage" name="CoInsurerAge"
+                    value="{{customer.CoInsurerAge}}" />
+            </div>
+            <div>
+                <label for="id_KYCIDType">KYC ID Type</label><br />
+                <input required type="text" readonly id="id_KYCIDType" name="KYCIDType"
+                    value="{{customer.KYCIDType}}" />
+            </div>
+            <div>
+                <label for="id_KYCID">KYC ID</label><br />
+                <input required type="number" readonly id="id_KYCID" name="KYCID" value="{{customer.KYCID}}" />
+            </div>
+            <div>
+                <label for="id_CoOccupation">Oc-cupation<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_CoOccupation" name="CoOccupation"
+                    value="{{customer.CoOccupation}}" />
+            </div>
+
+
+            <div>
+                <label for="id_RemarkComments">Remark Comments</label><br />
+                <input required type="text" readonly id="id_RemarkComments" name="RemarkComments"
+                    value="{{customer.RemarkComments}}" />
+            </div>
+        </fieldset>
+        <fieldset class="second">
+            <legend>Customer Documents</legend>
+            <div>
+                <br>
+                <a class="button" target="_blank"  href="{% url 'member_document' customer.id 100 %}" download>Member
+                    Photo</a>
+            </div>
+            <div>
+                <br>
+                <a class="button" target="_blank"  href="/member_document/{{customer.id}}/101" download>Member Aadhar
+                    Card</a>
+            </div>
+            <div>
+                <br>
+                <a class="button" target="_blank"  href="/member_document/{{customer.id}}/102" download>Member Voter
+                    Card</a>
+            </div>
+            <div>
+                <br>
+                <a class="button" target="_blank"  href="/member_document/{{customer.id}}/103" download>Co-Insurer
+                    ID</a>
+            </div>
+            <div>
+                <br>
+                <a class="button" href="/member_document/{{customer.id}}/104" download>Member Bank Details</a>
+            </div>
+            <div>
+                <br>
+                <a class="button" target="_blank"  href="/member_document/{{customer.id}}/105" download>Member Relation
+                    proof</a>
+            </div>
+            <br>
+            <div>
+                <br>
+                <br>
+                <a class="button" target="_blank"  href="/member_document/{{customer.id}}/106" download>Group Loan Agreement
+                    </a>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endfor %}
+{% include "footer.html" %}

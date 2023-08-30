@@ -1,0 +1,21 @@
+{% include "headerAgent.html" %}
+
+
+
+
+<!-- Main content form -->
+<div id="main">
+    <h1>Cutomer Loan Data</h1>
+    {% for userdata in data %}
+    <h4>Your Aadhar Card Number is : {{userdata.Aadhaar}}</h4>
+    <hr>
+    <h4>Your Loan Id is {{userdata.loanId}}</h4>
+    <hr>
+    <h4>Your customer Id Number is {{userdata.customerId}}</h4>
+    {% endfor %}
+    <br>
+    <a href="{% url 'desbord' %}"><button class="button1">Go to Homepage</button></a>
+</div>
+
+
+{% include "footer.html" %}

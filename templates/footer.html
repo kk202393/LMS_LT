@@ -1,0 +1,64 @@
+{% load static %}
+<!-- footer -->
+<footer>
+    <p>Version 1.0.9 </p>
+    <p>Copyright &#169; GlowWay CreditCare Network Ltd.</p>
+
+</footer>
+<!-- toggle dashboard items  -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //jquery for toggle sub menus
+        $('.sub-btn').click(function () {
+            $(this).next('.sub-menu').slideToggle();
+
+        });
+
+
+    });
+</script>
+
+
+<!-- session timer -->
+<script src="{% static '/js/app.js' %}"></script>
+<script src="{% static '/js/script.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{% static '/js/customerKYC.js' %}"></script>
+<script src="{% static '/js/preClouserAmount.js' %}"></script>
+<script src="{% static '/js/addCollection.js' %}"></script>
+<script src="{% static '/js/modal.js' %}"></script>
+<script src="{% static '/js/DayClose.js' %}"></script>
+<script src="{% static '/js/dayCloseModal.js' %}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function openSlideMenu() {
+        document.getElementById('side-menu').style.width = '250px';
+        // document.getElementById('main').style.marginLeft = '250px';
+            $.ajax({
+                url: '/clear-session/',
+                type: 'GET',
+                success: function (response) {
+                    // Handle the response as needed
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle any errors
+                    console.log(error);
+                }
+            });
+        }
+
+    
+
+    function closeSlideMenu() {
+        document.getElementById('side-menu').style.width = '0';
+        // document.getElementById('main').style.marginLeft = '0';
+
+    }
+</script>
+<script src="{% static '/js/state.js' %}"></script>
+<script src="{% static '/js/loan.js' %}"></script>
+<script src="{% static '/js/dropDownList.js' %}"></script>
+
+</html>

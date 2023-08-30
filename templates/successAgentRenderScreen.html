@@ -1,0 +1,16 @@
+{% include "headerAgent.html" %}
+<div>
+    <h2 style="justify-content: center; align-items: center; display: flex; margin: 10px 0px 10px 0px;">
+        {% if messages %} {% for message in messages %}
+        <span style="color:rgb(8, 8, 8); font-size: 30px; font-weight: 600;" {% if message.tags %}
+            class="{{message.tags}}" {% endif %}>{{message}}</span>{% endfor %}{% endif%}
+    </h2>
+    {% if customerKYCData %}
+    <h4>Your Aadhar Card Number is : {{customerKYCData.Aadhaar}}</h4>
+    <hr>
+    <h4>Your Loan Id is {{customerKYCData.loanId}}</h4>
+    <hr>
+    <h4>Your customer Id Number is {{customerKYCData.customerId}}</h4>
+    {% endif%}
+</div>
+{% include "footer.html" %}

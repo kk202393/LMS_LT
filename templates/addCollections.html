@@ -1,0 +1,138 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% else %}
+{% include "headerBranchManager.html" %}
+{% endif %}
+<div class="container1">
+  <h1>Add Collection</h1>
+  <form method="POST" action="/addCollectionForm/{{emiCustomerData.loandata.loanId}}/">
+    {% csrf_token %}
+    <fieldset>
+      <div>
+        <label for="branch">Branch <span class="danger">*</span></label><br />
+        <input type="text" readonly id="branch" name="branch"
+          value="{{emiCustomerData.BranchName.branchName.branch_Name}}" />
+      </div>
+      <div>
+        <label for="centerGroupCode">Center Group Code: <span class="danger">*</span></label><br />
+        <input type="text" readonly id="centerGroupCode" name="centerGroupCode"
+          value="{{emiCustomerData.GroupName.GroupName_value}}" />
+      </div>
+      <div>
+        <label for="center">Center ID: <span class="danger">*</span></label><br />
+        <input type="text" readonly id="center" name="center" value="{{emiCustomerData.CenterId.center_Id}}-{{emiCustomerData.CenterId.center_name}}" />
+      </div>
+      <div>
+        <label for="loadId">Loan Id: <span class="danger">*</span></label><br />
+        <input type="text" readonly id="loadId" name="loadId" value="{{emiCustomerData.loandata.loanId}}" />
+      </div>
+      <div>
+        <label for="CustomerId">Customer Id: <span class="danger">*</span></label><br />
+        <input type="text" readonly id="CustomerId" name="CustomerId" value="{{emiCustomerData.loandata.customerId}}" />
+      </div>
+      <div>
+        <label for="customerName">Customer Name: </label><br />
+        <input type="text" readonly id="customerName" name="customerName" value="{{emiCustomerData.FirstName}}" />
+      </div>
+      <div>
+        <label for="collectionNo">Collection Sequence No.: <span class="danger">*</span> </label><br />
+        <input type="number" readonly id="collectionNo" name="collectionNo" value="{{collectionSequanceNo}}" />
+      </div>
+      <div>
+        <label for="preclosureAmount">Preclosure Amount: <span class="danger">*</span> </label><br />
+        <input readonly type="number" id="preclosureAmount" name="preclosureAmount"
+          value="{% if loanAmount == 0 %}{{preclosureAmount.outstandingPrincipal|add:intrest_rate|floatformat:'0'}}{% else %}{{loanAmount|add:intrest_rate|floatformat:'0'}}{% endif %}" />
+      </div>
+      <div>
+        <label for="principalArrear">Principal Arrear: <span class="danger">*</span> </label><br />
+        <input readonly type="text" id="principalArrear" name="principalArrear"
+          value="{{principalArrear.principleAmount|floatformat:'0'}}" />
+      </div>
+      <div>
+        <label for="interestArrear">Interst Arrear: </label><br />
+        <input readonly type="text" id="interestArrear" name="interestArrear"
+          value="{{principalArrear.interestAmoun|floatformat:'0'}}" />
+      </div>
+      <div>
+        <label for="nextInstallmentPrincipal">Next Installed Principal: </label><br />
+        <input readonly type="text" id="nextInstallmentPrincipal" name="nextInstallmentPrincipal"
+          value="{{nextEmi.principleAmount|floatformat:'0'}}" />
+      </div>
+      <div>
+        <label for="nextInstallmentInterest">Next Installed Interest: </label><br />
+        <input readonly type="text" id="nextInstallmentInterest" name="nextInstallmentInterest"
+          value="{{nextEmi.interestAmoun|floatformat:'0'}}" />
+      </div>
+      <div>
+        <label for="nextInstallment">Next Installed EMI: </label><br />
+        <input readonly type="text" id="nextInstallment" name="nextInstallment"
+          value="{{nextEmi.installmentAmount|floatformat:'0'}}" />
+      </div>
+      <div>
+        <label for="collectionDateTime">Collection Date: <span class="danger">*</span> </label><br />
+        <input readonly type="date" id="collectionDateTime" name="collectionDateTime"
+          value="{{todayDate|date:'Y-m-d'}}" />
+      </div>
+      <div>
+        <label for="collectedBy">Collected By: <span class="danger">*</span> </label><br />
+        <select name="collectedBy" id="collectedBy" required>
+          <option value="">--select--</option>
+          <option value="{{request.user.id}}">{{request.user.first_name}}-{{request.user.username}}</option>
+        </select>
+      </div>
+      <div>
+        <label for="collectedAmount">Collected Amount: </label><br />
+        <select name="collectedAmount" id="collectedAmount">
+        </select>
+      </div>
+      <div>
+        <label for="PARDaysAnswer">PAR Days: <span class="danger">*</span> </label><br />
+        <input readonly type="text" id="PARDaysAnswer" name="PARDaysAnswer" value="{{days}} Days" />
+      </div>
+      <!-- <div>
+        <label for="deathFlag">Death Flag: <span class="danger">*</span> </label><br />
+        <select name="deathFlag" id="deathFlag">
+          <option value="volvo" selected>Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </div> -->
+      <div>
+        <label for="numberOfEMI">Number of EMI: <span class="danger">*</span> </label><br />
+        <select name="numberOfEMI" id="numberOfEMI" required>
+          <option value="">--select--</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+          <option value="5">Five</option>
+        </select>
+      </div>
+      <div>
+        <label for="collectionPayMode">Collection Pay Mode: <span class="danger">*</span> </label><br />
+        <select name="collectionPayMode" id="collectionPayMode" required>
+          <option value="">--select--</option>
+          {% for mode in disbursementMode %}
+          <option value="{{mode.id}}">{{mode.DisbursementModeName}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label for="CollectionPayType">Collection Pay Type: <span class="danger">*</span> </label><br />
+        <select name="CollectionPayType" id="CollectionPayType" required>
+          <option value="" selected>--select--</option>
+          {% for data in emiPayMode %}
+          <option value="{{data.id}}">{{data.EmiPaymentModeName}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="container-button">
+        <button type="submit" onclick="return confirm('Are you sure?')" class="button1">Save</button>
+        <button type="button"  class="button1" ><a href="{% url 'Loan_Details'  %}">Back
+          </a></button>
+      </div>
+    </fieldset>
+  </form>
+</div>
+{% include "footer.html" %}

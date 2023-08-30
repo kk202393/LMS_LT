@@ -1,0 +1,780 @@
+{% include "header.html" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"
+    integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.css"
+    integrity="sha512-C4k/QrN4udgZnXStNFS5osxdhVECWyhMsK1pnlk+LkC7yJGCqoYxW4mH3/ZXLweODyzolwdWSqmmadudSHMRLA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    fieldset.second {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        overflow: hidden;
+    }
+
+    li {
+        color: rgb(219, 18, 18);
+    }
+
+    .second input {
+        margin-top: 19px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .second p {
+        width: 90vw;
+        margin-top: 25px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .second p a {
+        text-decoration: none;
+        color: blue;
+        font-size: 20px;
+    }
+
+    .second button {
+        font-size: 16px;
+        margin: 10px 30px 0;
+        padding: 10px 20px 10px;
+        border-radius: 15px;
+        border: 0;
+        height: 45px;
+        cursor: pointer;
+        font-weight: 600;
+        background: #42598a;
+        color: white;
+    }
+
+    .second button:hover {
+        background-color: #202d4983;
+    }
+
+    /* new css */
+    .close-modal {
+        position: absolute;
+        top: 1.2rem;
+        right: 2rem;
+        font-size: 5rem;
+        color: #333;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .crop-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 5px;
+        box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        overflow: auto;
+
+    }
+
+    #cropImage {
+
+        width: 100%;
+        height: 350px;
+        border: 1px solid black;
+        margin: auto;
+
+    }
+
+    .saveBtn {
+        display: block;
+        margin: 10px auto;
+        width: 100px;
+        padding: 7px 14px;
+        border-radius: 14px;
+        border: none;
+        background: #3b5998;
+        color: white;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 5;
+    }
+
+    .stop-scroll {
+        overflow: hidden;
+    }
+</style>
+
+<div class="container1">
+    <h1>Update Customer KYC</h1>
+    <h2>Aadhar Card can not update(To change Aadhar card Reject this Application form and apply Again)</h2>
+    <form method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        <!-- fieldset#1 -->
+        <fieldset>
+            <legend>KYC IDS
+                <!-- {*Fields are mandatory}-->
+            </legend>
+            <div>
+                <label for="Application_No">Application Number<span class="danger">*</span></label> <br>
+                <input required type="number" readonly id="Application_No" name="Application_No"
+                    value="{{customer.loandata.Application_No}}" />
+            </div>
+            <div>
+                <label for="id_Aadhaar">Aadhaar<span class="danger">*</span></label><br>
+                <input required readonly type="number" id="id_Aadhaar" name="Aadhaar" value="{{customer.Aadhaar}}" />
+            </div>
+
+            <div>
+                <label for="id_VoterCard">Voter Card Id</label><br />
+                <input required type="text" id="id_VoterCard" name="VoterCard" value="{{customer.VoterCard}}" />
+            </div>
+
+            <div>
+                <label for="id_OtherKYCIdtype">Other KYC Id type</label><br />
+                <select id="id_OtherKYCIdtype" name="OtherKYCIdtype">
+                    <option value="{{customer.OtherKYCIdtype.id}}">{{customer.OtherKYCIdtype.OTHERKYCTYPE_value}}
+                    </option>
+                    {% for otherKYCList in OtherKYCIdtype %}
+                    <option value="{{otherKYCList.OtherKYCIdtype.id}}">
+                        {{otherKYCList.OtherKYCIdtype.OTHERKYCTYPE_value}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="id_OtherKYCId">Other KYC Id </label><br />
+                <input required type="text" id="id_OtherKYCId" name="OtherKYCId" value="{{customer.OtherKYCId}}" />
+            </div>
+        </fieldset>
+
+        <!-- second fieldset (Customer details) -->
+
+        <fieldset>
+            <legend>Customer Details</legend>
+            <div class="grid">
+                <div class="container-0">
+                    <h3>Client Image</h3>
+                    <!----------- PREVIEW Client Image --------->
+                    <div class="preview">
+                        <div class="image-preview">
+                            
+                            <img style="display: block;" src="{% if customer.Custimage %} {{customer.Custimage.url}} {% endif %}"
+                                alt="Image Preview9" class="image-preview__image9" />
+                            
+                            <a class="remove-img9" id='remove-image9' href="#">&#215;</a>
+                            <span style="display: none;" class="image-preview__default-text9">UPLOAD</span>
+                        </div>
+                        <p id="image-details9"></p>
+                    </div>
+                    <!-- <div class="preview">
+                        <div class="image-preview">
+                            <img src="" style="display: block;" alt="Image Preview9"
+                                class="image-preview__image9" />
+                            <a class="remove-img9" id='remove-image9' href="#">&#215;</a>
+                            <span class="image-preview__default-text9">UPLOAD</span>
+                        </div>
+                        <p id="image-details9"></p>
+                    </div> -->
+                    <!--------- Client Image BUTTONS -------->
+                    <div class="container-button">
+                        <!-- <input type="file" name="inputFile9" id="inputFile9" class="custom-file-input" /> -->
+                        <input type="file" name="Custimage" id="image-preview__image9" class="image-preview__image10" accept="image/*" required>
+                        <label for="image-preview__image9">UPLOAD</label>
+                        <!-- <span class="remove-img8">&#215;</span> -->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="id_FirstName">First Name<span class="danger">*</span></label><br />
+                <input required type="text" id="id_FirstName" readonly name="FirstName"
+                    value="{{customer.FirstName}}" />
+            </div>
+
+            <div>
+                <label for="id_LastName">Last Name<span class="danger">*</span></label><br />
+                <input required type="text" readonly id="id_LastName" name="LastName" value="{{customer.LastName}}" />
+            </div>
+
+            <div>
+                <label for="id_Gender">Gender<span class="danger">*</span></label><br />
+                <select readonly id="id_Gender" name="Gender">
+                    <option value="{{customer.Gender.id}}">{{customer.Gender.GENDER_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="txtDOB">Date of Birth<span class="danger">*</span></label><br />
+                <input required type="date" id="txtDOB" name="DateOfBirth" onchange="fnCalculateAge();"
+                    value="{{customer.DateOfBirth|date:'Y-m-d'}}" />
+            </div>
+            <div>
+                <label for="age">Age</label><br />
+                <input required type="number" id="age" readonly name="Age" value="{{customer.Age}}" />
+            </div>
+
+            <div>
+                <label for="id_MaritalStatus">Marital Status<span class="danger">*</span></label><br />
+                <select readonly id="id_MaritalStatus" name="MaritalStatus">
+                    <option value="{{customer.MaritalStatus.id}}">{{customer.MaritalStatus.MaritalStatus_value}}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_FSName">F/S Name<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_FSName" name="FSName" value="{{customer.FSName}}" />
+            </div>
+
+            <div>
+                <label for="fsType">F/S Type<span class="danger">*</span></label><br />
+                <select id="fsDOB" name="FSType">
+                    <option value="{{customer.FSType.id}}">{{customer.FSType.FSType_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="fsDOB">F/S Date of Birth<span class="danger">*</span></label><br />
+                <input required type="date" id="fsDOB" name="FSDateOfBirth"
+                    value="{{customer.FSDateOfBirth|date:'Y-m-d'}}" />
+            </div>
+            <div>
+                <label for="id_FSAdhaar">F/S Adhaar</label><br />
+                <input required readonly type="number" id="id_FSAdhaar" name="FSAdhaar" value="{{customer.FSAdhaar}}" />
+            </div>
+
+            <div>
+                <label for="id_MothersName">Mother's Name<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_MothersName" name="MothersName"
+                    value="{{customer.MothersName}}" />
+            </div>
+
+            <div>
+                <label for="id_Caste">Caste<span class="danger">*</span></label><br />
+                <select readonly id="id_Caste" name="Caste">
+                    <option value="{{customer.Caste.id}}">{{customer.Caste.CAST_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_Religion">Religion<span class="danger">*</span></label><br />
+                <select readonly id="id_Religion" name="Religion">
+                    <option value="{{customer.Religion.id}}">{{customer.Religion.Religion_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_Qualification">Qualification<span class="danger">*</span></label><br />
+                <select readonly id="id_Qualification" name="Qualification">
+                    <option value="{{customer.Qualification.id}}">{{customer.Qualification.Qualification_value}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label for="id_Occupation">Occupation<span class="danger">*</span></label><br />
+                <input required readonly type="text" id="id_Occupation" name="Occupation"
+                    value="{{customer.MothersName}}" />
+            </div>
+            <div>
+                <label for="id_PhoneNumber">Phone number<span class="danger">*</span></label><br />
+                <input required type="number" id="id_PhoneNumber" name="PhoneNumber" value="{{customer.PhoneNumber}}" />
+            </div>
+
+            <div>
+                <label for="id_AddressLine1">Address Line1<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_AddressLine1" name="AddressLine1"
+                    value="{{customer.AddressLine1}}" />
+            </div>
+
+            <div>
+                <label for="id_AddressLine2">Address Line2</label><br />
+                <input readonly required type="text" id="id_AddressLine2" name="AddressLine2"
+                    value="{{customer.AddressLine2}}" />
+            </div>
+
+            <div>
+                <label for="id_AddressLine3">Address Line3</label><br />
+                <input readonly required type="text" id="id_AddressLine3" name="AddressLine3"
+                    value="{{customer.AddressLine3}}" />
+            </div>
+            <div>
+                <label for="id_PreferredLanguage">Preferred Language<span class="danger">*</span></label><br />
+                <select readonly id="id_PreferredLanguage" name="PreferredLanguage">
+                    <option value="{{customer.PreferredLanguage.id}}">
+                        {{customer.PreferredLanguage.PreferredLanguage_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_Pincode">Pincode<span class="danger">*</span></label><br />
+                <input readonly required type="number" id="id_Pincode" name="Pincode" value="{{customer.Pincode}}" />
+            </div>
+
+            <div>
+                <label for="id_Village">Village<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_Village" name="Village" value="{{customer.Village}}" />
+            </div>
+
+            <div>
+                <label for="id_State_update">State<span class="danger">*</span></label><br />
+                <select readonly name="State" id="id_State_update" style="width: 150px">
+                    <option value="{{customer.State.id}}">{{customer.State.state_Name}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_District_update">District Name<span class="danger">*</span></label><br />
+                <select readonly class="form-control" id="id_District_update" name="District">
+                    <option value="{{customer.District}}">{{dist.Dist_Name}}</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <!-- third fieldset Product details -->
+
+        <fieldset>
+            <legend>
+                Correspondence Address
+                <input type="checkbox" style="width: 30px; height: 20px" id="check" onclick="OnClick()" /> same as above
+            </legend>
+            <div>
+                <label for="id_confirmAddressLine1">Address Line1<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_confirmAddressLine1" name="confirmAddressLine1"
+                    value="{{customer.confirmAddressLine1}}" />
+            </div>
+
+            <div>
+                <label for="id_confirmAddressLine2">Address Line2</label><br />
+                <input readonly required type="text" id="id_confirmAddressLine2" name="confirmAddressLine2"
+                    value="{{customer.confirmAddressLine2}}" />
+            </div>
+
+            <div>
+                <label for="id_confirmAddressLine3">Address Line3</label><br />
+                <input readonly required type="text" id="id_confirmAddressLine3" name="confirmAddressLine3"
+                    value="{{customer.confirmAddressLine3}}" />
+            </div>
+            <div>
+                <label for="id_confirmPincode">Pincode<span class="danger">*</span></label><br />
+                <input readonly required type="number" id="id_confirmPincode" name="confirmPincode"
+                    value="{{customer.confirmPincode}}" />
+            </div>
+
+            <div>
+                <label for="id_confirmVillage">Confirm Village</label><br />
+                <input readonly required type="text" id="id_confirmVillage" name="confirmVillage"
+                    value="{{customer.confirmVillage}}" />
+            </div>
+            <div>
+                <label for="id_confirmState_update">State<span class="danger">*</span></label><br />
+                <select readonly name="confirmState" id="id_confirmState_update" style="width: 150px">
+                    <option value="{{customer.confirmState}}">{{customer.confirmState}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_confirmDistricte_update">Confirm District Name<span class="danger">*</span></label><br />
+                <select readonly class="form-control" name="confirmDistrict" id="id_confirmDistricte_update">
+                    <option value="{{customer.confirmDistrict}}">{{dist.Dist_Name}}</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <!-- third <fieldset> -->
+
+        <fieldset>
+            <legend>Financial Details: SELF & FAMILY</legend>
+            <div>
+                <label for="id_HouseType"> House Type<span class="danger">*</span></label><br />
+                <select readonly id="id_HouseType" name="HouseType" required>
+                    <option value="{{customer.HouseType.id}}">{{customer.HouseType.HouseType_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_LandInAcre">Land In Acre</label><br />
+                <input required readonly type="number" id="id_LandInAcre" name="LandInAcre"
+                    value="{{customer.LandInAcre}}" />
+            </div>
+            <div>
+                <label for="id_NumberofAnimals">Number of Animals</label><br />
+                <input required readonly type="text" id="id_NumberofAnimals" name="NumberofAnimals"
+                    value="{{customer.NumberofAnimals}}" />
+            </div>
+            <div>
+                <label for="id_PovertyLine">Poverty Line<span class="danger">*</span></label><br />
+                <select readonly id="id_PovertyLine" name="PovertyLine" required>
+                    <option value="{{customer.PovertyLine.id}}">{{customer.PovertyLine.PovertyLine_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="BankName">Bank Name<span class="danger">*</span></label><br />
+                <select id="id_BankName" name="BankName" required>
+                    <option value="{{customer.BankName.id}}">{{customer.BankName.BankName_value}}</option>
+                    {% for banks in bankName %}
+                    <option value="{{banks.id}}">{{banks.BankName_value}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="id_BankAccountNo">Bank Account No.<span class="danger">*</span></label><br />
+                <input required type="number" id="id_BankAccountNo" name="BankAccountNo"
+                    value="{{customer.BankAccountNo}}" />
+            </div>
+
+            <div>
+                <label for="bankIFSCcode">Bank IFSC Code<span class="danger">*</span></label><br />
+                <input required type="text" id="id_BankIFSCCode" name="BankIFSCCode"
+                    value="{{customer.BankIFSCCode}}" />
+            </div>
+
+        </fieldset>
+
+        <!-- fourth fieldset -->
+        <fieldset>
+            <legend>Loan Details</legend>
+            <div>
+                <label for="id_BranchName">Branch<span class="danger">*</span></label><br />
+                <select readonly id="id_BranchName" name="BranchName">
+                    <option value="{{customer.BranchName.branch_Name.id}}">
+                        {{customer.BranchName.branch_Name.branch_Name}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_CenterId">Center Id<span class="danger">*</span></label><br />
+                <select aria-readonly="true" id="id_CenterId" name="CenterId">
+                    <option value="{{customer.CenterId.id}}">{{customer.CenterId.center_Id}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_CategoryType">Category Type<span class="danger">*</span></label><br />
+                <select id="id_CategoryType" name="CategoryType">
+                    <option value="{{customer.CategoryType.id}}">{{customer.CategoryType.categoryType_value}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="id_ProductCategory">Product Category<span class="danger">*</span></label><br />
+                <select id="id_ProductCategory" name="ProductCategory">
+                    <option value="{{customer.ProductCategory.id}}">{{customer.ProductCategory}}</option>
+                    {% for loan in loanDetails %}
+                    <option value="{{loan.id}}">{{loan.loanName}}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div>
+                <label for="id_Product">Product<span class="danger">*</span></label><br />
+                <select id="id_Product" name="Product">
+                    <option value="{{customer.Product.id}}">{{customer.Product}}</option>
+                    {% for loan in loanDetails %}
+                    <option value="{{loan.id}}">{{loan.Product}}</option>
+                    {% endfor %}
+                </select>
+                <!-- <button class="button">Check Product Eligibility</button> -->
+            </div>
+            <div>
+                <label for="id_PurposeId">Purpose Id<span class="danger">*</span></label><br />
+                <select readonly id="id_PurposeId" name="PurposeId">
+                    <option value="{{customer.PurposeId.id}}">{{customer.PurposeId.PurposeId_value}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="loanAmount">Loan Amount</label><br />
+                <input readonly type="number" id="id_LoanAmount" name="LoanAmount" value="{{customer.LoanAmount}}" />
+            </div>
+            <div>
+                <label for="intRate">Interest Rate</label><br />
+                <input readonly type="float" id="id_InterestRate" name="InterestRate"
+                    value="{{customer.InterestRate}}" />
+            </div>
+            <div>
+                <label for="repayFreq">Repay Frequency</label><br />
+                <input readonly type="number" id="id_RepayFrequency" name="RepayFrequency"
+                    value="{{customer.RepayFrequency}}" />
+            </div>
+            <div>
+                <label for="id_GroupName">Group Name</label><br />
+                <select readonly id="id_GroupName" name="GroupName">
+                    <option value="{{customer.GroupName.id}}">{{customer.GroupName.GroupName_value}}</option>
+                </select>
+            </div>
+        </fieldset>
+
+
+
+        <!-- #fieldset-Co-InsurerDetails -->
+        <fieldset>
+            <legend>Co-Insurer Details</legend>
+
+            <div>
+                <label for="id_CoInsurerRelation">Co-Insurer Relation<span class="danger">*</span></label><br />
+                <input required type="text" id="id_CoInsurerRelation" name="CoInsurerRelation"
+                    value="{{customer.CoInsurerRelation}}" />
+            </div>
+            <div>
+                <label for="id_CoInsurerName">Co-Insurer Name<span class="danger">*</span></label><br />
+                <input required type="text" id="id_CoInsurerName" name="CoInsurerName"
+                    value="{{customer.CoInsurerName}}" />
+            </div>
+            <div>
+                <label for="coInsurerdob">Co-Insurer DOB<span class="danger">*</span></label><br />
+                <input required type="date" id="coInsurerdob" name="CoInsurerDOB"
+                    value="{{customer.CoInsurerDOB|date:'Y-m-d'}}" onchange="fnCalculateAge2();" />
+            </div>
+            <div>
+                <label for="co-Insurerage">Co-Insurer Age</label><br />
+                <input required type="number" id="co-Insurerage" name="CoInsurerAge"
+                    value="{{customer.CoInsurerAge}}" />
+            </div>
+            <div>
+                <label for="id_KYCIDType">KYC ID Type</label><br />
+                <select id="id_KYCIDType" name="KYCIDType">
+                    <option value="{{customer.KYCIDType.id}}">{{customer.KYCIDType.OTHERKYCTYPE_value}}</option>
+                    <option value="Ration_card">Ration card</option>
+                    <option value="Pen_card">Pen card</option>
+                    <option value="Driving_license">Driving license</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_KYCID">KYC ID</label><br />
+                <input required type="number" id="id_KYCID" name="KYCID" value="{{customer.KYCID}}" />
+            </div>
+            <div>
+                <label for="id_CoOccupation">Oc-cupation<span class="danger">*</span></label><br />
+                <input readonly required type="text" id="id_CoOccupation" name="CoOccupation"
+                    value="{{customer.CoOccupation}}" />
+            </div>
+
+
+            <div>
+                <label for="id_RemarkComments">Remark Comments</label><br />
+                <input readonly type="text" id="id_RemarkComments" name="RemarkComments"
+                    value="{{customer.RemarkComments}}" />
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Attach Documents</legend>
+            <div class="primary-documents">PRIMARY DOCUMENTS</div>
+            <!----------- MEMBER AHDAAR CARD ---------->
+            <div class="container-1">
+                <h3>Member Aadhar Card</h3>
+
+                <!----------- PREVIEW ADHAAR CARD --------->
+                <div class="preview">
+                    <div class="image-preview " id="imagePreview">
+                        <img src="{{customer.Member_Aadhar_Card_front.url}}" style="display: block;"
+                            alt="Image Preview1" class="image-preview__image1" />
+                        <a class="remove-img1" href="#">&#215;</a>
+                        <input type="hidden" class="image-preview__default-text1" name="Member_Aadhar_Card_front"
+                            value="{{customer.Member_Aadhar_Card_front}}">
+                        <input type="file" name="Member_Aadhar_Card_front" id="image-preview__image1" class="image-preview__image1" accept="image/*" required>
+                        <!-- <span class="image-preview__default-text1">Front Side Upload</span> -->
+                    </div>
+                    <p id="image-details1"></p>
+                    <div class="image-preview" id="imagePreview">
+                        <img src="{{customer.Member_Aadhar_Card_back.url}}" style="display: block;" alt="Image Preview2"
+                            class="image-preview__image2" />
+                        <a class="remove-img2" href="#">&#215;</a>
+                        <input type="hidden" class="image-preview__default-text2"
+                            value="{{customer.Member_Aadhar_Card_back}}" name="Member_Aadhar_Card_back">
+                        <input type="file" name="Member_Aadhar_Card_back" id="image-preview__image2" class="image-preview__image2" accept="image/*" required>
+                        
+                        <!-- <span class="image-preview__default-text2">Back Side Upload</span> -->
+                    </div>
+                    <p id="image-details2"></p>
+                </div>
+                <!----------- (END)PREVIEW ADHAAR CARD --------->
+
+                <!--------- ADHAAR CARD BUTTONS -------->
+                <div class="container-button">
+                    <input type="file" name="inputFile" id="inputFile1" class="custom-file-input" />
+                    <label for="inputFile1">Front Side Upload:</label>
+                    <!-- <span class="remove-img1">&#215;</span> -->
+
+                    <input type="file" name="inputFile2" id="inputFile2" class="custom-file-input" />
+                    <label for="inputFile2">Back Side Upload:</label>
+                    <!-- <span class="remove-img2">&#215;</span> -->
+                </div>
+                <!--------- (END)ADHAAR CARD BUTTONS -------->
+            </div>
+            <!-----------(END) MEMBER AHDAAR CARD ---------->
+
+            <!----------- MEMBER VOTER CARD ---------->
+            <div class="container-2">
+                <h3>Member Voter Card</h3>
+
+                <!----------- PREVIEW VOTER CARD --------->
+                <div class="preview">
+                    <div class="image-preview" id="imagePreview">
+                        <img src="{{customer.Member_Voter_Card_front.url}}" style="display: block;" alt=""
+                            class="image-preview__image3" />
+                        <a class="remove-img3" href="#">&#215;</a>
+                        <!-- <span class="image-preview__default-text3">Front Side Upload</span> -->
+                        <input type="hidden" class="image-preview__default-text3"
+                            value="{{customer.Member_Voter_Card_front}}" name="Member_Voter_Card_front">
+                        <input type="file" name="Member_Voter_Card_front" id="image-preview__image3" class="image-preview__image3" accept="image/*" required>
+                        
+                    </div>
+                    <p id="image-details3"></p>
+                    <div class="image-preview" id="imagePreview">
+                        <img src="{{customer.Member_Voter_Card_back.url}}" style="display: block;" alt=""
+                            class="image-preview__image4" />
+                        <a class="remove-img4" href="#">&#215;</a>
+                        <input type="hidden" class="image-preview__default-text4"
+                            value="{{customer.Member_Voter_Card_back}}" name="Member_Voter_Card_back">
+                        <!-- <span class="image-preview__default-text4">Back Side Upload</span> -->
+                        <input type="file" name="Member_Voter_Card_back" id="image-preview__image4" class="image-preview__image4" accept="image/*" required>
+                    </div>
+                    <p id="image-details4"></p>
+                </div>
+
+                <!----------- (END)PREVIEW VOTER CARD --------->
+                <!----------- VOTER CARD BUTTONS -------------->
+                <div class="container-button">
+                    <input type="file" name="voter-card-frontSide" id="inputFile3" />
+                    <label for="inputFile3">Front Side Upload:</label>
+                    <!-- <span class="remove-img3">&#215;</span> -->
+                    <input type="file" name="voter-card-backSide" id="inputFile4" />
+                    <label for="inputFile4">Back Side Upload:</label>
+                    <!-- <span class="remove-img4">&#215;</span> -->
+                </div>
+                <!----------- (END)VOTER CARD BUTTONS ----------->
+
+                <!----------- (END)MEMBER VOTER CARD ---------->
+            </div>
+</div>
+</div>
+
+
+<!-- secondary documents -->
+<div class="secondary-documents-container">
+    <div class="secondary-documents">SECONDARY DOCUMENTS</div>
+    <!----------- CO-INSURER AHDAAR CARD (5,6)---------->
+    <div class="container-3">
+        <h3>Co-Insurer Aadhaar</h3>
+        <!----------- PREVIEW ADHAAR CARD --------->
+        <div class="preview">
+            <div class="image-preview" id="imagePreview">
+                <img src="{{customer.Co_Insurer_Aadhaar_front.url}}" style="display: block;" alt="Image Preview5"
+                    class="image-preview__image5" />
+                <a class="remove-img5" href="#">&#215;</a>
+                <input type="hidden" class="image-preview__default-text5" value="{{customer.Co_Insurer_Aadhaar_front}}"
+                    name="Co_Insurer_Aadhaar_front">
+                <!-- <span class="image-preview__default-text5">Front Side Upload</span> -->
+                <input type="file" name="Co_Insurer_Aadhaar_front" id="image-preview__image5" class="image-preview__image5" accept="image/*" required>
+            </div>
+            <p id="image-details5"></p>
+            <div class="image-preview" id="imagePreview">
+                <img src="{{customer.Co_Insurer_Aadhaar_back.url}}" style="display: block;" alt="Image Preview6"
+                    class="image-preview__image6" />
+                <a class="remove-img6" href="#">&#215;</a>
+
+                <input type="hidden" class="image-preview__default-text6" style="display: block;"
+                    value="{{customer.Co_Insurer_Aadhaar_back}}" name="Co_Insurer_Aadhaar_back">
+                <!-- <span class="image-preview__default-text6">Back Side Upload</span> -->
+                <input type="file" name="Co_Insurer_Aadhaar_back" id="image-preview__image6" class="image-preview__image6" accept="image/*" required>
+            </div>
+            <p id="image-details6"></p>
+        </div>
+        <!----------- (END)PREVIEW ADHAAR CARD --------->
+        <!--------- ADHAAR CARD BUTTONS -------->
+        <div class="container-button">
+            <input type="file" name="inputFile5" id="inputFile5" class="custom-file-input" />
+            <label for="inputFile5">Front Side Upload:</label>
+            <!-- <span class="remove-img5">&#215;</span> -->
+            <input type="file" name="inputFile6" id="inputFile6" class="custom-file-input" />
+            <label for="inputFile6">Back Side Upload:</label>
+            <!-- <span class="remove-img6">&#215;</span> -->
+        </div>
+        <!--------- (END)ADHAAR CARD BUTTONS -------->
+
+    </div>
+    <!----------- (END)CO-INSURER AHDAAR CARD ---------->
+
+    <!----------- Bank Details --------------->
+    <div class="container-4">
+        <h3>Bank Details</h3>
+
+        <!----------- PREVIEW BANK DETAILS --------->
+        <div class="preview">
+            <div class="image-preview" id="imagePreviewSingle">
+                <img src="{{customer.Member_Bank_Details.url}}" style="display: block;" alt="Image Preview7"
+                    class="image-preview__image7" />
+                <a class="remove-img7" href="#">&#215;</a>
+                <input type="hidden" class="image-preview__default-text7" value="{{customer.Member_Bank_Details}}"
+                    name="Member_Bank_Details">
+                <!-- <span class="image-preview__default-text7">UPLOAD</span> -->
+                <input type="file" name="Member_Bank_Details" id="image-preview__image7" class="image-preview__image7" accept="image/*" required>
+            </div>
+            <p id="image-details7"></p>
+
+        </div>
+
+        <!--------- BANK DETAILS BUTTONS -------->
+        <div class="container-button">
+            <input type="file" name="inputFile7" id="inputFile7" class="custom-file-input" />
+            <label for="inputFile7">UPLOAD</label>
+
+        </div>
+    </div>
+
+
+    <!----------- (END)Bank Details ---------->
+
+    <!----------- Relationship proof ---------->
+    <div class="container-5">
+        <h3>Relationship Proof</h3>
+
+        <!----------- PREVIEW BANK DETAILS --------->
+        <div class="preview">
+            <div class="image-preview" id="imagePreviewSingle">
+                <img src="" alt="Image Preview8" class="image-preview__image8" />
+                <a class="remove-img8" id='remove-image8' href="#">&#215;</a>
+                <input type="hidden" class="image-preview__default-text8 " style="display: block;"
+                    name="Member_Relationship_Proof" value="{{customer.Member_Relationship_Proof}}">
+                <input type="file" name="Member_Relationship_Proof" id="image-preview__image8" class="image-preview__image8" accept="image/*" required>
+                <!-- <span class="image-preview__default-text8">UPLOAD</span> -->
+            </div>
+            <p id="image-details8"></p>
+        </div>
+
+        <!--------- BANK DETAILS BUTTONS -------->
+        <div class="container-button">
+            <input type="file" name="inputFile8" id="inputFile8" class="custom-file-input" />
+            <label for="inputFile8">UPLOAD</label>
+            <!-- <span class="remove-img8">&#215;</span> -->
+        </div>
+    </div>
+</div>
+<!----------- (end)Relationship proof ---------->
+</fieldset>
+<fieldset class="second">
+    <div>
+        <button type="submit" onclick="return confirm('Are you sure?')" class="button1">Save</button>
+    </div>
+</fieldset>
+</form>
+</div>
+<div class="crop-modal hidden">
+    <button class="close-modal">&times;</button>
+    <div id="cropImage">
+
+    </div>
+    <button type="button" class="saveBtn">Save</button>
+</div>
+<div class="overlay hidden"></div>
+{% include "footer.html" %}

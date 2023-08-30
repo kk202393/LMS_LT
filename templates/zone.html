@@ -1,0 +1,21 @@
+{% include "header.html" %}
+<div class="container1">
+    <h2>Create New Zone</h2>
+    <form action="#" method="POST"></form>
+    <fieldset>
+        {% csrf_token %}
+        {% for fm in form %}
+        <div>
+            {{fm.label_tag}}{{fm}}
+        </div>
+        {% endfor %}
+        <div>
+            <input type="submit" value="Submit" class="button1">
+        </div>
+        <div style="color: red;">
+            <!-- {% if messages %} {% for message in messages %} {{message}}{% endfor %}{% endif%} -->
+        </div>
+    </fieldset>
+    </form>
+</div>
+{% include "footer.html" %}

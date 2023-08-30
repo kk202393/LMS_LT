@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital@0;1&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+@media print {
+  @page {
+    size: A4;
+    size: landscape;
+    margin: 0;
+    background-color: pink;
+  }
+
+  .first-page {
+    page-break-after: always;
+  }
+
+  body {
+    width: 297mm;
+    height: 210mm;
+  }
+}
+
+/* first-page */
+.first-page,
+.second-page {
+  /* width: 297mm;
+  height: 210mm; */
+  /* width: 100vw; */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  outline: 1px solid black;
+  margin-bottom: 3px;
+  margin: 10px;
+}
+
+.first-page .left,
+.second-page .left {
+  width: 45%;
+  /* height: 95%; */
+  margin: 7px 15px;
+}
+
+.first-page p,
+.second-page p {
+  font-size: 8px;
+}
+
+.first-page h3 {
+  text-align: center;
+  font-size: 10px;
+  text-decoration: underline;
+  margin-bottom: 3px;
+}
+
+.first-page div,
+.second-page div {
+  margin: 10px 0;
+}
+
+/* right side */
+
+/* Right  first div */
+.first-page .right,
+.second-page .right {
+  width: 45%;
+  height: 95%;
+  margin: 7px 15px;
+}
+
+.first-page .right .first {
+  border: 1px solid black;
+  padding: 3px 7px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.first-page .right .first .left-side p {
+  margin: 7px 5px;
+}
+
+.first-page .right .first .left-side p span {
+  margin-left: 10px;
+}
+
+.first-page .right .first .right-side {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.first-page .right .first .right-side img {
+  width: auto;
+  height: 100px;
+  margin-bottom: 3px;
+}
+
+.first-page .right .third {
+  border: 1px solid black;
+  width: 100%;
+  padding: 3px 7px;
+  margin-bottom: 5px;
+}
+
+.first-page .right .third p {
+  font-size: 8px;
+  margin-bottom: 5px;
+}
+
+.first-page .right .third p span {
+  margin: 3px;
+}
+
+.first-page .right .third p input[type="checkbox"] {
+  width: 20px;
+  margin-left: 10px;
+}
+
+.first-page .right .third p:nth-child(2) span {
+  text-decoration: underline;
+}
+
+.first-page .right .fifth {
+  border: 1px solid black;
+  width: 100%;
+  padding: 3px 7px;
+  margin-bottom: 5px;
+}
+
+.first-page .right .fifth p {
+  font-size: 8px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.first-page .right .fifth h3 {
+  font-weight: 200;
+  margin: 10px 0;
+}
+
+.first-page .right .sixth {
+  display: flex;
+  justify-content: space-between;
+  margin: 27px 0px;
+
+  border: 1px solid black;
+}
+
+.first-page .right .sixth p {
+  font-size: 10px;
+  margin: 0 10px;
+}
+
+.first-page .right .seventh
+
+/* second page */
+.second-page .right .first {
+  margin-bottom: 20px;
+}
+
+.second-page .right .second {
+  margin-bottom: 20px;
+}
+
+.second-page .right .third {
+  border: 1px solid black;
+  width: 100%;
+  padding: 3px 7px;
+  margin-bottom: 5px;
+}
+
+.second-page .right .third+p {
+  text-align: center;
+  font-weight: 800;
+}
+
+/* table */
+table,
+td,
+th {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 2px;
+  font-size: 8px;
+}
+
+table {
+  width: 100%;
+}
+
+@media print {
+  .first-page .right .seventh {
+    page-break-after: always;
+  }
+}

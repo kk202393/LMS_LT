@@ -1,0 +1,19 @@
+{% include "header.html" %}
+<div class="container1">
+    <h2>List of Zones</h2>
+    <fieldset>
+        {% for zone in zones %}
+        <div>
+            <p>Head Office: <span>{{zone.haed_office_name.haed_office_name}}</span></p>
+            <p>Circle: <span>{{zone.circle_name}}</span></p>
+            <p>Created By: <span>{{zone.created_by}}</span></p>
+            <p>Created Date: <span>{{zone.created_date}}</span></p>
+        </div>
+        {% endfor %}
+        <div>
+            <a href="{% url 'zone' %}"><button class="button1">Add Another Zone</button></a>
+            <a href="{% url 'desbord' %}"><button class="button1">Go to Homepage</button></a>
+        </div>
+    </fieldset>
+</div>
+{% include "footer.html" %}

@@ -1,0 +1,284 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% elif role.name == "Branch Manager" %}
+{% include "headerBranchManager.html" %}
+{% else %}
+{% include "headerAgent.html" %}
+{% endif %}
+<div class="container1">
+    <h1>Cross Sell Cash Sell</h1>
+    <form action="">
+        <fieldset>
+            <div>
+
+                <label for="circle">Circle</label><br>
+                <select id="cirlce" name="circle">
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                  </select>
+
+            </div>
+
+            <div>
+
+                <label for="region">Region</label><br>
+                <select id="region" name="region">
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                  </select>
+
+            </div>
+
+            <div>
+
+                <label for="branch">Branch</label><br>
+                <select id="branch" name="branch">
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                  </select>
+
+            </div>
+
+            <div>
+
+                <label for="productCategory">Product Category</label><br>
+                <select id="productCategory" name="productCategory">
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                  </select>
+
+            </div>
+
+            <div>
+
+                <label for="disbursementDateRange">Disbursement Date Range</label><br>
+                <select id="disbursementDateRange" name="disbursementDateRange">
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                  </select>
+
+            </div>
+
+            <div>
+
+                <label for="status">Status</label><br>
+                <select id="status" name="status">
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                  </select>
+
+            </div>
+
+            <div>
+
+                <label for="transactionId">Transaction Id</label><br>
+                <input type="number" id="transactionId" name="transactionId">
+
+            </div>
+
+            <div>
+
+                <label for="journalNumber">Journal Number</label><br>
+                <input type="number" id="journalNumber" name="journalNumber">
+                <button type="button" class="button">Fetch</button>
+
+            </div>
+
+
+        </fieldset>
+
+    </form>
+
+    <div class="container-table">
+        <fieldset>
+            <div>
+
+                <button type="button" class="button1">CSV</button>
+                <a href="{% url 'add_cross_sell_cash_sell' %}"><button type="button" class="button1">ADD CROSS SELL CASH SELL</button></a>
+
+            </div>
+        </fieldset>
+
+        <!-- table -->
+
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                    <th>Action</th>
+                    <th>Circle Name</th>
+                    <th>Region Name</th>
+                    <th>Branch Name</th>
+                    <th>Transaction Id</th>
+                    <th>Status</th>
+                    <th>Product Category</th>
+                    <th>Product</th>
+                    <th>Model</th>
+                    <th>Amount</th>
+                    <th>CSO ID</th>
+                    <th>Disbursement Date</th>
+                    <th>Journal Code</th>
+                    <th>Journal Number</th>
+                    <th>Invoice Number</th>
+                    <th>Supplier Name</th>
+                    <th>Customer Id</th>
+
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}

@@ -1,0 +1,265 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    /* padding-bottom:100px; */
+    left: 0;
+    top: 0;
+    width: 100vw;
+    /* Full width */
+    height: 100vh;
+    /* Full height */
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    margin-bottom: 100px;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+
+/* The Close Button */
+
+.close {
+    color: rgb(174, 186, 230);
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(255, 250, 250);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #3b5998;
+    ;
+    color: white;
+    text-align: center;
+}
+
+.modal-header h1 {
+    color: white;
+}
+
+.modal-body {
+    padding: 20px 16px;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+    text-align: center;
+}
+
+
+/* *************Inside Modal Form****************** */
+
+.form {
+    margin: 0px;
+    padding: 0px;
+}
+
+.form h3 {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #3b5898;
+    margin: 0px;
+}
+
+.form .grid {
+    /* margin-top:0px;
+  margin-bottom: 50px; */
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.form .grid .form-element {
+    width: 250px;
+    height: 300px;
+    box-shadow: 0px 0px 20px 5px rgba(100, 100, 100, 0.1);
+    margin: 10px;
+}
+
+.form .grid .form-element input {
+    display: none;
+}
+
+.form .grid .form-element img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form .grid .form-element div {
+    position: relative;
+    height: 40px;
+    margin-top: -40px;
+    background-color: #3b5898;
+    text-align: center;
+    line-height: 40px;
+    font-size: 13px;
+    color: #f5f5f5;
+    font-weight: 600;
+}
+
+.form .grid .form-element div span {
+    font-size: 40px;
+}
+
+
+/* *************Inside Modal Form****************** */
+
+
+/* ***************Button Modal****************** */
+
+.button-modal {
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 55px 0px 11px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1-modal {
+    background-color: white;
+    color: #3b5998;
+    border: 2px solid #3b5998;
+    width: 110px;
+    height: 45px;
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.button1-modal:hover {
+    background-color: #3b5898;
+    color: white;
+    transform: scale(0.9);
+}
+
+
+/* ***************Button-Modal****************** */
+
+
+/* ****************user image******************* */
+
+fieldset .grid {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+fieldset h3 {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    background-color: #3b5898;
+    margin: 0px;
+}
+
+fieldset .grid .form-element {
+    width: 170px;
+    height: 180px;
+    box-shadow: 0px 0px 20px 5px rgba(100, 100, 100, 0.1);
+    margin-bottom: 50px;
+}
+
+fieldset .grid .form-element input {
+    display: none;
+}
+
+fieldset .grid .form-element img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+fieldset .grid .form-element div {
+    position: relative;
+    height: 40px;
+    margin-top: -40px;
+    background-color: #3b5898;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    color: #f5f5f5;
+    font-weight: 600;
+    margin: 0;
+}
+
+fieldset .grid .form-element div span {
+    font-size: 30px;
+    line-height: 40px;
+}
+
+
+/* ****************user image******************* */

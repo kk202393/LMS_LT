@@ -1,0 +1,133 @@
+{% include "header.html" %}
+<div class="container1">
+    <h1>Add Cross Sell Cash Sell</h1>
+    <form action="">
+        <fieldset>
+            <div>
+
+                <label for="branch">Branch<span class="danger">*</span></label><br>
+                <select id="branch" name="branch" required>
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                </select>
+
+            </div>
+
+            <div>
+
+                <label for="productCategory">Product Category<span class="danger">*</span></label><br>
+                <select id="productCategory" name="productCategory" required>
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                </select>
+
+            </div>
+
+            <div>
+
+                <label for="supplierName">Supplier Name<span class="danger">*</span></label><br>
+                <input type="text" id="supplierName" name="supplierName">
+
+            </div>
+
+            <div>
+
+                <label for="product">Product<span class="danger">*</span></label><br>
+                <select id="product" name="product" required>
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                </select>
+
+            </div>
+
+            <div>
+
+                <label for="amount">Amount<span class="danger">*</span></label><br>
+                <input type="number" id="amount" name="amount">
+
+            </div>
+
+            <div>
+
+                <label for="model">Model<span class="danger">*</span></label><br>
+                <select id="model" name="model" required>
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                </select>
+
+            </div>
+
+            <div>
+
+                <label for="csoId">CSO Id<span class="danger">*</span></label><br>
+                <select id="csoId" name="csoId" required>
+                    <option value="option1">option1</option>
+                    <option value="option2">option2</option>
+                    <option value="option3">option3</option>
+                    <option value="option4">option4</option>
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label for="invoiceNumber">Invoice Number</label><br>
+                <input type="number" id="invoiceNumber" name="invoiceNumber">
+
+            </div>
+
+
+            <div>
+
+                <label for="disbursementDate">Disbursement Date<span class="danger">*</span></label><br>
+                <input type="date" id="disbursementDate" name="disbursementDate">
+
+            </div>
+
+
+
+
+
+        </fieldset>
+
+        <fieldset>
+            <div>
+
+                <label for="customer">Customer<span class="danger">*</span></label><br>
+                <input type="text" id="customer" name="customer">
+                <button type="button" class="button">Fetch Customer</button>
+
+            </div>
+            <div>
+
+                <label for="customerId">Customer ID<span class="danger">*</span></label><br>
+                <input type="text" id="customerId" name="customerId">
+
+
+            </div>
+            <div>
+
+                <label for="customerName">Customer Name<span class="danger">*</span></label><br>
+                <input type="text" id="customerName" name="customerName">
+
+
+            </div>
+        </fieldset>
+        <div class="buttons">
+            <button type="button">Save</button>
+            <a href="{% url 'cross_sell_cash_sell' %}"> <button type="button">Back</button></a>
+        </div>
+    </form>
+</div>
+
+
+{% include "footer.html" %}

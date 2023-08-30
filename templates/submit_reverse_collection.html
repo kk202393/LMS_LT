@@ -1,0 +1,9 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% else %}
+{% include "headerBranchManager.html" %}
+{% endif %}
+<h2 style="justify-content: center; align-items: center; display: flex; margin: 10px 0px 10px 0px;">
+    {{message}}
+</h2>
+{% include "footer.html" %}

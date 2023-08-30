@@ -1,0 +1,607 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Credit.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <title>Credit Bureau Check</title>
+</head>
+<body>
+    <div class="container1">
+        <h1>Credit Bureau Check</h1>
+        <form action="">
+            <fieldset>
+                <div>
+                    
+                    <label for="region">Region</label><br>
+                    <select id="region" name="region" >
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                      </select>
+                
+                </div>
+
+                <div>
+                    
+                    <label for="branch">Branch</label><br>
+                    <select id="branch" name="branch" >
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                      </select>
+                
+                </div>
+
+                <div>
+                    
+                    <label for="center">Center</label><br>
+                    <select id="center" name="center" >
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                      </select>
+                
+                </div>
+
+                <div>
+                    
+                    <label for="loanType">Loan Type</label><br>
+                    <select id="loanType" name="loanType" >
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                      </select>
+                      <button type="button" class="button">Fetch</button>
+                
+                </div>
+             
+                <div>
+                    
+                    <label for="creditBureau">Credit Bureau</label><br>
+                    <select id="creditBureau" name="creditBureau" >
+                        <option value="option1">option1</option>
+                        <option value="option2">option2</option>
+                        <option value="option3">option3</option>
+                        <option value="option4">option4</option>
+                      </select>
+                      <button type="button" class="button">Credit Bureau Check</button>
+                
+                </div>
+
+                
+
+                <div>
+                    
+                    <label for="AdhaarCardNumber">Adhaar Card Number</label><br>
+                    <input type="number" id="AdhaarCardNumber" name="AdhaarCardNumber">
+                    
+                </div>
+
+                <div>
+                    
+                    <label for="applicationNumber">Application Number</label><br>
+                    <input type="number" id="applicationNumber" name="applicationNumber">
+                    
+                    
+                </div>
+
+                <div>
+                    
+                    <label for="dateRange">Date Range</label><br>
+                    <input type="date" id="dateRange" name="dateRange">
+                    
+                    
+                </div>
+
+                
+            </fieldset>
+
+        </form>
+
+
+        <!-- second div -->
+        <div class="second">
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#" id="firstElement">Column</a>
+                <!-- <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a> -->
+                
+                <label class="container">Customer Id
+                  <input type="checkbox" checked="checked" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Application No.
+                  <input type="checkbox" checked="checked" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Customer Name
+                  <input type="checkbox" checked="checked" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Region Id
+                  <input type="checkbox" checked="checked" name="radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Branch Id
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Center Id
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">F/s Name
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Gender
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Pincode
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Address
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Address Line 1
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Address Line 2
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Address Line 3
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Village Id
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Mother Name
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Status
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Caste
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Religion
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Country
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">House Type
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Bank Name
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Bank Account No.
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Yearly Income
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Land Holding
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Other Montly EMI
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Other Loan Amt
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Business Type
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Date of Birth
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">State Code
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Product Id
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Loan Amount
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Nominee Name
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Nominee Relation
+                    <input type="checkbox" checked="checked" name="radio">
+                    <span class="checkmark"></span>
+                  </label>
+              </div>
+              
+              <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->
+              <fieldset>
+                <div>
+                    
+                    <button type="button" class="button1" onclick="openNav()">Edit Table</button>
+                    <!-- <a href="addcross.html"><button type="button" class="button1">ADD CROSS SELL CASH SELL</button></a> -->
+                    <button type="button" class="button1" >Export all data as csv</button>
+                    <button type="button" class="button1" >Export visible data as csv</button>
+                    <button type="button" class="button1" >Export all data as pdf</button>
+                    <button type="button" class="button1" >Export visible data as pdf</button>
+                </div>
+            </fieldset>
+
+            <!-- table -->
+            <div style="overflow-x:auto;" id="table">
+                <table>
+                  <tr>
+                    <th>Customer Id</th>
+                    <th>Application No.</th>
+                    <th>Customer Name</th>
+                    <th>Region Id</th>
+                    <th>Branch Id</th>
+                    <th>Center Id</th>
+                    <th>F/s Name</th>
+                    <th>Gender</th>
+                    <th>Pincode</th>
+                    <th>Address</th>
+                    <th>Address Line 1</th>
+                    <th>Address Line 2</th>
+                    <th>Address Line 3</th>
+                    <th>Village Id</th>
+                    <th>Mother Name</th>
+                    <th>Status</th>
+                    <th>Caste</th>
+                    <th>Religion</th>
+                    <th>Country</th>
+                    <th>House Type</th>
+                    <th>Bank Name</th>
+                    <th>Bank Account No.</th>
+                    <th>Yearly Income</th>
+                    <th>Land Holding</th>
+                    <th>Other Montly EMI</th>
+                    <th>Other Loan Amt</th>
+                    <th>Business Type</th>
+                    <th>Date of Birth</th>
+                    <th>State Code</th>
+                    <th>Product Id</th>
+                    <th>Loan Amount</th>
+                    <th>Nominee Name</th>
+                    <th>Nominee Relation</th>
+                   
+                    
+                   
+                   
+                  </tr>
+                  <tr>
+                     <td>1</td>
+                     <td>2</td>
+                     <td>3</td>
+                     <td>4</td>
+                     <td>5</td>
+                     <td>6</td>
+                     <td>7</td>
+                     <td>8</td>
+                     <td>9</td>
+                     <td>10</td>
+                     <td>11</td>
+                     <td>12</td>
+                     <td>13</td>
+                     <td>14</td>
+                     <td>15</td>
+                     <td>16</td>
+                     <td>17</td>
+                     <td>18</td>
+                     <td>19</td>
+                     <td>20</td>
+                     <td>21</td>
+                     <td>22</td>
+                     <td>23</td>
+                     <td>24</td>
+                     <td>25</td>
+                     <td>26</td>
+                     <td>27</td>
+                     <td>28</td>
+                     <td>29</td>
+                     <td>30</td>
+                     <td>31</td>
+                     <td>32</td>
+                     <td>33</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                     <td>2</td>
+                     <td>3</td>
+                     <td>4</td>
+                     <td>5</td>
+                     <td>6</td>
+                     <td>7</td>
+                     <td>8</td>
+                     <td>9</td>
+                     <td>10</td>
+                     <td>11</td>
+                     <td>12</td>
+                     <td>13</td>
+                     <td>14</td>
+                     <td>15</td>
+                     <td>16</td>
+                     <td>17</td>
+                     <td>18</td>
+                     <td>19</td>
+                     <td>20</td>
+                     <td>21</td>
+                     <td>22</td>
+                     <td>23</td>
+                     <td>24</td>
+                     <td>25</td>
+                     <td>26</td>
+                     <td>27</td>
+                     <td>28</td>
+                     <td>29</td>
+                     <td>30</td>
+                     <td>31</td>
+                     <td>32</td>
+                     <td>33</td>
+                    
+                </tr>
+                <tr>
+                    <td>1</td>
+                     <td>2</td>
+                     <td>3</td>
+                     <td>4</td>
+                     <td>5</td>
+                     <td>6</td>
+                     <td>7</td>
+                     <td>8</td>
+                     <td>9</td>
+                     <td>10</td>
+                     <td>11</td>
+                     <td>12</td>
+                     <td>13</td>
+                     <td>14</td>
+                     <td>15</td>
+                     <td>16</td>
+                     <td>17</td>
+                     <td>18</td>
+                     <td>19</td>
+                     <td>20</td>
+                     <td>21</td>
+                     <td>22</td>
+                     <td>23</td>
+                     <td>24</td>
+                     <td>25</td>
+                     <td>26</td>
+                     <td>27</td>
+                     <td>28</td>
+                     <td>29</td>
+                     <td>30</td>
+                     <td>31</td>
+                     <td>32</td>
+                     <td>33</td>
+                   
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td>32</td>
+                    <td>33</td>
+                   
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td>32</td>
+                    <td>33</td>
+                   
+                </tr>
+                <tr>
+                    <td>1</td>
+                     <td>2</td>
+                     <td>3</td>
+                     <td>4</td>
+                     <td>5</td>
+                     <td>6</td>
+                     <td>7</td>
+                     <td>8</td>
+                     <td>9</td>
+                     <td>10</td>
+                     <td>11</td>
+                     <td>12</td>
+                     <td>13</td>
+                     <td>14</td>
+                     <td>15</td>
+                     <td>16</td>
+                     <td>17</td>
+                     <td>18</td>
+                     <td>19</td>
+                     <td>20</td>
+                     <td>21</td>
+                     <td>22</td>
+                     <td>23</td>
+                     <td>24</td>
+                     <td>25</td>
+                     <td>26</td>
+                     <td>27</td>
+                     <td>28</td>
+                     <td>29</td>
+                     <td>30</td>
+                     <td>31</td>
+                     <td>32</td>
+                     <td>33</td>
+                    
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td>32</td>
+                    <td>33</td>
+                </tr>
+                </table>
+              </div>
+
+        </div>
+    </div>
+
+   
+    
+    
+    
+        
+          
+        
+   
+
+
+
+
+
+    <!-- <script>
+        function openSlideMenu()
+        {
+            document.getElementById('side-menu').style.width = '250px';
+            // document.getElementById('main').style.marginLeft = '250px';
+
+        }
+
+        function closeSlideMenu()
+        {
+            document.getElementById('side-menu').style.width = '0';
+            // document.getElementById('main').style.marginLeft = '0';
+
+        }
+    </script> -->
+
+
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById('table').style.marginLeft = '250px';
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById('table').style.marginLeft = '0';
+        }
+        </script>
+
+
+</body>
+</html>

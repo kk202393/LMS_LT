@@ -1,0 +1,575 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="style2.css" /> -->
+  <link rel="stylesheet" href="{% static '/css/Loan_Report_card.css' %}">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="first-page">
+    <div class="left">
+      <div class="first">
+        <h3>GUIDELINES FOR PMCF STAFF</h3>
+        <p>
+          1. The borrower will utilize the loan only for the purpose
+          declared in loan application form. LUC must be conducted within 60
+          days of loan disbursement.
+        </p>
+        <p>
+          2. All financial transactions will be held only in the center
+          meeting at a central designated place.
+        </p>
+        <p>
+          3. A Member has the option to repay the loan in
+          Weekly/Fortnightly/Monthly mode. There will be a moratorium for the
+          loan repayment equivalent to the period of one instalment span
+          selected by the borrower in Loan application.
+        </p>
+        <p>
+          4. The tenure of loans will be as chosen by the member in the loan
+          application.
+        </p>
+        <p>
+          5. There is no penalty for prepayment of loans but penal charges can
+          be taken in case of delayed payments. No security deposit or margin
+          will be collected from the borrower by the lender.
+        </p>
+        <p>
+          6. PMCF will acknowledge every financial transaction in the presence
+          of members by making entries into their loan cards.
+        </p>
+        <p>
+          7. Pre-closure of the loan will be done by updating both the
+          promissory note and loan card.
+        </p>
+        <p>
+          8. Loan application forms will not be returned to the members as it
+          is the property of the organization.
+        </p>
+        <p>
+          9. The borrower will be charged an amount equivalent to 1% of the
+          loan amount as a non-refundable Loan Processing Fee (exclusive of
+          applicable tax) and applicable insurance premium towards Credit
+          Shield Insurance at the time of disbursement of each loan.
+        </p>
+        <p>
+          10. The pricing of loans involves only three components, viz.
+          Interest Amount, Loan Processing Fees and applicable Insurance
+          Premium.
+        </p>
+        <p>
+          11. The borrower agrees to pay a Life Insurance Premium of
+          <u>&nbsp;&nbsp;<strong>₹ {{LPC|floatformat:0}} </strong>&nbsp;&nbsp;</u> for a sum
+          assured equal to the disbursed loan amount. The life insurance cover
+          term shall be equal to the loan term & any pre-closure of the loan
+          will get the insurance cover terminated.
+        </p>
+        <p>
+          12. In the event of any eventuality of self and/or Co-Insurer's
+          death giving rise to a claim under the Group Insurance Scheme, the
+          claim proceeds should be utilized to liquidate the outstanding loan
+          amount of PARISHKAR MICROCARE FOUNDATION. I authorize PARISHKAR MICROCARE FOUNDATION
+          to receive the outstanding loan amount of the
+          claim proceeds payable on the happening of the contingent event
+          covered under this policy from the Insurance partner. Any residual
+          amount, shall be paid by the Insurer to me or my nominee/beneficiary
+          as the case may be.
+        </p>
+        <p>
+          13. Member/s have an option to change their nomination for the life
+          insurance cover any time during the cover term.
+        </p>
+        <p>
+          14. PMCF will not hold any type of asset as collateral/ security
+          deposit/ margin money against any loan in the Joint Liability Group
+          (JLG) model.
+        </p>
+        <p>
+          15. PMCF is authorized to share the client details to Credit Bureau
+          agencies approved by Regulator/Government Authorities. PMCF gives an
+          assurance that the privacy of borrower data shall be respected.
+        </p>
+        <p>
+          16. All changes in the terms & conditions of the Loan, Interest
+          rates and other charges of loan will be only prospective.
+        </p>
+        <p>
+          17. The loan is required for the purpose mentioned in the loan
+          application form.
+        </p>
+        <p>
+          18. Warranty and after-sales services are provided by the
+          manufacturer and PMCF will not be responsible for any lapse on the
+          part of the manufacturer.
+        </p>
+        <p>
+          19. Customers should apply for loans/product loans on their own
+          wish, PMCF does not force anyone to borrow/take a loan or buy a
+          product.
+        </p>
+        <p>
+          20. In addition to the amount specified in the loan card, members
+          are not required to pay any kind of cash or any other form to the
+          employees or any other person.
+        </p>
+        <p>
+          21. PMCF maintains transparency of all the norms and conditions with
+          the borrower and communicates to the members in the local language
+          or in the language, they understand.
+        </p>
+        <p>
+          22. Grant of loan is not linked to any other product/services
+          offered by the company or third party.
+        </p>
+        <p>
+          23. PMCF does not discriminate against customers based on ethnicity,
+          age (Subject to IRDA norms), sexual orientation, political
+          affiliation, caste, creed, or religion.
+        </p>
+        <p>
+          24. An Insurance claim may be repudiated under conditions such as
+          Death date not falling within Insurance tenure; Submitting incorrect
+          or unclear claim document details; Inactive or dormant bank account
+          details; Issuance of Death certificate by an unauthorized agency.
+        </p>
+        <p>
+          25. Borrower shall be classified as NPA (Non-Performing Asset), if
+          any of her loan facility is in overdue for more than 90 days. NPA
+          status of the loan shall change only when the entire arrear i.e.
+          principal and interest is paid by the borrower. Asset classification
+          shall be done borrower-wise and not facility - wise. It is also
+          applicable for Restructured loan (if any).
+        </p>
+        <p>
+          26. Loan facility shall be classified as SMA 0 when it is in overdue
+          up to 30 days; SMA-1 when it is more than 30 days and up to 60 days;
+          SMA-2 when it is more than 60 days and up to 90 days and classifies
+          as NPA when it is more than 90 days.
+        </p>
+        <p>
+          27. PMCF as a regulated entity will be responsible & accountable
+        </p>
+      </div>
+
+      <div class="second">
+        <h3>WE AS A MEMBER OF GROUP KNOW THAT</h3>
+        <p>
+          1. PMCF reserves the right to recall the loan/accelerate payment of
+          the outstanding loan amount anytime from the borrower in case the
+          borrower breaches any of the terms and conditions mentioned in the
+          loan application.
+        </p>
+        <p>
+          2. We are taking the responsibility of repaying installment of
+          ourselves along with other group members of our group.
+        </p>
+        <p>
+          3. In Festivals/national holidays like 15th August, 26th January,
+          2nd October, Holi, Diwali and Eid, etc.we will pay that/those
+          installment(s) before the loan schedule. The intimation regarding
+          the same will be shared by PMCF via SMS/email.
+        </p>
+        <p>
+          4. The breakup of interest and principal amount in our installment
+          depends on tenure/ consistency of loan repayment and loan
+          outstanding as on repayment date.
+        </p>
+        <p>
+          5. PMCF does not provide life insurance. The insurance premium
+          deposited by the member is transferred directly to the insurance
+          provider company.
+        </p>
+        <p>
+          6. On the death of member or co-insurer or both, during the
+          insurance period, payment of the sum insured (an amount equal to the
+          remaining amount of loan amount) by the insurance company will be
+          paid to PMCF after submission of the Valid Death Certificate, from
+          which the remaining loan will be paid. The additional amount (if
+          any) will be paid through the cheque/bank transfer to the nominee.
+        </p>
+        <p>
+          7. We are aware about the non-credit products available with PMCF
+          and the fee structure of such products. In near future, I will be
+          willing to avail the benefits of the product.
+        </p>
+      </div>
+      <div class="third">
+        <h3>MEMBER PLEDGE</h3>
+        <p>1. We will come to the meeting on time</p>
+        <p>2. We will invest in the work for which we will take money.</p>
+        <p>3. We will pay the installments on time.</p>
+        <p>4. We will take responsibility for our Group/Centre.</p>
+        <p>
+          5. Increased income will be spent in the interest of the family.
+        </p>
+        <p>
+          6. We shall neither accept nor offer any commission to Centre
+          members, staff and
+        </p>
+      </div>
+    </div>
+
+    <div class="right">
+      <h2>परिष्कार माइक्रोकेयर फाउंडेशन</h2>
+      <h2>PARISHKAR MICROCARE FOUNDATION</h2>
+      <h3>REGD. OFFICE--PROP NO P-57 BL0CK NO-P, PANDAV NAGAR, DELHI 110091</h3>
+      <h3>CIN: U65100DL2022NPL402347</h3>
+      <h3>Loan Card</h3>
+      <div class="first">
+        <div class="left-side">
+          <p>
+            Branch Name : &nbsp;&nbsp;<span id="branchName">{{cust_data.BranchName.branchName.branch_Name}}</span>
+            {{days}}
+          </p>
+          <p>
+            Region Name : &nbsp;&nbsp;<span id="regionName">{{cust_data.BranchName.branchName.region.region}}</span>
+          </p>
+          <p>Center Id : &nbsp;&nbsp;<span id="centerId">{{cust_data.CenterId.center_Id}}</span></p>
+          <p>Center Name : &nbsp;&nbsp;<span id="centerName">{{cust_data.CenterId.center_name}}</span></p>
+          <p>
+            Member Name : &nbsp;&nbsp;<span id="memberName">{{cust_data.FirstName}} {{cust_data.LastName}}</span>
+          </p>
+          <p>
+            Customer ID : &nbsp;&nbsp;<span id="customerId">{{cust_data.loandata.customerId}}</span>
+          </p>
+          <p>Loan ID : &nbsp;&nbsp;<span id="loanId">{{cust_data.loandata.loanId}}</span></p>
+          <p>Group Code : &nbsp;&nbsp;<span id="groupCode">{{cust_data.GroupName.GroupName_value}}</span></p>
+          <p>
+            Contact No. : &nbsp;&nbsp;<span id="contactNo">{{cust_data.PhoneNumber}}</span>
+          </p>
+
+          <p>
+            Address : &nbsp;&nbsp;<span id="address">
+              {{cust_data.AddressLine1}} {{cust_data.AddressLine2}} {{cust_data.AddressLine3}} {{cust_data.Village}}
+              {{cust_data.State.Dist_Name}} {{cust_data.State}} {{cust_data.Pincode}}</span>
+          </p>
+          <p>
+            Co-Insurer Name : &nbsp;&nbsp;<span id="coInsurerName">{{cust_data.CoInsurerName}}</span>
+          </p>
+          <p>
+            Relationship with Member : &nbsp;&nbsp;<span id="relationWithMember">{{cust_data.CoInsurerRelation}}</span>
+          </p>
+        </div>
+        <div class="right-side">
+          <img src="{{cust_data.Custimage.url}}" alt="" />
+          <!-- <img src="{{Cust_data.qrcode}}"alt="" /> -->
+        </div>
+      </div>
+
+      <!-- second div -->
+      <div class="second">
+        <table>
+          <tr>
+            <th colspan="6">LOAN DETAILS</th>
+          </tr>
+          <tr>
+            <th>Loan Amount</th>
+            <td>{{cust_data.LoanAmount}}</td>
+            <td>Disbursement Date</td>
+            <td>{{cust_data.Disbursement_Date|date:'d/m/Y' }}</td>
+            <td>Disbursement Mode</td>
+            <td>{{cust_data.Disbursement_Payment_Mode.DisbursementModeName}}</td>
+          </tr>
+          <tr>
+            <th>Purpose of Loan</th>
+            <td>{{cust_data.PurposeId.PurposeId_value}}</td>
+            <td>Sub-Purpose of Loan</td>
+            <td> </td>
+            <td>Loan Repayment Frequency</td>
+            <td>{{cust_data.Product.loanMode.loan_days}} days</td>
+          </tr>
+          <tr>
+            <th>Name of Center Leader</th>
+            <td>{{cust_data.CenterId.center_leader}}</td>
+            <td>Name & Emp Code of CSO</td>
+            <td>{{cust_data.BranchName.userName.first_name}}({{cust_data.BranchName.userName.username}})</td>
+            <td>Guardian/Husband Name</td>
+            <td>{{cust_data.CoInsurerName}}</td>
+          </tr>
+        </table>
+      </div>
+      <!-- second div -->
+
+      <!-- third div -->
+      <div class="third">
+        <p>
+          Whether the loan is classified as “Qualifying Asset”:
+          <span>YES</span>
+          <input type="checkbox" name="" id="" />
+          <span>NO</span>
+          <input type="checkbox" name="" id="" />
+        </p>
+        <p>
+          Net Loan Amount after auto-deduction of charges of LPF ₹
+          <span> {{LPF|floatformat:0}} </span>
+          & Insurance ₹
+          <span> {{LPC|floatformat:0}} </span>
+          is ₹
+          <span>{{payment_amount|floatformat:0}}</span>
+        </p>
+      </div>
+
+      <!-- third div -->
+
+      <!-- forth -->
+      <div class="forth">
+        <table>
+          <tr>
+            <th>Loan Utilization Check Date</th>
+            <th>Purpose Of Loan</th>
+            <th>CSO Emp Code & Signature</th>
+            <th>Member Signature</th>
+          </tr>
+          <tr>
+            <td>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+          </tr>
+          <tr>
+            <th colspan="4">Insurance Product Details</th>
+          </tr>
+          <tr>
+            <th>Product</th>
+            <th>Tenure</th>
+            <th>Total Premium (Customer + Co-Insured)</th>
+            <th>Sum Assured</th>
+          </tr>
+          <tr>
+            <td>{{cust_data.Product}}</td>
+            <td>{{cust_data.RepayFrequency|floatformat:0}}</td>
+            <td>{{LPC|floatformat:0}}</td>
+            <td>{{cust_data.LoanAmount|floatformat:0}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- forth -->
+
+      <!-- fifth -->
+      <div class="fifth">
+        <h3>MEMBER HELP LINE</h3>
+        <h3>
+          (Nodal Officer : Mr. Jagdish Singh , Contact No.: 9887544825)
+        </h3>
+        <p>
+          In case of any complaint/ grievance/ suggestion/ feedback, call 8905654731
+          between 08:00 am to 6:30 pm, Monday to Saturday from any phone , which is available in multiple languages. If
+          you are not
+          satisfied with the resolution. you do
+          not get any resolution within 10 working days you can call 7976265268. If the
+          complaint/ dispute is not redressed within one month, the customer
+          may appeal to the RBI at Tel. No. (011) 2371 4456, 2373 9328,
+          23719466.
+        </p>
+      </div>
+      <!-- fifth -->
+
+      <!-- sixth -->
+      <div class="sixth">
+        <p>Member Signature</p>
+        <p>CSO Signature</p>
+        <p>BM/AM Signature</p>
+      </div>
+      <!-- sixth -->
+    </div>
+  </div>
+  <br>
+  <div class="second-page">
+    <div class="left">
+      <div class="first">
+        <table>
+          <tr>
+            <th rowspan="2">Ins. No.</th>
+            <th rowspan="2">Date</th>
+            <th colspan="3">Collection as per Schedule</th>
+            <th colspan="2">Collection as per Actual</th>
+            <th rowspan="2">Outstanding Principal (Rs.)</th>
+            <th rowspan="2" style="padding: 25px">Sign</th>
+          </tr>
+          <tr>
+            <th>Principal amount (Rs.)</th>
+            <th>Interest amount (Rs.)</th>
+            <th>installment amount (Rs.)</th>
+            <th>Collection Date</th>
+            <th>Amount Collected (Rs.)</th>
+          </tr>
+          {% for v , x , y , z , a in array_data %}
+          {% if forloop.counter <= 45 %} <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{v|date:'d/m/Y'}}</td>
+            <td>{{y|floatformat:0}}</td>
+            <td>{{x|floatformat:0}}</td>
+            <td>{{a|floatformat:0}}</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>{{z|floatformat:0}}</td>
+            <td>&nbsp;&nbsp;</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div class="right">
+      <div class="first">
+        <table>
+          {% if forloop.counter > 45 %}
+          <tr>
+            <th rowspan="2">Ins. No.</th>
+            <th rowspan="2">Date</th>
+            <th colspan="3">Collection as per Schedule</th>
+            <th colspan="2">Collection as per Actual</th>
+            <th rowspan="2">Outstanding Principal (Rs.)</th>
+            <th rowspan="2" style="padding: 25px">Sign</th>
+          </tr>
+          <tr>
+            <th>Principal amount (Rs.)</th>
+            <th>Interest amount (Rs.)</th>
+            <th>Install amount (Rs.)</th>
+            <th>Collection Date</th>
+            <th>Amount Collected (Rs.)</th>
+          </tr>
+          {% for v , x , y , z , a in array_data %}
+           <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{v|date:'d/m/Y'}}</td>
+            <td>{{y|floatformat:0}}</td>
+            <td>{{x|floatformat:0}}</td>
+            <td>{{a|floatformat:0}}</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>{{z|floatformat:0}}</td>
+            <td>&nbsp;&nbsp;</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+      </div>
+      <div class="second">
+        <table>
+          <caption>
+            Fact Sheet
+          </caption>
+          <tr>
+            <th style="width: 5%">S No.</th>
+            <th style="width: 75%">Parameter</th>
+            <th style="width: 20%">Details</th>
+          </tr>
+          <tr>
+            <td>1.</td>
+            <td>
+              Loan amount (amount disbursed to the borrower) (in Rupees)
+            </td>
+            <td>{{cust_data.LoanAmount}}</td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>
+              Total Intrest Charge during the entire tenure of the loan (in Rupees)
+            </td>
+            <td>{{Total_intrest|floatformat:0}}</td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>
+              Other up-front charges(break-up of each component given blow)(in Rupees)
+            </td>
+            <td>{{LPC |add:LPF}}</td>
+          </tr>
+          <tr>
+            <td>4.</td>
+            <td>
+              Processing fees (in Rupees)-1% of Loan Amount + applicable GST
+            </td>
+            <td> {{LPF|floatformat:0}} </td>
+          </tr>
+          <tr>
+            <td>5.</td>
+            <td>
+              Insurance charges for Borrower and Spouse (in Rupees) - Actual
+            </td>
+            <td> {{LPC|floatformat:0}} </td>
+          </tr>
+          <tr>
+            <td>6.</td>
+            <td>
+              Other (if any)(in Rupees)
+            </td>
+            <td>NIL</td>
+          </tr>
+          <tr>
+            <td>7.</td>
+            <td>
+              Net disbursed{(i)-(iii)}(in Rupees)
+            </td>
+            <td>{{payment_amount|floatformat:0}}</td>
+          </tr>
+          <tr>
+            <td>8.</td>
+            <td>
+              Total amount to be paid by the borroer {sum of (i),(ii)and (iii)}(in Rupees)
+            </td>
+            <td>{{Total_intrest |add:cust_data.LoanAmount |add:LPC |add:LPF}}</td>
+          </tr>
+          <tr>
+            <td>9.</td>
+            <td>
+              Applicable Rate of Intrest (in Percentage)(per annum)
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>10.</td>
+            <td>
+              Effective annualized Intrest rate (in percentage)(net off Processing amount using IRR approach and
+              reducing
+              method)
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>11.</td>
+            <td>
+              Loan term(in months)
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>12.</td>
+            <td>
+              Repayment Frequency by the borrow
+            </td>
+            <td>{{cust_data.Product.loanMode.loan_name}}</td>
+          </tr>
+          <tr>
+            <td>13.</td>
+            <td>
+              Number of installments of repayment
+            </td>
+            <td>{{cust_data.RepayFrequency|floatformat:0}}</td>
+          </tr>
+          <tr>
+            <td>14.</td>
+            <td>
+              Amount of each installment of repayment(in Rupees)
+            </td>
+            <td>{{emi|floatformat:0}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    addEventListener("load", () => {
+      window.print();
+    });
+  </script>
+</body>
+
+</html>

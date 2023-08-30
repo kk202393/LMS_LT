@@ -1,0 +1,84 @@
+{% include "header.html" %}
+<style>
+    .table-container {
+        max-height: 300px;
+        /* Set the maximum height for the container */
+        overflow-y: scroll;
+        /* Enable vertical scrolling */
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+<div class="container1">
+    <h2>Create New Loan</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            {% for field in form %}
+            <div>
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+            {% endfor %}
+            <div>
+                <label for="installmentAmount">Installment Amount : </label>
+                <input type="text" id="installmentAmount" name="installmentAmount" class="installmentAmount">
+                <button id="installmentAmountButton" type="button" class="button">Installment Amount</button>
+            </div>
+            <div>
+                <input type="submit" value="Submit" class="button">
+                <input type="reset" value="Reset" class="button">
+                <input type="hidden" id="loanDetailsId">
+            </div>
+            <div style="color:rgb(245, 51, 17); font-size: 25px; font-weight: 500;">
+                {% if messages %} {% for message in messages %} {{message}}{% endfor %}{% endif%}
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Current Running Loans</legend>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Action</th>
+                        <th>Loan Name</th>
+                        <th>Loan Mode</th>
+                        <th>Loan Amount</th>
+                        <th>Product</th>
+                        <th>Interest Rate</th>
+                        <th>Number of Months</th>
+                        <th>Repay Frequency</th>
+                        <th>Loan Processing Charge</th>
+                        <th>Loan Processing Fee</th>
+                        <th>Loan Active Status</th>
+                        <th>Created Date </th>
+                    </tr>
+                    {% for loan in allLoans %}
+                    <tr>
+                        <td>{{loan.id}}</td>
+                        <td><button type="button" class="button" id="editLoanId{{ forloop.counter }}"
+                                value="{{loan.id}}">Activate/Deactivate</button></td>
+                        <td>{{loan.loanName}}</td>
+                        <td>{{loan.loanMode.loan_name}}</td>
+                        <td>{{loan.LoanAmount}}</td>
+                        <td>{{loan.Product}}</td>
+                        <td>{{loan.InterestRate}}</td>
+                        <td>{{loan.Number_of_months}}</td>
+                        <td>{{loan.RepayFrequency}}</td>
+                        <td>{{loan.loanProcessingCharge}}</td>
+                        <td>{{loan.loanProcessingFee}}</td>
+                        <td>{{loan.activateStatus}}</td>
+                        <td>{{loan.updated_date.date | date:"d-m-Y"}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+{% include "footer.html" %}

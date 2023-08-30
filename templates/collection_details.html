@@ -1,0 +1,114 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% elif role.name == "Branch Manager" %}
+{% include "headerBranchManager.html" %}
+{% else %}
+{% include "headerAgent.html" %}
+{% endif %}
+<div class="container1">
+    <h1>Collection Details</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            {% if not user.is_superuser %}
+            <div>
+                <label for="branch">Branch</label><br />
+                <select id="branch" name="branch">
+                    <option value="">--Select--</option>
+                    <option value="{{managerBranch.branchName.id}}">{{managerBranch.branchName.branch_Name}}</option>
+                </select>
+            </div>
+            {% else %}
+            <div>
+                <label for="region">Region</label><br />
+                <select id="region" name="region">
+                    <option value="">--Select--</option>
+                    {% for Region_name in Region %}
+                    <option value="{{Region_name.id}}">{{Region_name.region}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="branch">Branch</label><br />
+                <select id="branch" name="branch">
+                </select>
+            </div>
+            {% endif %}
+
+            <div style="display: none;">
+                <input type="hidden" id="centerID" name="centerID">
+                <!-- <label for="center">CenterId</label><br /> -->
+                <select id="center" name="center">
+                </select>
+            </div>
+            <div class="select-wrapper">
+                <label for="selectInput">CenterId</label><br />
+                <input type="text" id="selectInput" class="select-input" placeholder="Select an option">
+                <div id="selectDropdown" class="select-dropdown"></div>
+            </div>
+
+            <div>
+                <label for="disbursementDate">Collection Date</label><br />
+                <input type="date" name="disbursementDate" id="disbursementDate">
+            </div>
+
+
+
+            <div>
+                <label for="csoId"></label><br />
+                <input type="hidden" id="csoId" name="csoId" />
+                <button type="submit" class="button">Fetch</button>
+                <button type="reset" class="button">Reset</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="container-table">
+        <!-- table -->
+
+        <div style="overflow-x: auto">
+            <table>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Region</th>
+                    <th>Branch Name</th>
+                    <th>Center Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>FS Name</th>
+                    <th>Loan ID</th>
+                    <th>Coll. Seq. No.</th>
+                    <th>Amount Collected</th>
+                    <th>Prinicipal Collected</th>
+                    <th>Interest Collected</th>
+                    <th>Coll. Date Time</th>
+                    <th>Collected By</th>
+                    <th>Product Id</th>
+                </tr>
+                {% for customerEmi, customer_data,customerEmiAmount in customerEmiData %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{customerEmi.center.region.region}}</td>
+                    <td>{{customerEmi.center.branch_Name.branch_Name}}</td>
+                    <td>{{customerEmi.center.center_Id}}</td>
+                    <td>{{customer_data.FirstName}}</td>
+                    <td>{{customer_data.LastName}}</td>
+                    <td>{{customer_data.FSName}}</td>
+                    <td>{{customerEmi.loanId.loanId}}</td>
+                    <td>&nbsp;</td>
+                    <td>{{customerEmiAmount.installmentAmountSum|floatformat:0}}</td>
+                    <td>{{customerEmiAmount.principleAmountSum|floatformat:0}}</td>
+                    <td>{{customerEmiAmount.interestAmounSum|floatformat:0}}</td>
+                    <td>{{customerEmi.PaymentDate|date:'d-m-Y'}}</td>
+                    <td>{{customerEmi.emiSubmittedBy}}</td>
+                    <td>{{customer_data.LoanAmount}}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+{% include "footer.html" %}

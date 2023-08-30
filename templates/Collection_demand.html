@@ -1,0 +1,259 @@
+{% if user.is_superuser %}
+{% include "header.html" %}
+{% elif role.name == "Branch Manager" %}
+{% include "headerBranchManager.html" %}
+{% else %}
+{% include "headerAgent.html" %}
+{% endif %}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap");
+
+  @media print {
+    .page-break {
+      page-break-before: always;
+      margin-bottom: 200px;
+      border:  2px solid black;
+    }
+    
+    @page {
+      size: A4 landscape;
+      padding: 0px;
+      font-family: "Roboto", sans-serif;
+    }
+
+    table {
+      transform: scale(0.88);
+      transform-origin: 50% 50%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .row1 {
+      margin-top: 15px;
+      display: none !important;
+    }
+    /* .row2 , .row3,.row4{
+      border: 2px solid black;
+    } */
+  
+    #innerContainer,
+    header,
+    footer {
+      display: none !important;
+    }
+
+    table th {
+      color: black;
+    }
+  }
+
+  h1,
+  h3 {
+    margin: 4px;
+  }
+
+  .row1 {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 300;
+    border-top: 2px solid black;
+  }
+
+  .row2 {
+    background-color: rgba(192, 184, 184, 0.438);
+    border: 2px solid black;
+    font-size: 1vmax;
+    padding: 2px;
+  }
+
+  .row3 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .row4 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tab {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  h4 {
+    border-bottom: 2px solid black;
+    font-size: 1.2vmax;
+  }
+
+  table th {
+    border-bottom: 2px solid black;
+    margin: 5px;
+    padding: 5px;
+  }
+
+  table td {
+    margin: 5px;
+    padding: 5px;
+  }
+</style>
+<div class="container1" style="border: none;">
+  <div id="innerContainer">
+    <h1>Collection & Demand Sheet</h1>
+    <form action="#" method="POST">
+      {% csrf_token %}
+      <fieldset>
+        {% if not user.is_superuser %}
+        <div>
+          <label for="branch">Branch</label><br />
+          <select id="branch" name="branch">
+            <option value="">--Select--</option>
+            <option value="{{managerBranch.branchName.id}}">{{managerBranch.branchName.branch_Name}}</option>
+          </select>
+        </div>
+        {% else %}
+        <div>
+          <label for="region">Region</label><br />
+          <select id="region" name="region">
+            <option value="">--Select--</option>
+            {% for Region_name in Region %}
+            <option value="{{Region_name.id}}">{{Region_name.region}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label for="branch">Branch</label><br />
+          <select id="branch" name="branch">
+          </select>
+        </div>
+        {% endif %}
+        <div>
+          <label for="CSO_Name">CSO Name</label><br />
+          <select id="CSO_Name" name="CSO_Name">
+          </select>
+        </div>
+
+        <div style="display: none;">
+          <input type="hidden" id="centerID" name="centerID">
+          <!-- <label for="center">CenterId</label><br /> -->
+          <select id="center" name="center">
+          </select>
+        </div>
+        <div class="select-wrapper">
+          <label for="selectInput">CenterId</label><br />
+          <input type="text" autocomplete="off" id="selectInput" class="select-input" placeholder="Select an option">
+          <div id="selectDropdown" class="select-dropdown"></div>
+        </div>
+
+        <div>
+          <label for="Demand_Date">Demand Date</label><br />
+          <input type="date" name="Demand_Date" id="Demand_Date">
+        </div>
+        <div>
+          <br>
+          <button type="submit" class="button">Fetch</button>
+          <button type="submit" class="button" onclick="reset()">Reset</button>
+          <button class="button" id="Print" onclick="window.print()">Print</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <!-- second div -->
+  <div>
+    <div class="row1">
+      <h3>Company: Parishkar Microcare Foundation</h3>
+      <h3>Requested By:{{request.user.first_name}}-{{ request.user.username}}</h3>
+      <h3>Requested On: {% now "d M Y" %}</h3>
+    </div>
+      {% for item in grouped_queryset %}
+      {% for data in customer_data %}
+      {% if data.CenterId.center_Id == item.CenterId__center_Id %}
+      {% ifchanged data.CenterId.center_Id %}
+      <div class="page-break">
+        <div class="row2">
+          <div class="row3">
+            <h3>Region:{{data.CenterId.region.region}}</h3>
+            <h3>Branch:{{data.CenterId.branch_Name.branch_Name}}</h3>
+            <h3>Center Id:{{data.CenterId.center_Id}}-{{data.CenterId.center_name}}</h3>
+            <h3>Total Due:&nbsp;{{ item.totalSumInstallment |floatformat:"0"}}</h3>
+            <h3>CSO: {{data.CenterId.agents_Name.first_name}}-{{data.CenterId.agents_Name.username}}</h3>
+          </div>
+          <div class="row4">
+            <h3>CL:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            <h3>Collection date:{{Demand_Date}}</h3>
+            <h3>Collection Day:{{data.CenterId.center_meeting_day|date:"D"}}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </h3>
+            <h3>&nbsp;</h3>
+            <h3>Center Meeting Time:{{data.CenterId.center_meeting_time}}</h3>
+            {% endifchanged %}
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="tab">
+          <table>
+            <thead>
+              <tr>
+                <th>Group</th>
+                <th>Cust Id</td>
+                <th>Customer Name</td>
+                <th>Husband Name</td>
+                <th>Mobile No.</td>
+                <th>Co-Insurer</td>
+                <th>Loan Id</td>
+                <th>Disburse Dt</td>
+                <th>Product Id</td>
+                <th>Cycle</td>
+                <th>Insll</td>
+                <th>O/S</td>
+                <th>P.DUE</td>
+                <th>I.DUE</th>
+                <th>T.DUE</td>
+                <th>P.ARR</td>
+                <th>L.ARR</td>
+                <th>T.ARR</td>
+                <th>PAR</td>
+                <th>Coll Amt.</td>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for data in customer_data %}
+              {% if data.CenterId.center_Id == item.CenterId__center_Id %}
+              <tr>
+                <td>{{data.GroupName.GroupName_value}}</td>
+                <td>{{data.loandata.customerId}}</td>
+                <td>{{data.FirstName}}</td>
+                <td>{{data.FSName}}</td>
+                <td>{{data.PhoneNumber}}</td>
+                <td>{{data.CoInsurerName}}</td>
+                <td>{{data.loandata.loanId}}</td>
+                <td>{{data.Disbursement_Date|date:"d-m-Y"}}</td>
+                <td>{{data.Product.LoanAmount}}</td>
+                <td>{{data.loanCycle|length}}</td>
+                <td>{{data.paidEMI.collectedEMI}}/{{data.totalEmiData|length}}</td>
+                <td>{{data.pendingEmiData.outstandingPrincipal|floatformat:"0"}}</td>
+                <td>{{data.pendingEmiData.principleAmount|floatformat:"0"}}</td>
+                <td>{{data.pendingEmiData.interestAmoun|floatformat:"0"}}</td>
+                <td>{{data.pendingEmiData.installmentAmount|floatformat:"0"}}</td>
+                <td>{{data.notPaidEmiData.pAmount|floatformat:"0"}}</td>
+                <td>{{data.notPaidEmiData.iAmount|floatformat:"0"}}</td>
+                <td>{{data.notPaidEmiData.emiAmount|floatformat:"0"}}</td>
+                <td>{{data.paidEMI.days}} Days</td>
+                <td></td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+  {% include "footer.html" %}

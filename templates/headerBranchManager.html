@@ -1,0 +1,96 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7bf0e3e20b.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="{% static '/css/desbord.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/header.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/CM.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/customerKYC.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/cross.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/centerIDDropDown.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/addCollections.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static '/favicon.ico' %}" />
+    <title>Parishkar Microcare Foundation</title>
+</head>
+
+<body>
+    <header>
+        <div class="left-side">
+            <li><a href="#" onclick="openSlideMenu()"><i class="fa-solid fa-bars"></i></a></li>
+            <li>
+                <a href="#">
+                    <h2>PMCF</h2>
+                </a>
+            </li>
+        </div>
+        <nav>
+            <ul class="nav_links">
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-user"></i>
+                        {% if user.first_name %}
+                        <span>{{user.first_name.title}} {{user.last_name.title}}</span>
+                        {% else %}
+                        <span>{{user.username}}</span>
+                        {% endif %}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <abbr title="Session Time">
+                            <div class="time">
+                                <!-- for time -->
+                                <div class="hms"></div>
+
+                                <!-- for AM/PM -->
+                                <div class="ampm"></div>
+                            </div>
+                        </abbr>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div id="side-menu" class="side-nav">
+        <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+        <div class="menu">
+            <div class="item">
+                <a class="sub-btn">Branch Manager</a>
+                <div class="sub-menu">
+                    <a href="{% url 'center_ID' %}">Create new center ID for Agent</a>
+                </div>
+            </div>
+            <div class="item">
+                <a class="sub-btn">Transaction </a>
+                <div class="sub-menu">
+                    <a href="{% url 'center_meeting' %}">Centre Meeting</a>
+                    <a href="{% url 'collection_reverse' %}">Collection Reverse</a>
+                    <a href="{% url 'cross_sell_cash_sell' %}">Cross Sell Cash Sell</a>
+                    <a href="{% url 'Credit_Bureau_Check' %}">Customer Credit Bureau</a>
+                    <a href="{% url 'branchDayClose' %}">Day Close</a>
+                    <a href="{% url 'loanApplication' %}">Loan Applications</a>
+                    <a href="{% url 'Loan_Details' %}">Loan Details</a>
+                </div>
+            </div>
+
+            <div class="item">
+                <a class="sub-btn">Reports</a>
+                <div class="sub-menu">
+                    <a href="{% url 'collection_details' %}">Collection Details</a>
+                    <a href="{% url 'branchSummaryReport' %}">Branch Summary Report</a>
+                    <a href="{% url 'Collection_demand' %}">Demand Details Reports</a>
+                    <a href="{% url 'Group_Loan_Application_Report' %}">Group Loan Application Report</a>
+                    <a href="#">Loan Summary Report</a>
+                </div>
+            </div>
+            <div class="item">
+                <a href="{% url 'signin' %}" class="sub-btn logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>

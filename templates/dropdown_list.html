@@ -1,0 +1,17 @@
+<option value="">--Select--</option>
+{% for Branch in Branch_name %}
+<option value="{{Branch.id}}">{{Branch.branch_Name}}</option>
+{% endfor %}
+
+{% for Data in center_ids %}
+<option value="{{Data.id}}">{{Data.center_Id}} - {{Data.center_name}}</option>
+{% endfor %}
+
+
+{% for csoName in cso_Name %}
+<option value="{{csoName.userName.id}}">{{csoName.userName.first_name}}({{csoName.userName.username}})</option>
+{% endfor %}
+
+
+
+

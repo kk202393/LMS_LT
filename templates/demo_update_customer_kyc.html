@@ -1,0 +1,855 @@
+{% include "headerAgent.html" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"
+    integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.css"
+    integrity="sha512-C4k/QrN4udgZnXStNFS5osxdhVECWyhMsK1pnlk+LkC7yJGCqoYxW4mH3/ZXLweODyzolwdWSqmmadudSHMRLA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    fieldset.second {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        overflow: hidden;
+    }
+
+    li {
+        color: rgb(219, 18, 18);
+    }
+
+    .second input {
+        margin-top: 19px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .second p {
+        width: 90vw;
+        margin-top: 25px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .second p a {
+        text-decoration: none;
+        color: blue;
+        font-size: 20px;
+    }
+
+    .second button {
+        font-size: 16px;
+        margin: 10px 30px 0;
+        padding: 10px 20px 10px;
+        border-radius: 15px;
+        border: 0;
+        height: 45px;
+        cursor: pointer;
+        font-weight: 600;
+        background: #42598a;
+        color: white;
+    }
+
+    .second button:hover {
+        background-color: #202d4983;
+    }
+
+    /* new css */
+    .close-modal {
+        position: absolute;
+        top: 1.2rem;
+        right: 2rem;
+        font-size: 5rem;
+        color: #333;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .crop-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 5px;
+        box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        overflow: auto;
+
+    }
+
+    #cropImage {
+
+        width: 100%;
+        height: 350px;
+        border: 1px solid black;
+        margin: auto;
+
+    }
+
+    .saveBtn {
+        display: block;
+        margin: 10px auto;
+        width: 100px;
+        padding: 7px 14px;
+        border-radius: 14px;
+        border: none;
+        background: #3b5998;
+        color: white;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 5;
+    }
+
+    .stop-scroll {
+        overflow: hidden;
+    }
+</style>
+
+<div class="container1">
+    <h1>Gloway CreditCare KYC</h1>
+    <form method="POST" enctype="multipart/form-data" id="agentCustomerKyc" novalidate>
+        <!-- onClick='return confirmSubmit()' -->
+        {% if form.errors %}
+        <h2>{% for error in form.non_field_errors %}
+            <div style="color: red; font-size: larger;">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+        </h2>
+        {% endif %} {% csrf_token %}
+        <!-- fieldset#1 -->
+        <fieldset>
+            <legend>KYC IDS
+                <!-- {*Fields are mandatory}-->
+            </legend>
+            <!-- <div>
+                <label for="aadhaar">Aadhaar<span class="danger">*</span></label> 
+                {{ form.Application_No.errors}}{{ form.Application_No.label_tag }}
+                <br />{{form.Application_No}}
+               <input required type="number" id="aadhaar" name="aadhaar" />
+            </div> -->
+
+            <div>
+                <!-- <label for="aadhaar">Aadhaar<span class="danger">*</span></label> -->
+                {{ form.Aadhaar.errors}}{{ form.Aadhaar.label_tag }}
+                <br />{{form.Aadhaar}}
+                <!-- <input required type="number" id="aadhaar" name="aadhaar" /> -->
+            </div>
+            <div>
+                <br>
+                <button type="button" id="Customer_data" class="button">Fetch</button>
+            </div>
+            <div>
+                <!-- <label for="voterCard">Voter Card Id</label><br />  -->
+                {{ form.VoterCard.errors }}{{ form.VoterCard.label_tag }}
+                <br />{{form.VoterCard}}
+                <!-- <input required type="text" id="voterCard" name="voterCard" /> -->
+            </div>
+
+            <div>
+                <!-- <label for="kycIdType">Other KYC Id type</label><br /> -->
+                {{ form.OtherKYCIdtype.errors }}{{ form.OtherKYCIdtype.label_tag }}
+                <br />{{form.OtherKYCIdtype}}
+            </div>
+
+            <div>
+                <!-- <label for="kycId">Other KYC Id </label><br /> -->
+                {{ form.OtherKYCId.errors }}{{ form.OtherKYCId.label_tag }}
+                <br />{{form.OtherKYCId}}
+                <!-- <input required type="text" id="kycId" name="kycId" /> -->
+            </div>
+        </fieldset>
+
+        <!-- second fieldset (Customer details) -->
+
+        <fieldset>
+            <legend>Customer Details</legend>
+            <div class="grid">
+                <div class="container-0">
+                    <h3>{{ form.Custimage.label_tag }}</h3>
+                    {{ form.Custimage.errors }}
+                    <!----------- PREVIEW Client Image --------->
+                    <div class="preview">
+                        <div class="image-preview">
+                            <img src="" alt="Image Preview9" class="image-preview__image9" />
+                            <a class="remove-img9" id='remove-image9' href="#">&#215;</a>
+                            <span class="image-preview__default-text9">UPLOAD</span>
+                        </div>
+                        <p id="image-details9"></p>
+                    </div>
+                    <!--------- Client Image BUTTONS -------->
+                    <div class="container-button">
+                        {{form.Custimage}}
+                        <!-- <input
+                        type="file"
+                        name="inputFile9"
+                        id="inputFile9"
+                        class="custom-file-input"
+                      /> -->
+                        <label for="image-preview__image9">UPLOAD</label>
+                        <!-- <span class="remove-img8">&#215;</span> -->
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <!-- <label for="fName">First Name<span class="danger">*</span></label><br /> -->
+                {{ form.FirstName.errors }}{{ form.FirstName.label_tag }}
+                <br />{{form.FirstName}}
+                <!-- <input required type="text" id="fName" name="fName" /> -->
+            </div>
+
+            <div>
+                <!-- <label for="lName">Last Name<span class="danger">*</span></label><br /> -->
+                {{ form.LastName.errors }}{{ form.LastName.label_tag }}
+                <br />{{form.LastName}}
+                <!-- <input required type="text" id="lName" name="lName" /> -->
+            </div>
+
+            <div>
+                {{ form.Gender.errors }}{{ form.Gender.label_tag }}
+                <br />{{form.Gender}}
+            </div>
+
+            <div> {{ form.DateOfBirth.errors }}{{ form.DateOfBirth.label_tag }}
+                <br />{{form.DateOfBirth}}
+                <!-- <label for="dob">Date of Birth<span class="danger">*</span></label><br />{{form.DateOfBirth}} -->
+                <!-- <input required type="date" id="txtDOB" name="dob" onchange="fnCalculateAge();" /> -->
+            </div>
+            <div>
+                {{ form.Age.errors }}{{ form.Age.label_tag }}
+                <br />{{form.Age}}
+                <!-- <label for="age">Age</label><br />{{form.Age}} -->
+                <!-- <input required type="number" id="age" name="age" value="" /> -->
+            </div>
+
+            <div>
+                {{ form.MaritalStatus.errors }}{{ form.MaritalStatus.label_tag }}
+                <br />{{form.MaritalStatus}}
+            </div>
+
+            <div>
+                {{ form.FSName.errors }}{{ form.FSName.label_tag }}
+                <br />{{form.FSName}}
+                <!-- <label for="fsName">F/S Name<span class="danger">*</span></label><br />{{form.FSName}} -->
+                <!-- <input required type="text" id="fsName" name="fsName" /> -->
+            </div>
+
+            <div>
+                {{ form.FSType.errors }}{{ form.FSType.label_tag }}
+                <br />{{form.FSType}}
+            </div>
+
+            <div>
+                {{ form.FSDateOfBirth.errors }}{{ form.FSDateOfBirth.label_tag }}
+                <br />{{form.FSDateOfBirth}}
+                <!-- <label for="fsDOB">F/S Date of Birth<span class="danger">*</span></label><br /> {{form.FSDateOfBirth}} -->
+                <!-- <input required type="date" id="fsDOB" name="fsDOB" /> -->
+            </div>
+            <div>
+                {{ form.FSAdhaar.errors }}{{ form.FSAdhaar.label_tag }}
+                <br />{{form.FSAdhaar}}
+                <!-- <label for="fsAdhaar">F/S Adhaar</label><br />{{form.FSAdhaar}} -->
+                <!-- <input required type="number" id="fsAdhaar" name="fsAdhaar" /> -->
+            </div>
+
+            <div>
+                {{ form.MothersName.errors }}{{ form.MothersName.label_tag }}
+                <br />{{form.MothersName}}
+                <!-- <label for="MoName">Mother's Name<span class="danger">*</span></label><br />{{form.MothersName}} -->
+                <!-- <input required type="text" id="MoName" name="MoName" /> -->
+            </div>
+
+            <div>
+                {{ form.Caste.errors }}{{ form.Caste.label_tag }}
+                <br />{{form.Caste}}
+            </div>
+            <div>
+                {{ form.Religion.errors }}{{ form.Religion.label_tag }}
+                <br />{{form.Religion}}
+            </div>
+
+            <div>
+                {{ form.Qualification.errors }}{{ form.Qualification.label_tag }}
+                <br />{{form.Qualification}}
+            </div>
+            <div>
+                {{ form.Occupation.errors }}{{ form.Occupation.label_tag }}
+                <br />{{form.Occupation}}
+                <!-- <label for="Occupation">Occupation<span class="danger">*</span></label><br />{{form.Occupation}} -->
+                <!-- <input required type="text" id="Occupation" name="Occupation" /> -->
+            </div>
+            <div>
+                {{ form.PhoneNumber.errors }}{{ form.PhoneNumber.label_tag }}
+                <br />{{form.PhoneNumber}}
+                <!-- <label for="pNumber">Phone number<span class="danger">*</span></label><br />{{form.PhoneNumber}} -->
+                <!-- <input required type="number" id="pNumber" name="pNumber" /> -->
+            </div>
+
+            <div>
+                {{ form.PreferredLanguage.errors }}{{ form.PreferredLanguage.label_tag }}
+                <br />{{form.PreferredLanguage}}
+                <!-- <label for="lang">Preferred Language<span class="danger">*</span></label><br />{{form.PreferredLanguage}} -->
+                <!-- <select id="lang" name="lang">
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                  </select> -->
+            </div>
+            <div>
+                {{ form.AddressLine1.errors }}{{ form.AddressLine1.label_tag }}
+                <br />{{form.AddressLine1}}
+                <!-- <label for="AddLine1">Address Line1<span class="danger">*</span></label><br />{{form.AddressLine1}} -->
+                <!-- <input required type="text" id="AddLine1" name="AddLine1" /> -->
+            </div>
+
+            <div>
+                {{ form.AddressLine2.errors }}{{ form.AddressLine2.label_tag }}
+                <br />{{form.AddressLine2}}
+                <!-- <label for="AddLine2">Address Line2</label><br />{{form.AddressLine2}} -->
+                <!-- <input required type="text" id="AddLine2" name="AddLine2" /> -->
+            </div>
+
+            <div>
+                {{ form.AddressLine3.errors }}{{ form.AddressLine3.label_tag }}
+                <br />{{form.AddressLine3}}
+                <!-- <label for="AddLine3">Address Line3</label><br />{{form.AddressLine3}} -->
+                <!-- <input required type="text" id="AddLine3" name="AddLine3" /> -->
+            </div>
+
+            <div>
+                {{ form.Village.errors }}{{ form.Village.label_tag }}
+                <br />{{form.Village}}
+                <!-- <label for="village">Village<span class="danger">*</span></label><br />{{form.Village}} -->
+                <!-- <input required type="text" id="village" name="village" /> -->
+            </div>
+
+
+            <div>
+                {{ form.District.errors }}
+                {{ form.District.label_tag }}
+                <br />
+                {{ form.District }}
+                <!-- <label for="inputDistrict">District Name<span class="danger">*</span></label><br /> -->
+                <!-- {{form.District}} -->
+                <!-- <select class="form-control" id="id_District" name="District">
+                    <option value="">-- select one --</option>
+                </select> -->
+            </div>
+            <div>
+                {{ form.State.errors }}{{ form.State.label_tag }}
+                <br />{{form.State}}
+            </div>
+            <div>
+                {{ form.Pincode.errors }}{{ form.Pincode.label_tag }}
+                <br />{{form.Pincode}}
+                <!-- <label for="pcode">Pincode<span class="danger">*</span></label><br />{{form.Pincode}} -->
+                <!-- <input required type="number" id="pcode" name="pcode" /> -->
+            </div>
+        </fieldset>
+
+        <!-- third fieldset Product details -->
+
+        <fieldset>
+            <legend>
+                Correspondence Address
+                <input type="checkbox" style="width: 30px; height: 20px" id="check" onclick="OnClick()" /> same as above
+            </legend>
+            <div>
+                {{ form.confirmAddressLine1.errors }}{{ form.confirmAddressLine1.label_tag }}
+                <br />{{form.confirmAddressLine1}}
+                <!-- <label for="AddLine1">Address Line1<span class="danger">*</span></label
+          ><br />{{form.confirmAddressLine1}} -->
+                <!-- <input required type="text" id="CorrAddLine1" name="AddLine1" /> -->
+            </div>
+
+            <div>
+                {{ form.confirmAddressLine2.errors }}{{ form.confirmAddressLine2.label_tag }}
+                <br />{{form.confirmAddressLine2}}
+                <!-- <label for="AddLine2">Address Line2</label><br />{{form.confirmAddressLine2}} -->
+                <!-- <input required type="text" id="CorrAddLine2" name="AddLine2" /> -->
+            </div>
+
+            <div>
+                {{ form.confirmAddressLine3.errors }}{{ form.confirmAddressLine3.label_tag }}
+                <br />{{form.confirmAddressLine3}}
+                <!-- <label for="AddLine3">Address Line3</label><br />{{form.confirmAddressLine3}} -->
+                <!-- <input required type="text" id="CorrAddLine3" name="AddLine3" /> -->
+            </div>
+
+            <div>
+                {{ form.confirmVillage.errors }}{{ form.confirmVillage.label_tag }}
+                <br />{{form.confirmVillage}}
+                <!-- <label for="village">Village</label
+                    ><br />{{form.confirmVillage}} -->
+                <!-- <input required type="text" id="Corrvillage" name="village" /> -->
+            </div>
+            <div>
+                {{ form.confirmState.errors }}{{ form.confirmState.label_tag }}
+                <br />{{form.confirmState}}
+            </div>
+
+            <div>
+                {{ form.confirmDistrict.errors }}
+                {{ form.confirmDistrict.label_tag }}
+                <br>
+                {{ form.confirmDistrict }}
+                <!-- <label for="inputDistrict">Confirm District Name<span class="danger">*</span></label><br /> -->
+                <!-- {{form.confirmDistrict}} -->
+                <!-- <select class="form-control" name="confirmDistrict" id="id_confirmDistrict">
+                        <option value="">-- select one --</option>
+                    </select> -->
+            </div>
+            <div> {{ form.confirmPincode.errors }}{{ form.confirmPincode.label_tag }}
+                <br />{{form.confirmPincode}}
+                <!-- <label for="pcode">Pincode<span class="danger">*</span></label
+              ><br />{{form.confirmPincode}} -->
+                <!-- <input required type="number" id="Corrpcode" name="pcode" /> -->
+            </div>
+        </fieldset>
+
+        <!-- third <fieldset> -->
+
+        <fieldset>
+            <legend>Financial Details: SELF & FAMILY</legend>
+            <div>
+                {{ form.HouseType.errors }}{{ form.HouseType.label_tag }}
+                <br />{{form.HouseType}}
+            </div>
+            <div>
+                {{ form.LandInAcre.errors }}{{ form.LandInAcre.label_tag }}
+                <br />{{form.LandInAcre}}
+                <!-- <label for="landInAcre">Land(In Acre)</label><br />{{form.LandInAcre}} -->
+                <!-- <input required type="number" id="landInAcre" name="landInAcre" /> -->
+            </div>
+            <div>
+                {{ form.NumberofAnimals.errors }}{{ form.NumberofAnimals.label_tag }}
+                <br />{{form.NumberofAnimals}}
+                <!-- <label for="noOfAnimals">Number of Animals</label><br />{{form.NumberofAnimals}} -->
+                <!-- <input required type="text" id="noOfAnimals" name="noOfAnimals" /> -->
+            </div>
+            <div>
+                {{ form.PovertyLine.errors }}{{ form.PovertyLine.label_tag }}
+                <br />{{form.PovertyLine}}
+            </div>
+            <div>
+                {{ form.BankName.errors }}{{ form.BankName.label_tag }}
+                <br />{{form.BankName}}
+                <!-- <label for="bankName">Bank Name<span class="danger">*</span></label><br />{{form.BankName}} -->
+                <!-- <input required type="text" id="bankName" name="bankName" /> -->
+            </div>
+            <div>
+                {{ form.BankAccountNo.errors }}{{ form.BankAccountNo.label_tag }}
+                <br />{{form.BankAccountNo}}
+                <!-- <label for="bankAccountNo">Bank Account No.<span class="danger">*</span></label><br />{{form.BankAccountNo}} -->
+                <!-- <input required type="number" id="bankAccountNo" name="bankAccountNo" /> -->
+            </div>
+            <div>
+                {{ form.ConfirmBankAccountNo.errors }}{{ form.ConfirmBankAccountNo.label_tag }}
+                <br />{{form.ConfirmBankAccountNo}}
+            </div>
+            <div>
+                {{ form.BankIFSCCode.errors }}{{ form.BankIFSCCode.label_tag }}
+                <br />{{form.BankIFSCCode}}
+                <!-- <label for="bankIFSCcode">Bank IFSC Code<span class="danger">*</span></label><br />{{form.BankIFSCCode}} -->
+                <!-- <input required type="text" id="bankIFSCcode" name="bankIFSCcode" /> -->
+            </div>
+            <div>
+                {{ form.ConfirmBankIFSCCode.errors }}{{ form.ConfirmBankIFSCCode.label_tag }}
+                <br />{{form.ConfirmBankIFSCCode}}
+            </div>
+
+
+        </fieldset>
+
+        <!-- fourth fieldset -->
+        <fieldset>
+            <legend>Loan Details</legend>
+            <div>
+                {{ form.BranchName.errors }}{{ form.BranchName.label_tag }}
+                <br />{{form.BranchName}}
+            </div>
+            <div>
+                {{ form.CenterId.errors }}{{ form.CenterId.label_tag }}
+                <br />{{form.CenterId}}
+            </div>
+            <div>
+                {{ form.CategoryType.errors }}{{ form.CategoryType.label_tag }}
+                <br />{{form.CategoryType}}
+            </div>
+
+            <div>
+                {{ form.ProductCategory.errors }}{{ form.ProductCategory.label_tag }}
+                <br />{{form.ProductCategory}}
+            </div>
+            <div>
+                {{ form.Product.errors }}{{ form.Product.label_tag }}
+                <br />{{form.Product}}
+            </div>
+            <div>
+                {{ form.PurposeId.errors }}{{ form.PurposeId.label_tag }}
+                <br />{{form.PurposeId}}
+            </div>
+            <div>
+                {{ form.LoanAmount.errors }}{{ form.LoanAmount.label_tag }}
+                <br />{{form.LoanAmount}}
+                <!-- <label for="loanAmount">Loan Amount</label><br />{{form.LoanAmount}} -->
+                <!-- <input required type="number" id="loanAmount" name="loanAmount" value="" /> -->
+            </div>
+            <div>
+                {{ form.InterestRate.errors }}{{ form.InterestRate.label_tag }}
+                <br />{{form.InterestRate}}
+                <!-- <label for="intRate">Interest Rate</label><br />{{form.InterestRate}} -->
+                <!-- <input required type="float" id="intRate" name="intRate" value="" /> -->
+            </div>
+            <div>
+                {{ form.RepayFrequency.errors }}{{ form.RepayFrequency.label_tag }}
+                <br />{{form.RepayFrequency}}
+                <!-- <label for="repayFreq">Repay Frequency</label><br />{{form.RepayFrequency}} -->
+                <!-- <input required type="number" id="repayFreq" name="repayFreq" value="" /> -->
+            </div>
+            <div>
+                {{ form.GroupName.errors }}{{ form.GroupName.label_tag }}
+                <br />{{form.GroupName}}
+                <!-- <label for="loanAmount">Group Name</label><br />{{form.GroupName}} -->
+                <!-- <input required type="number" id="loanAmount" name="loanAmount" value="" /> -->
+            </div>
+        </fieldset>
+
+
+
+        <!-- #fieldset-Co-InsurerDetails -->
+        <fieldset>
+            <legend>Co-Insurer Details</legend>
+
+            <div>
+                {{ form.CoInsurerRelation.errors }}{{ form.CoInsurerRelation.label_tag }}
+                <br />{{form.CoInsurerRelation}}
+            </div>
+            <div>
+                {{ form.CoInsurerName.errors }}{{ form.CoInsurerName.label_tag }}
+                <br />{{form.CoInsurerName}}
+            </div>
+            <div>
+                {{ form.CoInsurerDOB.errors }}{{ form.CoInsurerDOB.label_tag }}
+                <br />{{form.CoInsurerDOB}}
+                <!-- <label for="coInsurerdob">Co-Insurer DOB<span class="danger">*</span></label><br />{{form.CoInsurerDOB}} -->
+                <!-- <input required type="date" id="coInsurerdob" name="coInsurerdob" onchange="fnCalculateAge2();" /> -->
+            </div>
+            <div>
+                {{ form.CoInsurerAge.errors }}{{ form.CoInsurerAge.label_tag }}
+                <br />{{form.CoInsurerAge}}
+                <!-- <label for="co-Insurerage">Co-Insurer Age</label><br />{{form.CoInsurerAge}} -->
+                <!-- <input required type="number" id="co-Insurerage" name="coInsurerage" /> -->
+            </div>
+            <div>
+                {{ form.KYCIDType.errors }}{{ form.KYCIDType.label_tag }}
+                <br />{{form.KYCIDType}}
+            </div>
+            <div>
+                {{ form.KYCID.errors }}{{ form.KYCID.label_tag }}
+                <br />{{form.KYCID}}
+                <!-- <label for="kycId">KYC ID</label
+          ><br />{{form.KYCID}} -->
+                <!-- <input required type="number" id="kycId" name="kycId" /> -->
+            </div>
+            <div>
+                {{ form.CoOccupation.errors }}{{ form.CoOccupation.label_tag }}
+                <br />{{form.CoOccupation}}
+                <!-- <label for="CoOccupation">Occupation<span class="danger">*</span></label><br />{{form.CoOccupation}} -->
+                <!-- <input required type="text" id="CoOccupation" name="CoOccupation" /> -->
+            </div>
+
+
+            <div>
+                {{ form.RemarkComments.errors }}{{ form.RemarkComments.label_tag }}
+                <br />{{form.RemarkComments}}
+                <!-- <label for="remarkComments">Remark Comments</label><br />{{form.RemarkComments}} -->
+                <!-- <input required type="text" id="remarkComments" name="remarkComments" /> -->
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <!----------- MEMBER AHDAAR CARD ---------->
+            <div class="container-1">
+                <h3>Member Aadhar Card</h3>
+
+                <!----------- PREVIEW ADHAAR CARD --------->
+                <div class="preview">
+                    <div class="image-preview " id="imagePreview">
+                        <img src="" alt="Image Preview1" class="image-preview__image1" />
+                        <a class="remove-img1" href="#">&#215;</a>
+                        <span class="image-preview__default-text1">Front Side Upload</span>
+                    </div>
+                    <p id="image-details1"></p>
+                    <div class="image-preview" id="imagePreview">
+                        <img src="" alt="Image Preview2" class="image-preview__image2" />
+                        <a class="remove-img2" href="#">&#215;</a>
+                        <span class="image-preview__default-text2">Back Side Upload</span>
+                    </div>
+                    <p id="image-details2"></p>
+                </div>
+                <!----------- (END)PREVIEW ADHAAR CARD --------->
+
+                <!--------- ADHAAR CARD BUTTONS -------->
+                <div class="container-button">
+                    <!-- <input
+                type="file"
+                name="inputFile"
+                id="inputFile1"
+                class="custom-file-input"
+              /> -->
+                    {{ form.Member_Aadhar_Card_front.errors }}
+                    <br />{{form.Member_Aadhar_Card_front}}
+                    <label for="inputFile1">{{ form.Member_Aadhar_Card_front.label_tag }}</label>
+                    <!-- <span class="remove-img1">&#215;</span> -->
+
+                    <!-- <input
+                type="file"
+                name="inputFile2"
+                id="inputFile2"
+                class="custom-file-input"
+              /> -->
+                    {{ form.Member_Aadhar_Card_back.errors }}
+                    <br />{{form.Member_Aadhar_Card_back}}
+                    <label for="inputFile2">{{ form.Member_Aadhar_Card_back.label_tag }}</label>
+                    <!-- <span class="remove-img2">&#215;</span> -->
+                </div>
+                <!--------- (END)ADHAAR CARD BUTTONS -------->
+            </div>
+            <!-----------(END) MEMBER AHDAAR CARD ---------->
+
+            <!----------- MEMBER VOTER CARD ---------->
+            <div class="container-2">
+                <h3>Member Voter Card</h3>
+
+                <!----------- PREVIEW VOTER CARD --------->
+                <div class="preview">
+                    <div class="image-preview" id="imagePreview">
+                        <img src="" alt="" class="image-preview__image3" />
+                        <a class="remove-img3" href="#">&#215;</a>
+                        <span class="image-preview__default-text3">Front Side Upload</span>
+                    </div>
+                    <p id="image-details3"></p>
+                    <div class="image-preview" id="imagePreview">
+                        <img src="" alt="" class="image-preview__image4" />
+                        <a class="remove-img4" href="#">&#215;</a>
+
+                        <span class="image-preview__default-text4">Back Side Upload</span>
+                    </div>
+                    <p id="image-details4"></p>
+                </div>
+
+                <!----------- (END)PREVIEW VOTER CARD --------->
+                <!----------- VOTER CARD BUTTONS -------------->
+                <div class="container-button">
+                    <!-- <input type="file" name="voter-card-frontSide" id="inputFile3" /> -->
+                    {{ form.Member_Voter_Card_front.errors }}
+                    <br />{{form.Member_Voter_Card_front}}
+                    <label for="inputFile3">{{ form.Member_Voter_Card_front.label_tag }}</label>
+                    <!-- <span class="remove-img3">&#215;</span> -->
+
+                    <!-- <input type="file" name="voter-card-backSide" id="inputFile4" /> -->
+                    {{ form.Member_Voter_Card_back.errors }}
+                    <br />{{form.Member_Voter_Card_back}}
+                    <label for="inputFile4">{{ form.Member_Voter_Card_back.label_tag }}</label>
+                    <!-- <span class="remove-img4">&#215;</span> -->
+                </div>
+                <!----------- (END)VOTER CARD BUTTONS ----------->
+
+                <!----------- (END)MEMBER VOTER CARD ---------->
+            </div>
+</div>
+
+
+<!-- secondary documents -->
+<div class="secondary-documents-container">
+    <div class="secondary-documents">SECONDARY DOCUMENTS</div>
+
+    <!----------- CO-INSURER AHDAAR CARD (5,6)---------->
+    <div class="container-3">
+        <h3>Co-Insurer Aadhaar</h3>
+        <!----------- PREVIEW ADHAAR CARD --------->
+        <div class="preview">
+            <div class="image-preview" id="imagePreview">
+                <img src="" alt="Image Preview5" class="image-preview__image5" />
+                <a class="remove-img5" href="#">&#215;</a>
+
+                <span class="image-preview__default-text5">Front Side Upload</span>
+            </div>
+            <p id="image-details5"></p>
+            <div class="image-preview" id="imagePreview">
+                <img src="" alt="Image Preview6" class="image-preview__image6" />
+                <a class="remove-img6" href="#">&#215;</a>
+
+                <span class="image-preview__default-text6">Back Side Upload</span>
+            </div>
+            <p id="image-details6"></p>
+        </div>
+        <!----------- (END)PREVIEW ADHAAR CARD --------->
+        <!--------- ADHAAR CARD BUTTONS -------->
+        <div class="container-button">
+            <!-- <input
+      type="file"
+      name="inputFile5"
+      id="inputFile5"
+      class="custom-file-input"
+    /> -->
+            {{ form.Co_Insurer_Aadhaar_front.errors }}
+            <br />{{form.Co_Insurer_Aadhaar_front}}
+            <label for="inputFile5">{{ form.Co_Insurer_Aadhaar_front.label_tag }}</label>
+            <!-- <span class="remove-img5">&#215;</span> -->
+
+            <!-- <input
+      type="file"
+      name="inputFile6"
+      id="inputFile6"
+      class="custom-file-input"
+    /> -->
+            {{ form.Co_Insurer_Aadhaar_back.errors }}
+            <br />{{form.Co_Insurer_Aadhaar_back}}
+            <label for="inputFile6">{{ form.Co_Insurer_Aadhaar_back.label_tag }}</label>
+            <!-- <span class="remove-img6">&#215;</span> -->
+        </div>
+        <!--------- (END)ADHAAR CARD BUTTONS -------->
+
+    </div>
+    <!----------- (END)CO-INSURER AHDAAR CARD ---------->
+
+    <!----------- Bank Details --------------->
+    <div class="container-4">
+        <h3>Bank Details</h3>
+
+        <!----------- PREVIEW BANK DETAILS --------->
+        <div class="preview">
+            <div class="image-preview" id="imagePreviewSingle">
+                <img src="" alt="Image Preview7" class="image-preview__image7" />
+                <a class="remove-img7" href="#">&#215;</a>
+
+                <span class="image-preview__default-text7">UPLOAD</span>
+            </div>
+            <p id="image-details7"></p>
+
+        </div>
+
+        <!--------- BANK DETAILS BUTTONS -------->
+        <div class="container-button">
+            <!-- <input
+      type="file"
+      name="inputFile7"
+      id="inputFile7"
+      class="custom-file-input"
+    /> -->
+            {{ form.Member_Bank_Details.errors }}
+            <br />{{form.Member_Bank_Details}}
+            <label for="inputFile7">{{ form.Member_Bank_Details.label_tag }}</label>
+
+        </div>
+    </div>
+
+
+    <!----------- (END)Bank Details ---------->
+
+    <!----------- Relationship proof ---------->
+    <div class="container-5">
+        <h3>Relationship Proof</h3>
+
+        <!----------- PREVIEW BANK DETAILS --------->
+        <div class="preview">
+            <div class="image-preview" id="imagePreviewSingle">
+                <img src="" alt="Image Preview8" class="image-preview__image8" />
+                <a class="remove-img8" id='remove-image8' href="#">&#215;</a>
+
+                <span class="image-preview__default-text8">UPLOAD</span>
+            </div>
+            <p id="image-details8"></p>
+        </div>
+
+        <!--------- BANK DETAILS BUTTONS -------->
+        <div class="container-button">
+            <!-- <input
+      type="file"
+      name="inputFile8"
+      id="inputFile8"
+      class="custom-file-input"
+    /> -->
+            {{ form.Member_Relationship_Proof.errors }}
+            <br />{{form.Member_Relationship_Proof}}
+            <label for="inputFile8">{{ form.Member_Relationship_Proof.label_tag }}</label>
+            <!-- <span class="remove-img8">&#215;</span> -->
+        </div>
+
+    </div>
+
+
+    <!----------- (end)Relationship proof ---------->
+</div>
+</fieldset>
+<fieldset class="second">
+    <div>
+        <input required type="checkbox" id="verfied" name="verfied" value="verfied">
+    </div>
+    <p style="width: 90vw;">
+        1.I give my free consent and hereby authorise GlowWay CreditCare Network Limited to share and keep documents
+        provided by me including Aadhaar for the purpose of authentication/ verfication and get my data from Credit
+        Bureau Agencies(CICs) and any government/regulartory/statutory
+        or private agencies which are allowed by RBI/Government to do so, as required by law from time to time.</br>
+        </br>2.I do hereby declare that all information and facts stated are true, correct and complete to the best of
+        my knowledge and belief.</br>
+        </br>3.I have been explained that submission of Aadhaar document is not mandatory. The consent and purpose of
+        collecting Aadhaar has been explained to me in local language by GlowWay CreditCare Network Limited.</br>
+        </br> 4.Loan facility shall be classified as SMA 0 when it is in overdue up to 30 days; SMA-1 when it is more
+        than 30 days and up to 60 days; SMA-2 when it is more than 60 days and up to 90 days and classifies as NPA when
+        it is more than 90 days. For
+        more information , kindly refer <a href="http://www.rbi.org.in/Scripts/NotificationUser.aspx?id=12194&Mode=0"
+            target="_blank">http://www.rbi.org.in/Scripts/NotificationUser.aspx?id=12194&Mode=0</a>
+
+    </p>
+    <div>
+        <button type="submit" id="submitButton" onclick="disableButton()" class="button1">Save</button>
+    </div>
+</fieldset>
+</form>
+</div>
+<!-- crop modal -->
+<div class="crop-modal hidden">
+    <button class="close-modal">&times;</button>
+    <div id="cropImage">
+
+    </div>
+    <button type="button" class="saveBtn">Save</button>
+</div>
+<div class="overlay hidden"></div>
+
+<script>
+    function disableButton() {
+        // return confirm('Are you sure ?')
+        var form = document.getElementById("agentCustomerKyc");
+        const submitButton = document.getElementById("submitButton");
+        form.submit();
+        form.addEventListener("submit", function () {
+            submitButton.disabled = true;
+        });
+        // var button = document.querySelector("#agentCustomerKyc button[type='submit']");
+        // button.disabled = true;
+    }
+</script>
+
+
+
+{% include "footer.html" %}

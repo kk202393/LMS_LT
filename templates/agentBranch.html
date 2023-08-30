@@ -1,0 +1,23 @@
+{% include "header.html" %}
+<div class="container1">
+    <legend>Assign Branch for Agent</legend>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            {% for fm in form %}
+            <div>
+                {{fm.label_tag}}{{fm}} <small>{{fm.errors|striptags}}</small>
+            </div>
+            {% endfor %}
+            <div>
+                <input type="submit" value="Submit" class="button">
+            </div>
+            <div>
+                {% if messages %} {% for message in messages %}
+                <span style="color:rgb(245, 51, 17); font-size: 25px; font-weight: 500;" {% if message.tags %}
+                    class="{{message.tags}}" {% endif %}>{{message}}</span>{% endfor %}{% endif%}
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% include "footer.html" %}
